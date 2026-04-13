@@ -1,15 +1,23 @@
 # Memory — Architecture & Technical Decisions
 
-*Important architectural decisions, why they were made, what they imply. Load this file for any task that affects the project structure.*
+*Load this file for any task that affects the project structure.*
 
 ---
 
-<!-- Entry format:
+### 2026-04-13 — TypeScript + Commander.js + tsup
 
-### YYYY-MM-DD — Short title
+**Context**: Choosing the stack for the CLI. Options: plain Node.js, oclif, Commander.js, yargs.
+**Decision**: TypeScript for type safety, Commander.js for CLI parsing (lightweight, well-maintained), tsup for bundling (fast, zero-config for TypeScript).
+**Consequence**: Single dependency for CLI parsing. The bundle is a single JS file. No runtime TypeScript compilation needed.
 
-**Context**: Why this decision was made.
-**Decision**: What was chosen.
-**Consequence**: What it implies going forward.
+### 2026-04-13 — No YAML parser dependency
 
--->
+**Context**: Issues have YAML frontmatter that needs to be parsed. Full YAML parsers (js-yaml) are heavy and overkill for simple key-value frontmatter.
+**Decision**: Hand-written regex parser for the subset of YAML we use (strings, lists, dates).
+**Consequence**: Smaller bundle, no dep. But if we ever need nested YAML or complex types, we'll need to reconsider.
+
+### 2026-04-13 — One file per command in src/commands/
+
+**Context**: How to organize command implementations.
+**Decision**: Each command is a self-contained file in `src/commands/`. The main CLI file (`src/cli.ts`) only registers commands.
+**Consequence**: Easy to add new commands. Each command can be tested independently. The main file stays small.
