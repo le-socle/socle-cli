@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { initCommand } from "./commands/init.js";
 
 const program = new Command();
 
@@ -9,8 +10,9 @@ program
   )
   .version("0.0.0");
 
-// Commands will be registered here as they are implemented:
-// program.addCommand(initCommand);
+program.addCommand(initCommand);
+
+// Future commands:
 // program.addCommand(boardCommand);
 // program.addCommand(lintCommand);
 // program.addCommand(doctorCommand);

@@ -8,10 +8,11 @@ complexity: heavy
 domain: [cli, scaffold]
 skill: code-structure
 skills_aux: [documentation]
-status: 2-sprint
+status: 5-done
 branch: "feat/ISS-0002-socle-init"
 depends: [ISS-0001]
 created: 2026-04-13
+updated: 2026-04-13
 ---
 
 # ISS-0002 — Implement `socle init` command

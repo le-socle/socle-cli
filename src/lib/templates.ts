@@ -1,0 +1,348 @@
+/**
+ * Template generators for all files created by `socle init`.
+ *
+ * Each function returns the file content as a string.
+ * Variables (project name, date, stack) are injected at generation time.
+ */
+
+import { DetectedStack } from "./detect-stack.js";
+
+const REPO_URL = "https://github.com/le-socle/socle";
+
+interface TemplateContext {
+  projectName: string;
+  date: string;
+  stack: Partial<DetectedStack>;
+}
+
+export function manifestTemplate(ctx: TemplateContext): string {
+  const stackRows = [
+    `| Language | ${ctx.stack.language || ""} |`,
+    `| Framework | ${ctx.stack.framework || ""} |`,
+    `| Database | ${ctx.stack.database || ""} |`,
+    `| Tests | ${ctx.stack.tests || ""} |`,
+  ].join("\n");
+
+  return `# Manifest — ${ctx.projectName}
+
+*This file is the project's constitution. It is read by agents at the start of each work session.*
+
+---
+
+## Identity
+
+| Field | Value |
+|-------|-------|
+| Name | ${ctx.projectName} |
+| Description | |
+| Owner | |
+| Repo | |
+
+---
+
+## Why this project exists
+
+*3-5 sentences. The "why" of this project.*
+
+---
+
+## What this project is
+
+-
+
+## What this project is not
+
+-
+
+---
+
+## Tech stack
+
+| Component | Technology |
+|-----------|------------|
+${stackRows}
+
+---
+
+## Project vocabulary
+
+| Term | Definition |
+|------|-----------|
+| | |
+
+---
+
+## Development principles
+
+*When an agent hesitates between two approaches, it consults these principles to decide. Formulate as trade-offs: "we prefer X over Y, because Z."*
+
+-
+-
+
+---
+
+## AI models by complexity
+
+*Map your own models based on your budget and tools. Update when better models come out.*
+
+| Complexity | Usage | Model |
+|------------|-------|-------|
+| \`light\` | Documentation, formatting, renaming, boilerplate | |
+| \`standard\` | Day-to-day development, code review, tests | |
+| \`heavy\` | Complex architecture, critical algorithms, security | |
+
+---
+
+## Important links
+
+| Resource | URL |
+|----------|-----|
+| Main repo | |
+| Documentation | |
+| Staging | |
+| Production | |
+
+---
+
+*Last updated: ${ctx.date}*
+`;
+}
+
+export function memoryTemplate(ctx: TemplateContext): string {
+  return `# Memory — ${ctx.projectName}
+
+*This file is the project memory's table of contents. Do not read everything — load only what is relevant to the current task.*
+
+> **Last updated**: ${ctx.date}
+> **Number of entries**: 0
+
+---
+
+## Section index
+
+| File | Content | Load when... |
+|------|---------|--------------|
+| [architecture.md](./cortex/architecture.md) | Architectural decisions, technical choices | Any structural task |
+| [backend.md](./cortex/backend.md) | Server-side patterns and pitfalls | Backend task |
+| [frontend.md](./cortex/frontend.md) | Client-side patterns and pitfalls | Frontend task |
+| [patterns.md](./cortex/patterns.md) | Recurring code patterns | Code review, new code |
+| [bugs.md](./cortex/bugs.md) | Recurring problems and solutions | Debug, fix |
+| [business.md](./cortex/business.md) | Business context, vocabulary | Business logic, UX |
+| [sprints.md](./cortex/sprints.md) | Sprint history | Planning |
+
+---
+
+## Living summary
+
+*3-5 lines. The current state of the project at a glance.*
+
+---
+
+*The folder is the structure. The file is the content. This table of contents is the map.*
+`;
+}
+
+interface CortexFile {
+  name: string;
+  title: string;
+  description: string;
+  example: string;
+}
+
+const cortexFiles: CortexFile[] = [
+  {
+    name: "architecture.md",
+    title: "Architecture & Technical Decisions",
+    description:
+      "Load this file for any task that affects the project structure.",
+    example: `### ${new Date().toISOString().slice(0, 10)} — Database choice
+
+**Context**: Hesitation between SQLite (simple) and PostgreSQL (robust).
+**Decision**: PostgreSQL from the start.
+**Consequence**: Requires Docker for local dev, but no painful migration later.`,
+  },
+  {
+    name: "backend.md",
+    title: "Backend",
+    description:
+      "Load this file for any backend task: API, database, services.",
+    example: `### Key files
+
+| File | Role |
+|------|------|
+| \`src/main.py\` | Application entry point |
+| \`src/models/\` | Data models |
+| \`src/routes/\` | API endpoints |`,
+  },
+  {
+    name: "frontend.md",
+    title: "Frontend",
+    description:
+      "Load this file for any frontend task: UI, components, styles.",
+    example: `### Key files
+
+| File | Role |
+|------|------|
+| \`src/App.tsx\` | Root component |
+| \`src/components/\` | Reusable components |
+| \`src/hooks/\` | Custom hooks |`,
+  },
+  {
+    name: "patterns.md",
+    title: "Discovered Patterns",
+    description:
+      "Load this file for code review, refactoring, or writing new code.",
+    example: `### Pattern name
+
+**What**: One-sentence description of the pattern.
+**Where**: File(s) where it is applied.
+**Why it works**: What makes it effective in this context.`,
+  },
+  {
+    name: "bugs.md",
+    title: "Recurring Problems & Solutions",
+    description:
+      "Load this file before debugging — the problem may have already been solved.",
+    example: `| Problem | Cause | Solution |
+|---------|-------|----------|
+| Tests fail on CI but pass locally | Missing env variables in pipeline | Add secrets in CI settings |`,
+  },
+  {
+    name: "business.md",
+    title: "Business Context",
+    description:
+      "Load this file for any task involving business logic or UX.",
+    example: `### Business concept name
+
+**Rule**: What the business requires.
+**Why**: The business reason (not technical).
+**Code impact**: What this means concretely in the code.`,
+  },
+  {
+    name: "sprints.md",
+    title: "Sprint History",
+    description: "Load this file at sprint start, retrospective, or planning.",
+    example: `| Sprint | Objective | Result | Key learning |
+|--------|-----------|--------|--------------|`,
+  },
+];
+
+export function cortexTemplate(file: CortexFile): string {
+  return `# Memory — ${file.title}
+
+*${file.description}*
+
+---
+
+<!-- Example to adapt or remove:
+
+${file.example}
+
+-->
+`;
+}
+
+export function getCortexFiles(): CortexFile[] {
+  return cortexFiles;
+}
+
+export function boardTemplate(ctx: TemplateContext): string {
+  return `# Issue Board — ${ctx.projectName}
+
+> Each issue = a \`ISS-XXXX-title.md\` file in the folder matching its status.
+>
+> **Last updated**: ${ctx.date}
+> **Next number**: ISS-0001
+
+> Regenerate: \`npx socle board\`
+
+---
+
+## Issue index
+
+### 0-icebox (ideas)
+
+_No issues._
+
+### 1-backlog (prioritized)
+
+_No issues._
+
+### 2-sprint (committed)
+
+_No issues._
+
+### 3-in-progress (in dev)
+
+_No issues._
+
+### 4-review (review/test)
+
+_No issues._
+
+### 5-done (completed)
+
+_No issues._
+
+---
+
+*The YAML frontmatter is the source of truth. The folder is the visual status. The BOARD.md is the map.*
+`;
+}
+
+export function claudeTemplate(ctx: TemplateContext): string {
+  return `# CLAUDE.md
+
+This project uses **Le Socle** — a human-first method for working with AI agents.
+
+## First session (setup)
+
+If the manifest is empty or incomplete, read first:
+- .socle/SOCLE.md — understand the method and how to help fill the files
+
+## Every session
+
+Read these files in order:
+1. .socle/manifest.md — the project constitution (identity, stack, principles, AI models)
+2. .socle/memory/MEMORY.md — the memory summary (then load relevant cortex/ sections)
+3. .socle/rules/default-rules.md — quality criteria
+
+## To work on a task
+
+4. .socle/issue-board/BOARD.md — board state
+5. .socle/skills/session-start.md — full start and end-of-task procedure
+
+## Rules
+
+- The YAML frontmatter of issues is the source of truth
+- Don't interpret silently — ask if an instruction is ambiguous
+- At end of task: update frontmatter, move the file, update BOARD.md
+- Check the issue's \`complexity\` field + the manifest table for which model to use
+
+Documentation: ${REPO_URL}
+`;
+}
+
+export function cursorrTemplate(ctx: TemplateContext): string {
+  return `This project uses Le Socle — a human-first method for working with AI agents.
+
+First session (setup): if the manifest is empty, read @.socle/SOCLE.md to understand the method.
+
+Every session, read in order:
+1. @.socle/manifest.md — the project constitution
+2. @.socle/memory/MEMORY.md — the memory summary (then relevant cortex/ sections)
+3. @.socle/rules/default-rules.md — quality criteria
+
+To work on a task:
+4. @.socle/issue-board/BOARD.md — board state
+5. @.socle/skills/session-start.md — start and end-of-task procedure
+
+Rules:
+- The YAML frontmatter of issues is the source of truth
+- Don't interpret silently — ask if an instruction is ambiguous
+- At end of task: update frontmatter, move the file, update BOARD.md
+- Check the issue's complexity field + the manifest table for the model to use
+
+Documentation: ${REPO_URL}
+`;
+}

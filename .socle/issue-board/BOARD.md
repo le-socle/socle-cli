@@ -25,7 +25,6 @@ _No issues._
 
 | # | Title | Priority | Effort | Depends |
 |---|-------|----------|--------|---------|
-| [ISS-0002](2-sprint/ISS-0002-socle-init.md) | Implement `socle init` | P0-critical | L | ISS-0001 |
 | [ISS-0003](2-sprint/ISS-0003-socle-board.md) | Implement `socle board` | P1-high | M | ISS-0001 |
 | [ISS-0004](2-sprint/ISS-0004-tests-init.md) | Integration tests for `socle init` | P1-high | M | ISS-0002 |
 | [ISS-0005](2-sprint/ISS-0005-tests-board.md) | Integration tests for `socle board` | P1-high | S | ISS-0003 |
@@ -45,6 +44,7 @@ _No issues._
 | # | Title | Completed |
 |---|-------|-----------|
 | [ISS-0001](5-done/ISS-0001-setup-project.md) | Setup Node.js project | 2026-04-13 |
+| [ISS-0002](5-done/ISS-0002-socle-init.md) | Implement `socle init` | 2026-04-13 |
 
 ---
 
