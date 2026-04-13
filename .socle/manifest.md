@@ -31,7 +31,7 @@ It is also the bridge between the free open-source method and the future team da
 - A CLI that scaffolds, validates, and visualizes Le Socle projects
 - The reference implementation of how Le Socle files should be structured
 - A tool that works offline, with no account, no API, no telemetry
-- Published on npm as `socle-cli`, usable via `npx socle`
+- Published on npm as `socle-cli`, usable via `npx socle-cli`
 
 ## What this project is not
 
