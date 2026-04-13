@@ -36,9 +36,15 @@ skills/              → Defines the procedure to follow for the task
 issue-board/         → Defines the exact scope of the task (frontmatter = source of truth)
 ```
 
-## Helping the human fill in the manifest
+## First session — two paths
 
-If the manifest is empty or incomplete, help the human fill it in by asking questions:
+### Path A: Manifest is already filled
+
+If the manifest has real content (not placeholders), skip the setup flow. Go directly to `skills/session-start.md` — load the context, identify the current task, and start working. The briefing below is not needed.
+
+### Path B: Manifest is empty or incomplete
+
+Help the human fill it in by asking questions:
 
 ### Identity
 - "What is the project called and what does it do in one sentence?"

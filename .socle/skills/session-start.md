@@ -43,14 +43,21 @@ Once the issue is identified, load **only** what is relevant:
 
 #### The appropriate model
 
-Read the `complexity` field in the issue frontmatter and check the **AI Models by complexity** table in the manifest to determine which model to use.
+Read the `complexity` field in the issue frontmatter and check the **AI Models by complexity** table in the manifest.
+
+**Important**: most tools today don't let the agent switch models on its own. The agent's role is to **flag the recommendation to the human**, not to switch silently.
 
 ```
-Issue says "complexity: heavy" -> manifest says "heavy = Claude Opus" -> use Opus
-Issue says "complexity: light" -> manifest says "light = Claude Haiku" -> use Haiku
+Issue says "complexity: heavy" -> manifest says "heavy = Claude Opus"
+-> Tell the human: "This task is heavy — the manifest recommends Opus. Switch with /model if needed."
+
+Issue says "complexity: light" -> manifest says "light = Claude Haiku"
+-> Tell the human: "This task is light — Haiku would be sufficient and cheaper."
 ```
 
-If complexity is not specified, use the `standard` model by default. If the table is not filled in the manifest, flag it to the human.
+If complexity is not specified, assume `standard`. If the table is not filled in the manifest, flag it to the human.
+
+When orchestration tools support automatic model switching, this step will become automatic. Until then, the agent recommends and the human decides.
 
 #### The assigned skill
 
@@ -163,7 +170,9 @@ The review needs the full quality framework, not detailed technical context.
 
 ## Task completion — 3 mandatory actions
 
-When the task is done (all done criteria met), the agent performs these 3 actions in this order:
+When the task is done (all done criteria met), the agent performs these 3 actions in this order.
+
+**Exception — bootstrap/multi-task sessions**: When working on multiple issues in one session (e.g., project setup, creating the sprint, initial scaffolding), it is acceptable to batch the issue updates at the end of the session rather than after each individual task. The key rule remains: by the time you commit, every completed issue must have its frontmatter and folder updated.
 
 ### 1. Update the issue frontmatter
 
