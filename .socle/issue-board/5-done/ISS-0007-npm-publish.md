@@ -6,7 +6,7 @@ priority: P1-high
 effort: S
 complexity: light
 skill: deployment
-status: 2-sprint
+status: 5-done
 branch: "chore/ISS-0007-npm-publish"
 depends: [ISS-0006]
 created: 2026-04-13

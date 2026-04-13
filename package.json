@@ -1,6 +1,6 @@
 {
   "name": "socle-cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CLI tool for Le Socle — a human-first method for working with AI agents",
   "type": "module",
   "bin": {
