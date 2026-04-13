@@ -1,7 +1,7 @@
 # CI pipeline — runs on every push and pull request.
 #
-# Steps: install deps → lint → typecheck → test → build → verify binary.
-# If any step fails, the whole pipeline fails and the PR is blocked.
+# Steps: install deps → lint → typecheck → build → test → verify binary.
+# Build runs before test because tests execute the compiled binary.
 
 name: CI
 
@@ -38,11 +38,11 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
-      - name: Test
-        run: npm test
-
       - name: Build
         run: npm run build
+
+      - name: Test
+        run: npm test
 
       - name: Verify binary works
         run: |
