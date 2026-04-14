@@ -1,7 +1,7 @@
 # Lytos — CLI
 
 [![CI](https://github.com/getlytos/lytos-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/getlytos/lytos-cli/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/lytos)](https://www.npmjs.com/package/lytos-cli)
+[![npm](https://img.shields.io/npm/v/lytos-cli)](https://www.npmjs.com/package/lytos-cli)
 
 > The command-line tool for [Lytos](https://github.com/getlytos/lytos-method) — a human-first method for working with AI agents.
 
