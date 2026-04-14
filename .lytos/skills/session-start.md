@@ -19,10 +19,10 @@
 These files are read at **every** session, without exception:
 
 ```
-.socle/manifest.md              <- the project constitution (who, what, why)
-.socle/memory/MEMORY.md         <- the memory summary (not the sub-files)
-.socle/rules/default-rules.md   <- the baseline quality criteria
-.socle/issue-board/BOARD.md     <- the current board state
+.lytos/manifest.md              <- the project constitution (who, what, why)
+.lytos/memory/MEMORY.md         <- the memory summary (not the sub-files)
+.lytos/rules/default-rules.md   <- the baseline quality criteria
+.lytos/issue-board/BOARD.md     <- the current board state
 ```
 
 Estimated time: a few seconds. This context foundation does not change based on the task.
@@ -64,7 +64,7 @@ When orchestration tools support automatic model switching, this step will becom
 Read the `skill` field in the issue -> load the corresponding skill file.
 
 ```
-Issue says "skill: testing" -> load .socle/skills/testing.md
+Issue says "skill: testing" -> load .lytos/skills/testing.md
 ```
 
 #### The relevant memory sections
@@ -140,12 +140,12 @@ If the session is not development but planning (sprint, issues, retrospective):
 
 ```
 Load:
-.socle/manifest.md
-.socle/memory/MEMORY.md
-.socle/memory/cortex/sprints.md
-.socle/sprint.md
-.socle/issue-board/BOARD.md
-.socle/skills/documentation.md
+.lytos/manifest.md
+.lytos/memory/MEMORY.md
+.lytos/memory/cortex/sprints.md
+.lytos/sprint.md
+.lytos/issue-board/BOARD.md
+.lytos/skills/documentation.md
 ```
 
 No need for technical memory (backend, frontend, bugs).
@@ -156,12 +156,12 @@ No need for technical memory (backend, frontend, bugs).
 
 ```
 Load:
-.socle/manifest.md
-.socle/memory/MEMORY.md
-.socle/memory/cortex/architecture.md
-.socle/memory/cortex/patterns.md
-.socle/skills/code-review.md
-.socle/rules/*.md (all rules)
+.lytos/manifest.md
+.lytos/memory/MEMORY.md
+.lytos/memory/cortex/architecture.md
+.lytos/memory/cortex/patterns.md
+.lytos/skills/code-review.md
+.lytos/rules/*.md (all rules)
 ```
 
 The review needs the full quality framework, not detailed technical context.
@@ -188,7 +188,7 @@ updated: 2026-04-12
 The folder represents the status visually. Move the file:
 
 ```bash
-git mv .socle/issue-board/3-in-progress/ISS-XXXX-title.md .socle/issue-board/5-done/
+git mv .lytos/issue-board/3-in-progress/ISS-XXXX-title.md .lytos/issue-board/5-done/
 ```
 
 ### 3. Update the BOARD.md

@@ -1,6 +1,6 @@
 # Skill — Security
 
-*This skill defines how to handle security on a project using Le Socle. An agent loaded with this skill knows how to identify vulnerabilities, apply secure coding patterns, and enforce security best practices across any language.*
+*This skill defines how to handle security on a project using Lytos. An agent loaded with this skill knows how to identify vulnerabilities, apply secure coding patterns, and enforce security best practices across any language.*
 
 ---
 

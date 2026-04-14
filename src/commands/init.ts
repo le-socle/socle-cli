@@ -1,5 +1,5 @@
 /**
- * socle init — Scaffold Le Socle in a project.
+ * lytos init — Scaffold Lytos in a project.
  *
  * Interactive mode: prompts for project name and AI tool.
  * Non-interactive: uses --name, --tool, --yes flags.
@@ -46,7 +46,7 @@ async function promptChoice(
 }
 
 export const initCommand = new Command("init")
-  .description("Scaffold Le Socle in your project")
+  .description("Scaffold Lytos in your project")
   .option("--name <name>", "Project name")
   .option(
     "--tool <tool>",
@@ -54,16 +54,16 @@ export const initCommand = new Command("init")
     ""
   )
   .option("--yes", "Skip prompts, use defaults", false)
-  .option("--force", "Override existing .socle/ directory", false)
+  .option("--force", "Override existing .lytos/ directory", false)
   .option("--dry-run", "Show what would be created without creating", false)
   .action(async (opts) => {
     const cwd = process.cwd();
-    const socleDir = resolve(cwd, ".socle");
+    const lytosDir = resolve(cwd, ".lytos");
 
-    // Check if .socle already exists
-    if (existsSync(socleDir) && !opts.force) {
+    // Check if .lytos already exists
+    if (existsSync(lytosDir) && !opts.force) {
       error(
-        ".socle/ already exists. Use --force to override."
+        ".lytos/ already exists. Use --force to override."
       );
       process.exit(2);
     }
@@ -108,7 +108,7 @@ export const initCommand = new Command("init")
 
     // Scaffold
     console.error("");
-    info(`Installing Le Socle in .socle/...`);
+    info(`Installing Lytos in .lytos/...`);
     console.error("");
 
     const result = await scaffold({
@@ -128,12 +128,12 @@ export const initCommand = new Command("init")
     console.error("");
 
     // Summary
-    console.error(bold(green("Le Socle is installed.")));
+    console.error(bold(green("Lytos is installed.")));
     console.error("");
     console.error("  Next step — open your AI tool and say:");
     console.error("");
     console.error(
-      `  ${bold('"Help me configure Le Socle for this project."')}`
+      `  ${bold('"Help me configure Lytos for this project."')}`
     );
     console.error("");
     console.error(
@@ -144,8 +144,8 @@ export const initCommand = new Command("init")
     );
     console.error("");
     console.error("  Installed structure:");
-    console.error("  .socle/");
-    console.error("  ├── SOCLE.md              <- AI briefing");
+    console.error("  .lytos/");
+    console.error("  ├── LYTOS.md              <- AI briefing");
     console.error(
       "  ├── manifest.md           <- fill with your AI's help"
     );
@@ -160,7 +160,7 @@ export const initCommand = new Command("init")
     console.error("  └── templates/            <- sprint template");
     console.error("");
     console.error(
-      `  Documentation: https://github.com/le-socle/socle`
+      `  Documentation: https://github.com/getlytos/lytos-method`
     );
     console.error("");
   });

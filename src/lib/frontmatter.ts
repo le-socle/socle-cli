@@ -1,7 +1,7 @@
 /**
  * Simple YAML frontmatter parser.
  *
- * Only handles the subset of YAML used in Le Socle issues:
+ * Only handles the subset of YAML used in Lytos issues:
  * strings, simple lists ([a, b]), and dates. No nested objects,
  * no multi-line values, no anchors. This keeps us dependency-free.
  */

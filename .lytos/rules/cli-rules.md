@@ -1,6 +1,6 @@
 # Rules — CLI Specific
 
-*Quality criteria specific to the socle-cli project. These complement the default rules.*
+*Quality criteria specific to the lytos-cli project. These complement the default rules.*
 
 ---
 
@@ -42,5 +42,5 @@
 | Rule | Detail |
 |------|--------|
 | Every command has integration tests | Run the actual CLI binary, check stdout/stderr/exit code |
-| Test with real `.socle/` fixtures | Create temp dirs with real structures, not mocks |
+| Test with real `.lytos/` fixtures | Create temp dirs with real structures, not mocks |
 | Test the error paths | Verify that bad input produces the right error message and exit code |

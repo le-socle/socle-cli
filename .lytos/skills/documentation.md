@@ -1,6 +1,6 @@
 # Skill — Documentation
 
-*This skill defines how to document code, modules, and learnings on a project using Le Socle. An agent loaded with this skill knows what to document, in what format, and when to update the project memory.*
+*This skill defines how to document code, modules, and learnings on a project using Lytos. An agent loaded with this skill knows what to document, in what format, and when to update the project memory.*
 
 ---
 
@@ -173,7 +173,7 @@ What changes as a result? What are the trade-offs?
 - Security architecture decisions (auth flow, encryption)
 - Any decision you would have to re-explain to a new team member
 
-The memory entries in Le Socle (context/decision/consequence format) are lightweight ADRs. For most projects, they are sufficient. Use formal ADRs only when external traceability is required.
+The memory entries in Lytos (context/decision/consequence format) are lightweight ADRs. For most projects, they are sufficient. Use formal ADRs only when external traceability is required.
 
 ---
 

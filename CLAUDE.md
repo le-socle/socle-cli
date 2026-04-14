@@ -1,28 +1,28 @@
 # CLAUDE.md
 
-This project uses **Le Socle** — a human-first method for working with AI agents.
+This project uses **Lytos** — a human-first method for working with AI agents.
 
-This is the CLI tool for Le Socle. It is built using Le Socle itself.
+This is the CLI tool for Lytos. It is built using Lytos itself.
 
 ## First session
 
 Read these files to understand the project:
-1. .socle/manifest.md — what this CLI is, why it exists, stack, principles
-2. .socle/SOCLE.md — the method itself (how manifest, memory, skills, rules, issues work together)
+1. .lytos/manifest.md — what this CLI is, why it exists, stack, principles
+2. .lytos/LYTOS.md — the method itself (how manifest, memory, skills, rules, issues work together)
 
 ## Every session
 
 Read in order:
-1. .socle/manifest.md — project constitution
-2. .socle/memory/MEMORY.md — accumulated knowledge (then load relevant cortex/ sections)
-3. .socle/rules/default-rules.md — quality criteria
-4. .socle/rules/cli-rules.md — CLI-specific rules
+1. .lytos/manifest.md — project constitution
+2. .lytos/memory/MEMORY.md — accumulated knowledge (then load relevant cortex/ sections)
+3. .lytos/rules/default-rules.md — quality criteria
+4. .lytos/rules/cli-rules.md — CLI-specific rules
 
 ## To work on a task
 
-5. .socle/issue-board/BOARD.md — current board state
-6. .socle/sprint.md — current sprint
-7. .socle/skills/session-start.md — full start and end-of-task procedure
+5. .lytos/issue-board/BOARD.md — current board state
+6. .lytos/sprint.md — current sprint
+7. .lytos/skills/session-start.md — full start and end-of-task procedure
 
 ## Key info
 
@@ -30,7 +30,7 @@ Read in order:
 - Tests are in `tests/`
 - The CLI entry point is `src/cli.ts`
 - Each command is a separate file in `src/commands/`
-- Published on npm as `socle-cli`
+- Published on npm as `lytos-cli`
 
 ## Rules
 

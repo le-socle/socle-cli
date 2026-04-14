@@ -1,6 +1,6 @@
 # Rules — Default Rules
 
-*These rules are the universal quality criteria applicable to any project using Le Socle. They are read by agents before each task. They define what "well done" means.*
+*These rules are the universal quality criteria applicable to any project using Lytos. They are read by agents before each task. They define what "well done" means.*
 
 ---
 

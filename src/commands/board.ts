@@ -1,5 +1,5 @@
 /**
- * socle board — Regenerate BOARD.md from issue frontmatter.
+ * lytos board — Regenerate BOARD.md from issue frontmatter.
  *
  * Reads all ISS-*.md files, parses their YAML frontmatter,
  * and generates a clean BOARD.md index. Source of truth is
@@ -17,9 +17,9 @@ import {
 import { ok, warn, error } from "../lib/output.js";
 
 function findBoardDir(cwd: string): string | null {
-  // Try .socle/issue-board/ first, then issue-board/
+  // Try .lytos/issue-board/ first, then issue-board/
   const candidates = [
-    join(cwd, ".socle", "issue-board"),
+    join(cwd, ".lytos", "issue-board"),
     join(cwd, "issue-board"),
   ];
   for (const candidate of candidates) {
@@ -42,7 +42,7 @@ export const boardCommand = new Command("board")
 
     if (!boardDir) {
       error(
-        "No issue-board/ directory found. Run `socle init` first."
+        "No issue-board/ directory found. Run `lytos init` first."
       );
       process.exit(2);
     }
@@ -84,7 +84,7 @@ export const boardCommand = new Command("board")
         return;
       } else {
         error(
-          "BOARD.md is outdated. Run `socle board` to regenerate."
+          "BOARD.md is outdated. Run `lytos board` to regenerate."
         );
         process.exit(1);
       }

@@ -3,8 +3,8 @@
 Génère le BOARD.md à partir des frontmatter YAML des issues.
 
 Usage :
-    python .socle/scripts/generate-board.py
-    python .socle/scripts/generate-board.py --board-dir .socle/issue-board
+    python .lytos/scripts/generate-board.py
+    python .lytos/scripts/generate-board.py --board-dir .lytos/issue-board
 
 Le script lit tous les fichiers .md dans les sous-dossiers de l'issue-board,
 extrait le frontmatter YAML, et régénère le BOARD.md.
@@ -170,10 +170,10 @@ def main():
         idx = sys.argv.index("--board-dir")
         board_dir = Path(sys.argv[idx + 1])
     else:
-        # Chercher dans .socle/issue-board/ ou issue-board/
+        # Chercher dans .lytos/issue-board/ ou issue-board/
         cwd = Path.cwd()
         candidates = [
-            cwd / ".socle" / "issue-board",
+            cwd / ".lytos" / "issue-board",
             cwd / "issue-board",
         ]
         board_dir = None

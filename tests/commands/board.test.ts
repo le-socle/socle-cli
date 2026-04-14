@@ -1,5 +1,5 @@
 /**
- * Integration tests for `socle board`.
+ * Integration tests for `lytos board`.
  *
  * Uses fixture directories with pre-made issue files.
  * Tests the actual CLI binary output.
@@ -42,7 +42,7 @@ afterEach(() => {
   if (fixture) fixture.cleanup();
 });
 
-describe("socle board", () => {
+describe("lytos board", () => {
   it("generates BOARD.md from fixture issues", () => {
     fixture = createBoardFixture();
     const result = run("board", fixture.cwd);
@@ -50,7 +50,7 @@ describe("socle board", () => {
     expect(result.exitCode).toBe(0);
 
     const board = readFileSync(
-      join(fixture.cwd, ".socle", "issue-board", "BOARD.md"),
+      join(fixture.cwd, ".lytos", "issue-board", "BOARD.md"),
       "utf-8"
     );
 
@@ -107,7 +107,7 @@ describe("socle board", () => {
     expect(result.exitCode).toBe(0);
 
     const board = readFileSync(
-      join(fixture.cwd, ".socle", "issue-board", "BOARD.md"),
+      join(fixture.cwd, ".lytos", "issue-board", "BOARD.md"),
       "utf-8"
     );
     expect(board).toContain("No issues.");
@@ -136,7 +136,7 @@ describe("socle board", () => {
     // Generate, then manually modify BOARD.md
     run("board", fixture.cwd);
 
-    const boardPath = join(fixture.cwd, ".socle", "issue-board", "BOARD.md");
+    const boardPath = join(fixture.cwd, ".lytos", "issue-board", "BOARD.md");
     const content = readFileSync(boardPath, "utf-8");
     // Simulate an outdated board by adding a fake line
     const modified = content.replace("_No issues._", "| ISS-9999 | Fake | P3-low | XS |");

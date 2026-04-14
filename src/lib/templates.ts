@@ -1,5 +1,5 @@
 /**
- * Template generators for all files created by `socle init`.
+ * Template generators for all files created by `lytos init`.
  *
  * Each function returns the file content as a string.
  * Variables (project name, date, stack) are injected at generation time.
@@ -7,7 +7,7 @@
 
 import { DetectedStack } from "./detect-stack.js";
 
-const REPO_URL = "https://github.com/le-socle/socle";
+const REPO_URL = "https://github.com/getlytos/lytos-method";
 
 interface TemplateContext {
   projectName: string;
@@ -254,7 +254,7 @@ export function boardTemplate(ctx: TemplateContext): string {
 > **Last updated**: ${ctx.date}
 > **Next number**: ISS-0001
 
-> Regenerate: \`npx socle board\`
+> Regenerate: \`npx lytos board\`
 
 ---
 
@@ -293,24 +293,24 @@ _No issues._
 export function claudeTemplate(_ctx: TemplateContext): string {
   return `# CLAUDE.md
 
-This project uses **Le Socle** — a human-first method for working with AI agents.
+This project uses **Lytos** — a human-first method for working with AI agents.
 
 ## First session (setup)
 
 If the manifest is empty or incomplete, read first:
-- .socle/SOCLE.md — understand the method and how to help fill the files
+- .lytos/LYTOS.md — understand the method and how to help fill the files
 
 ## Every session
 
 Read these files in order:
-1. .socle/manifest.md — the project constitution (identity, stack, principles, AI models)
-2. .socle/memory/MEMORY.md — the memory summary (then load relevant cortex/ sections)
-3. .socle/rules/default-rules.md — quality criteria
+1. .lytos/manifest.md — the project constitution (identity, stack, principles, AI models)
+2. .lytos/memory/MEMORY.md — the memory summary (then load relevant cortex/ sections)
+3. .lytos/rules/default-rules.md — quality criteria
 
 ## To work on a task
 
-4. .socle/issue-board/BOARD.md — board state
-5. .socle/skills/session-start.md — full start and end-of-task procedure
+4. .lytos/issue-board/BOARD.md — board state
+5. .lytos/skills/session-start.md — full start and end-of-task procedure
 
 ## Rules
 
@@ -324,18 +324,18 @@ Documentation: ${REPO_URL}
 }
 
 export function cursorrTemplate(_ctx: TemplateContext): string {
-  return `This project uses Le Socle — a human-first method for working with AI agents.
+  return `This project uses Lytos — a human-first method for working with AI agents.
 
-First session (setup): if the manifest is empty, read @.socle/SOCLE.md to understand the method.
+First session (setup): if the manifest is empty, read @.lytos/LYTOS.md to understand the method.
 
 Every session, read in order:
-1. @.socle/manifest.md — the project constitution
-2. @.socle/memory/MEMORY.md — the memory summary (then relevant cortex/ sections)
-3. @.socle/rules/default-rules.md — quality criteria
+1. @.lytos/manifest.md — the project constitution
+2. @.lytos/memory/MEMORY.md — the memory summary (then relevant cortex/ sections)
+3. @.lytos/rules/default-rules.md — quality criteria
 
 To work on a task:
-4. @.socle/issue-board/BOARD.md — board state
-5. @.socle/skills/session-start.md — start and end-of-task procedure
+4. @.lytos/issue-board/BOARD.md — board state
+5. @.lytos/skills/session-start.md — start and end-of-task procedure
 
 Rules:
 - The YAML frontmatter of issues is the source of truth

@@ -5,9 +5,9 @@ import { boardCommand } from "./commands/board.js";
 const program = new Command();
 
 program
-  .name("socle")
+  .name("lytos")
   .description(
-    "CLI tool for Le Socle — a human-first method for working with AI agents"
+    "CLI tool for Lytos — a human-first method for working with AI agents"
   )
   .version("0.1.1");
 

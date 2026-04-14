@@ -146,7 +146,7 @@ After a successful deployment:
 | **Canary** | Many users | Low — progressive exposure |
 | **Feature flags** | Risky features | Low — enable/disable without redeploying |
 
-For most projects using Le Socle, the **CI/CD with merge to main** strategy is sufficient.
+For most projects using Lytos, the **CI/CD with merge to main** strategy is sufficient.
 
 ---
 
