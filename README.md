@@ -5,6 +5,32 @@
 
 > The command-line tool for [Lytos](https://github.com/getlytos/lytos-method) — a human-first method for working with AI agents.
 
+**Lytos** gives your AI agents a structured context: what the project is, how to work, what "done" means, what's in progress, and what's been learned. Everything in markdown. No vendor lock-in, no API, no account.
+
+---
+
+## The problem
+
+AI agents (Claude, Cursor, GPT...) are powerful but stateless. Every session starts from zero. They don't know your project's conventions, your sprint priorities, or what was tried last week.
+
+**Lytos** solves this by creating a `.lytos/` directory in your project — a structured context that any AI can read, and that you own.
+
+---
+
+## The 5 pillars
+
+`lytos init` scaffolds a `.lytos/` directory built on 5 pillars:
+
+| Pillar | Purpose | File / Directory |
+|--------|---------|-----------------|
+| **Intent** | Why the project exists — its constitution | `manifest.md` |
+| **Design** | Procedures for recurring tasks (code review, testing, deployment...) | `skills/` |
+| **Standards** | Non-negotiable quality criteria | `rules/` |
+| **Progress** | Issues, sprint, what's moving and what's blocked | `issue-board/` |
+| **Memory** | What's been learned — sovereign, portable, model-independent | `memory/` |
+
+These 5 pillars are the method. The AI agent reads them at the start of each session and follows them.
+
 ---
 
 ## Install
@@ -13,24 +39,15 @@
 npm install -g lytos-cli
 ```
 
-Then use:
-
-```bash
-lytos init          # Install Lytos in your project
-lytos board         # Regenerate BOARD.md from issue frontmatter
-```
-
 Or use without installing:
 
 ```bash
-npx lytos init
+npx lytos-cli init
 ```
 
 ---
 
-## What it does
-
-One command to install the method, one command to validate your setup, one command to see your sprint.
+## Commands
 
 | Command | What it does |
 |---------|-------------|
@@ -42,22 +59,70 @@ One command to install the method, one command to validate your setup, one comma
 
 ---
 
+## What `lytos init` generates
+
+```
+your-project/
+└── .lytos/
+    ├── manifest.md              # Intent — project identity and constraints
+    ├── LYTOS.md                 # Method reference
+    ├── sprint.md                # Current sprint
+    ├── skills/                  # Design — 9 reusable procedures
+    │   ├── session-start.md
+    │   ├── code-structure.md
+    │   ├── code-review.md
+    │   ├── testing.md
+    │   ├── documentation.md
+    │   ├── git-workflow.md
+    │   ├── deployment.md
+    │   ├── security.md
+    │   └── api-design.md
+    ├── rules/                   # Standards — quality criteria
+    │   └── default-rules.md
+    ├── issue-board/             # Progress — kanban board
+    │   ├── BOARD.md
+    │   ├── 0-icebox/
+    │   ├── 1-backlog/
+    │   ├── 2-sprint/
+    │   ├── 3-in-progress/
+    │   ├── 4-review/
+    │   └── 5-done/
+    └── memory/                  # Memory — accumulated knowledge
+        ├── MEMORY.md
+        └── cortex/
+            ├── architecture.md
+            ├── patterns.md
+            ├── bugs.md
+            └── ...
+```
+
+---
+
+## Design principles
+
+- **Offline-first** — no network needed (except `lytos init` to download templates)
+- **Zero lock-in** — plain markdown files, works with any AI tool
+- **No telemetry** — no tracking, no analytics, ever
+- **Human-first** — the human defines the method, the AI follows it
+
+---
+
 ## Built with Lytos
 
 This project uses Lytos to develop itself. The `.lytos/` directory contains the real manifest, sprint, issues, and memory for this project — not templates.
 
-If you want to contribute, open this repo in Claude Code and say: **"Help me understand this project."**
+---
+
+## Links
+
+- [Lytos Method](https://github.com/getlytos/lytos-method) — the method itself
+- [Documentation](https://github.com/getlytos/lytos-website) — full docs (EN/FR)
 
 ---
 
 ## Author
 
-Created by **Frederic Galliné** — [ubeez.com](https://ubeez.com)
-
-- GitHub: [@FredericGalline](https://github.com/FredericGalline)
-- X: [@fred](https://x.com/fred)
-
-Part of the [Lytos](https://github.com/getlytos/lytos-method) project.
+Created by **Frederic Galline** — [ubeez.com](https://ubeez.com)
 
 ---
 
