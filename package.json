@@ -1,10 +1,11 @@
 {
-  "name": "lytos",
+  "name": "lytos-cli",
   "version": "0.2.0",
   "description": "CLI tool for Lytos — a human-first method for working with AI agents",
   "type": "module",
   "bin": {
-    "lytos": "dist/cli.js"
+    "lytos": "dist/cli.js",
+    "lytos-cli": "dist/cli.js"
   },
   "files": [
     "dist"
