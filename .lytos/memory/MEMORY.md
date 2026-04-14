@@ -1,4 +1,4 @@
-# Memory — socle-cli
+# Memory — lytos-cli
 
 *This file is the project memory's table of contents. Load only what is relevant to the current task.*
 
@@ -20,7 +20,7 @@
 
 ## Living summary
 
-CLI for Le Socle method. Sprint #01 in progress — implementing `socle init` (interactive scaffold) and `socle board` (BOARD.md generator). TypeScript, Commander.js, zero unnecessary deps.
+CLI for Lytos method. Sprint #01 in progress — implementing `lytos init` (interactive scaffold) and `lytos board` (BOARD.md generator). TypeScript, Commander.js, zero unnecessary deps.
 
 ---
 

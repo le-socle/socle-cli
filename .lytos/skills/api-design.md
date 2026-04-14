@@ -1,6 +1,6 @@
 # Skill — API Design
 
-*This skill defines how to design and review REST APIs on a project using Le Socle. An agent loaded with this skill knows the conventions, patterns, and checks required to produce a consistent, production-ready API.*
+*This skill defines how to design and review REST APIs on a project using Lytos. An agent loaded with this skill knows the conventions, patterns, and checks required to produce a consistent, production-ready API.*
 
 ---
 

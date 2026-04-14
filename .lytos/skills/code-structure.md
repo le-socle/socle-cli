@@ -1,6 +1,6 @@
 # Skill — Code Structure
 
-*This skill defines the rules for file structure, naming, and code organization on a project using Le Socle. An agent loaded with this skill produces clean, consistent, and maintainable code.*
+*This skill defines the rules for file structure, naming, and code organization on a project using Lytos. An agent loaded with this skill produces clean, consistent, and maintainable code.*
 
 ---
 

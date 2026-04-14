@@ -19,7 +19,7 @@ An agent doing a code review loads the `code-review` skill **and** the project r
 
 | File | Content |
 |------|---------|
-| `default-rules.md` | Universal rules applicable to any Le Socle project |
+| `default-rules.md` | Universal rules applicable to any Lytos project |
 
 ---
 
@@ -85,4 +85,4 @@ In case of conflict, project-specific rules take precedence over default rules.
 
 ---
 
-*Rules are one of the four pillars of Le Socle. They guarantee a consistent quality level, regardless of which agent is working.*
+*Rules are one of the four pillars of Lytos. They guarantee a consistent quality level, regardless of which agent is working.*

@@ -1,5 +1,5 @@
 /**
- * Test fixtures — helpers to create temporary .socle/ directories.
+ * Test fixtures — helpers to create temporary .lytos/ directories.
  *
  * Each test gets its own isolated temp directory. No test can
  * pollute another. Cleanup is automatic via the returned `cleanup` function.
@@ -18,10 +18,10 @@ export interface Fixture {
 }
 
 /**
- * Creates a bare temp directory (no .socle/).
+ * Creates a bare temp directory (no .lytos/).
  */
 export function createEmptyFixture(): Fixture {
-  const cwd = mkdtempSync(join(tmpdir(), "socle-test-"));
+  const cwd = mkdtempSync(join(tmpdir(), "lytos-test-"));
   return {
     cwd,
     cleanup: () => rmSync(cwd, { recursive: true, force: true }),
@@ -45,11 +45,11 @@ export function createNodeProjectFixture(): Fixture {
 }
 
 /**
- * Creates a temp directory with a .socle/issue-board/ containing sample issues.
+ * Creates a temp directory with a .lytos/issue-board/ containing sample issues.
  */
 export function createBoardFixture(): Fixture {
   const fixture = createEmptyFixture();
-  const board = join(fixture.cwd, ".socle", "issue-board");
+  const board = join(fixture.cwd, ".lytos", "issue-board");
 
   // Create Kanban folders
   for (const dir of [
@@ -145,7 +145,7 @@ created: 2026-04-10
  */
 export function createEmptyBoardFixture(): Fixture {
   const fixture = createEmptyFixture();
-  const board = join(fixture.cwd, ".socle", "issue-board");
+  const board = join(fixture.cwd, ".lytos", "issue-board");
 
   for (const dir of [
     "0-icebox",

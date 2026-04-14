@@ -1,6 +1,6 @@
 # Skill — Testing
 
-*This skill defines how to write tests on a project using Le Socle. It covers unit tests and end-to-end tests. An agent loaded with this skill knows what to test, how to structure tests, and what coverage criteria to meet.*
+*This skill defines how to write tests on a project using Lytos. It covers unit tests and end-to-end tests. An agent loaded with this skill knows what to test, how to structure tests, and what coverage criteria to meet.*
 
 ---
 

@@ -1,8 +1,8 @@
 /**
- * Scaffolding logic for `socle init`.
+ * Scaffolding logic for `lytos init`.
  *
- * Creates the .socle/ directory structure and all essential files.
- * Downloads skills, rules, and SOCLE.md from the Le Socle GitHub repo.
+ * Creates the .lytos/ directory structure and all essential files.
+ * Downloads skills, rules, and LYTOS.md from the Lytos GitHub repo.
  */
 
 import { mkdirSync, writeFileSync, existsSync } from "fs";
@@ -19,7 +19,7 @@ import {
 import type { DetectedStack } from "./detect-stack.js";
 
 const REPO_RAW =
-  "https://raw.githubusercontent.com/le-socle/socle/main";
+  "https://raw.githubusercontent.com/getlytos/lytos-method/main";
 
 const SKILLS = [
   "session-start",
@@ -40,7 +40,7 @@ const REMOTE_FILES = [
   })),
   { remote: "rules/default-rules.md", local: "rules/default-rules.md" },
   { remote: "rules/README.md", local: "rules/README.md" },
-  { remote: "SOCLE.md", local: "SOCLE.md" },
+  { remote: "LYTOS.md", local: "LYTOS.md" },
   { remote: "templates/sprint.md", local: "templates/sprint.md" },
   {
     remote: "issue-board/templates/issue-feature.md",
@@ -104,7 +104,7 @@ export async function scaffold(
     warnings: [],
   };
 
-  const socleDir = join(options.cwd, ".socle");
+  const lytosDir = join(options.cwd, ".lytos");
   const today = new Date().toISOString().slice(0, 10);
   const ctx = {
     projectName: options.projectName,
@@ -129,7 +129,7 @@ export async function scaffold(
   ];
 
   for (const dir of dirs) {
-    ensureDir(join(socleDir, dir), options.dryRun);
+    ensureDir(join(lytosDir, dir), options.dryRun);
   }
 
   // Create .gitkeep files in empty Kanban folders
@@ -143,7 +143,7 @@ export async function scaffold(
   ];
   for (const dir of kanbanDirs) {
     writeFile(
-      join(socleDir, "issue-board", dir, ".gitkeep"),
+      join(lytosDir, "issue-board", dir, ".gitkeep"),
       "",
       options.dryRun,
       result
@@ -152,19 +152,19 @@ export async function scaffold(
 
   // Generate local files from templates
   writeFile(
-    join(socleDir, "manifest.md"),
+    join(lytosDir, "manifest.md"),
     manifestTemplate(ctx),
     options.dryRun,
     result
   );
   writeFile(
-    join(socleDir, "memory", "MEMORY.md"),
+    join(lytosDir, "memory", "MEMORY.md"),
     memoryTemplate(ctx),
     options.dryRun,
     result
   );
   writeFile(
-    join(socleDir, "issue-board", "BOARD.md"),
+    join(lytosDir, "issue-board", "BOARD.md"),
     boardTemplate(ctx),
     options.dryRun,
     result
@@ -173,19 +173,19 @@ export async function scaffold(
   // Generate cortex files with examples
   for (const cortexFile of getCortexFiles()) {
     writeFile(
-      join(socleDir, "memory", "cortex", cortexFile.name),
+      join(lytosDir, "memory", "cortex", cortexFile.name),
       cortexTemplate(cortexFile),
       options.dryRun,
       result
     );
   }
 
-  // Download remote files (skills, rules, SOCLE.md, templates)
+  // Download remote files (skills, rules, LYTOS.md, templates)
   for (const file of REMOTE_FILES) {
     try {
       const content = await download(`${REPO_RAW}/${file.remote}`);
       writeFile(
-        join(socleDir, file.local),
+        join(lytosDir, file.local),
         content,
         options.dryRun,
         result

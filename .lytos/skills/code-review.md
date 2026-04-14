@@ -1,6 +1,6 @@
 # Skill — Code Review
 
-*This skill defines how to perform a code review on a project using Le Socle. An agent loaded with this skill knows exactly what to check, in what order, and how to formulate feedback.*
+*This skill defines how to perform a code review on a project using Lytos. An agent loaded with this skill knows exactly what to check, in what order, and how to formulate feedback.*
 
 ---
 

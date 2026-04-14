@@ -1,12 +1,12 @@
-# Le Socle — AI Briefing
+# Lytos — AI Briefing
 
-*This file explains the Le Socle method to the AI working on this project. It is read once at the start of the first session to understand the framework. Afterwards, only the manifest and memory are needed.*
+*This file explains the Lytos method to the AI working on this project. It is read once at the start of the first session to understand the framework. Afterwards, only the manifest and memory are needed.*
 
 ---
 
-## What Le Socle is
+## What Lytos is
 
-Le Socle is a human-AI working method. It replaces agent "personas" (LeadDev, UX Expert...) with operational procedures (skills), quality criteria (rules), and persistent memory (memory). The human is the architect, the AI executes within the defined framework.
+Lytos is a human-AI working method. It replaces agent "personas" (LeadDev, UX Expert...) with operational procedures (skills), quality criteria (rules), and persistent memory (memory). The human is the architect, the AI executes within the defined framework.
 
 ## Files and their roles
 
@@ -86,4 +86,4 @@ Issues have YAML frontmatter. The important fields:
 
 ---
 
-*This briefing is operational. The AI reading it understands the method and can guide the human in setting up Le Socle.*
+*This briefing is operational. The AI reading it understands the method and can guide the human in setting up Lytos.*

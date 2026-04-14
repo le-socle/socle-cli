@@ -1,10 +1,10 @@
 {
-  "name": "le-socle",
+  "name": "lytos",
   "version": "0.1.1",
-  "description": "CLI tool for Le Socle — a human-first method for working with AI agents",
+  "description": "CLI tool for Lytos — a human-first method for working with AI agents",
   "type": "module",
   "bin": {
-    "socle": "dist/cli.js"
+    "lytos": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "socle",
+    "lytos",
     "ai",
     "agents",
     "cli",
@@ -35,11 +35,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/le-socle/socle-cli.git"
+    "url": "git+https://github.com/getlytos/lytos-cli.git"
   },
-  "homepage": "https://github.com/le-socle/socle",
+  "homepage": "https://github.com/getlytos/lytos-method",
   "bugs": {
-    "url": "https://github.com/le-socle/socle-cli/issues"
+    "url": "https://github.com/getlytos/lytos-cli/issues"
   },
   "engines": {
     "node": ">=20.0.0"

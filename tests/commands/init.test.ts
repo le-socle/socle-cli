@@ -1,5 +1,5 @@
 /**
- * Integration tests for `socle init`.
+ * Integration tests for `lytos init`.
  *
  * Each test runs the actual CLI binary in a temp directory,
  * then checks the file system and output.
@@ -41,8 +41,8 @@ afterEach(() => {
   if (fixture) fixture.cleanup();
 });
 
-describe("socle init", () => {
-  it("creates .socle/ directory with essential files", () => {
+describe("lytos init", () => {
+  it("creates .lytos/ directory with essential files", () => {
     fixture = createEmptyFixture();
     const result = run('init --name "Test Project" --tool none --yes', fixture.cwd);
 
@@ -50,16 +50,16 @@ describe("socle init", () => {
     expect(result.exitCode).toBe(0);
 
     // Essential directories exist
-    expect(existsSync(join(fixture.cwd, ".socle"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "memory", "cortex"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "issue-board", "3-in-progress"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "skills"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "rules"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "memory", "cortex"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "issue-board", "3-in-progress"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "skills"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "rules"))).toBe(true);
 
     // Essential files exist
-    expect(existsSync(join(fixture.cwd, ".socle", "manifest.md"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "memory", "MEMORY.md"))).toBe(true);
-    expect(existsSync(join(fixture.cwd, ".socle", "issue-board", "BOARD.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "manifest.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "memory", "MEMORY.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos", "issue-board", "BOARD.md"))).toBe(true);
   });
 
   it("pre-fills manifest with project name", () => {
@@ -67,7 +67,7 @@ describe("socle init", () => {
     run('init --name "My Awesome API" --tool none --yes', fixture.cwd);
 
     const manifest = readFileSync(
-      join(fixture.cwd, ".socle", "manifest.md"),
+      join(fixture.cwd, ".lytos", "manifest.md"),
       "utf-8"
     );
 
@@ -80,7 +80,7 @@ describe("socle init", () => {
     run('init --name "Test" --tool none --yes', fixture.cwd);
 
     const manifest = readFileSync(
-      join(fixture.cwd, ".socle", "manifest.md"),
+      join(fixture.cwd, ".lytos", "manifest.md"),
       "utf-8"
     );
 
@@ -96,7 +96,7 @@ describe("socle init", () => {
     expect(existsSync(join(fixture.cwd, "CLAUDE.md"))).toBe(true);
 
     const content = readFileSync(join(fixture.cwd, "CLAUDE.md"), "utf-8");
-    expect(content).toContain("Le Socle");
+    expect(content).toContain("Lytos");
     expect(content).toContain("manifest.md");
   });
 
@@ -115,7 +115,7 @@ describe("socle init", () => {
     expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(false);
   });
 
-  it("fails if .socle/ already exists", () => {
+  it("fails if .lytos/ already exists", () => {
     fixture = createEmptyFixture();
     // First init
     run('init --name "Test" --tool none --yes', fixture.cwd);
@@ -125,7 +125,7 @@ describe("socle init", () => {
     expect(result.exitCode).toBe(2);
   });
 
-  it("succeeds with --force when .socle/ already exists", () => {
+  it("succeeds with --force when .lytos/ already exists", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool none --yes', fixture.cwd);
     const result = run('init --name "Test v2" --tool none --yes --force', fixture.cwd);
@@ -133,7 +133,7 @@ describe("socle init", () => {
     expect(result.exitCode).toBe(0);
 
     const manifest = readFileSync(
-      join(fixture.cwd, ".socle", "manifest.md"),
+      join(fixture.cwd, ".lytos", "manifest.md"),
       "utf-8"
     );
     expect(manifest).toContain("Test v2");
@@ -144,7 +144,7 @@ describe("socle init", () => {
     run('init --name "Test" --tool none --yes', fixture.cwd);
 
     const arch = readFileSync(
-      join(fixture.cwd, ".socle", "memory", "cortex", "architecture.md"),
+      join(fixture.cwd, ".lytos", "memory", "cortex", "architecture.md"),
       "utf-8"
     );
     expect(arch).toContain("Architecture");
@@ -160,7 +160,7 @@ describe("socle init", () => {
     run('init --name "Test" --tool none --yes', fixture.cwd);
 
     const manifest = readFileSync(
-      join(fixture.cwd, ".socle", "manifest.md"),
+      join(fixture.cwd, ".lytos", "manifest.md"),
       "utf-8"
     );
     expect(manifest).toContain("Python");

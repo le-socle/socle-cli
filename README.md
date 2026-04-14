@@ -1,29 +1,29 @@
-# Le Socle — CLI
+# Lytos — CLI
 
-[![CI](https://github.com/le-socle/socle-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/le-socle/socle-cli/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/le-socle)](https://www.npmjs.com/package/le-socle)
+[![CI](https://github.com/getlytos/lytos-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/getlytos/lytos-cli/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/lytos)](https://www.npmjs.com/package/lytos)
 
-> The command-line tool for [Le Socle](https://github.com/le-socle/socle) — a human-first method for working with AI agents.
+> The command-line tool for [Lytos](https://github.com/getlytos/lytos-method) — a human-first method for working with AI agents.
 
 ---
 
 ## Install
 
 ```bash
-npm install -g le-socle
+npm install -g lytos
 ```
 
 Then use:
 
 ```bash
-socle init          # Install Le Socle in your project
-socle board         # Regenerate BOARD.md from issue frontmatter
+lytos init          # Install Lytos in your project
+lytos board         # Regenerate BOARD.md from issue frontmatter
 ```
 
 Or use without installing:
 
 ```bash
-npx le-socle init
+npx lytos init
 ```
 
 ---
@@ -34,17 +34,17 @@ One command to install the method, one command to validate your setup, one comma
 
 | Command | What it does |
 |---------|-------------|
-| `socle init` | Scaffold `.socle/` in your project (interactive, detects your stack) |
-| `socle board` | Regenerate BOARD.md from issue YAML frontmatter |
-| `socle lint` | Validate `.socle/` structure and content *(coming soon)* |
-| `socle doctor` | Full diagnostic — missing files, broken links, stale memory *(coming soon)* |
-| `socle status` | Display sprint DAG in terminal *(coming soon)* |
+| `lytos init` | Scaffold `.lytos/` in your project (interactive, detects your stack) |
+| `lytos board` | Regenerate BOARD.md from issue YAML frontmatter |
+| `lytos lint` | Validate `.lytos/` structure and content *(coming soon)* |
+| `lytos doctor` | Full diagnostic — missing files, broken links, stale memory *(coming soon)* |
+| `lytos status` | Display sprint DAG in terminal *(coming soon)* |
 
 ---
 
-## Built with Le Socle
+## Built with Lytos
 
-This project uses Le Socle to develop itself. The `.socle/` directory contains the real manifest, sprint, issues, and memory for this project — not templates.
+This project uses Lytos to develop itself. The `.lytos/` directory contains the real manifest, sprint, issues, and memory for this project — not templates.
 
 If you want to contribute, open this repo in Claude Code and say: **"Help me understand this project."**
 
@@ -57,7 +57,7 @@ Created by **Frederic Galliné** — [ubeez.com](https://ubeez.com)
 - GitHub: [@FredericGalline](https://github.com/FredericGalline)
 - X: [@fred](https://x.com/fred)
 
-Part of the [Le Socle](https://github.com/le-socle/socle) project.
+Part of the [Lytos](https://github.com/getlytos/lytos-method) project.
 
 ---
 

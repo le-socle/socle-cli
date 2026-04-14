@@ -8,10 +8,10 @@ function run(args: string): string {
   return execSync(`node ${CLI_PATH} ${args}`, { encoding: "utf-8" }).trim();
 }
 
-describe("socle CLI", () => {
+describe("lytos CLI", () => {
   it("shows help", () => {
     const output = run("--help");
-    expect(output).toContain("Le Socle");
+    expect(output).toContain("Lytos");
     expect(output).toContain("Options:");
   });
 
