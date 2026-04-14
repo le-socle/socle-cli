@@ -6,7 +6,7 @@ priority: P1-high
 effort: S
 complexity: light
 skill: ~
-status: 2-sprint
+status: 5-done
 depends: []
 created: 2026-04-14
 updated: 2026-04-14

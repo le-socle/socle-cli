@@ -24,15 +24,11 @@ _No issues._
 
 ### 2-sprint (committed)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0015](2-sprint/ISS-0015-configure-domains.md) | Configure lytos.org and lytos.dev domains | P1-high | S |
+_No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0017](1-backlog/ISS-0017-board-terminal-display.md) | Enhance lyt board with rich terminal display | P1-high | M |
+_No issues._
 
 ### 4-review (review/test)
 
@@ -53,6 +49,8 @@ _No issues._
 | [ISS-0012](5-done/ISS-0012-rename-cli-repo-content.md) | Replace all socle references in CLI repo (lytos-cli) | 2026-04-14 |
 | [ISS-0013](5-done/ISS-0013-rename-website-content.md) | Replace all socle references in website repo | 2026-04-14 |
 | [ISS-0014](5-done/ISS-0014-publish-npm-and-deprecate.md) | Publish lytos on npm, deprecate le-socle | 2026-04-14 |
+| [ISS-0015](5-done/ISS-0015-configure-domains.md) | Configure lytos.org and lytos.dev domains | 2026-04-14 |
+| [ISS-0017](5-done/ISS-0017-board-terminal-display.md) | Enhance lyt board with rich terminal display | 2026-04-14 |
 
 ---
 
