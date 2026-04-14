@@ -1,9 +1,13 @@
 import { Command } from "commander";
 import { execSync } from "child_process";
+import { createRequire } from "module";
 import { initCommand } from "./commands/init.js";
 import { boardCommand } from "./commands/board.js";
 import { checkForUpdates } from "./lib/update-check.js";
 import { ok, error, bold, dim, green } from "./lib/output.js";
+
+const require = createRequire(import.meta.url);
+const { version: VERSION } = require("../package.json");
 
 const program = new Command();
 
@@ -12,7 +16,7 @@ program
   .description(
     "CLI tool for Lytos — a human-first method for working with AI agents"
   )
-  .version("0.2.1");
+  .version(VERSION);
 
 program.addCommand(initCommand);
 program.addCommand(boardCommand);
@@ -57,8 +61,6 @@ program
       process.exit(1);
     }
   });
-
-const VERSION = "0.2.1";
 
 program.parse();
 
