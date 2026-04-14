@@ -39,7 +39,7 @@
     "type": "git",
     "url": "git+https://github.com/getlytos/lytos-cli.git"
   },
-  "homepage": "https://github.com/getlytos/lytos-method",
+  "homepage": "https://lytos.org",
   "bugs": {
     "url": "https://github.com/getlytos/lytos-cli/issues"
   },
