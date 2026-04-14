@@ -16,6 +16,7 @@ function color(code: string, text: string): string {
 
 export const green = (t: string) => color("32", t);
 export const red = (t: string) => color("31", t);
+export const yellow = (t: string) => color("33", t);
 export const blue = (t: string) => color("34", t);
 export const bold = (t: string) => color("1", t);
 export const dim = (t: string) => color("2", t);
