@@ -50,7 +50,7 @@ export const initCommand = new Command("init")
   .option("--name <name>", "Project name")
   .option(
     "--tool <tool>",
-    "AI tool to configure (claude, cursor, none)",
+    "AI tool to configure (claude, cursor, codex, none)",
     ""
   )
   .option("--yes", "Skip prompts, use defaults", false)
@@ -93,10 +93,13 @@ export const initCommand = new Command("init")
       const choice = await promptChoice("Which AI tool do you use?", [
         { key: "1", label: "Claude Code" },
         { key: "2", label: "Cursor" },
-        { key: "3", label: "Other / None" },
+        { key: "3", label: "Codex (OpenAI)" },
+        { key: "4", label: "Other / None" },
       ]);
       tool =
-        choice === "1" ? "claude" : choice === "2" ? "cursor" : "none";
+        choice === "1" ? "claude" :
+        choice === "2" ? "cursor" :
+        choice === "3" ? "codex" : "none";
     }
     tool = tool || "none";
 
@@ -113,7 +116,7 @@ export const initCommand = new Command("init")
 
     const result = await scaffold({
       projectName,
-      tool: tool as "claude" | "cursor" | "none",
+      tool: tool as "claude" | "cursor" | "codex" | "none",
       stack,
       cwd,
       dryRun: opts.dryRun,
