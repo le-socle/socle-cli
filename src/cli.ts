@@ -3,6 +3,7 @@ import { execSync } from "child_process";
 import { createRequire } from "module";
 import { initCommand } from "./commands/init.js";
 import { boardCommand } from "./commands/board.js";
+import { lintCommand } from "./commands/lint.js";
 import { checkForUpdates } from "./lib/update-check.js";
 import { ok, error, bold, dim, green } from "./lib/output.js";
 
@@ -20,15 +21,7 @@ program
 
 program.addCommand(initCommand);
 program.addCommand(boardCommand);
-
-// Coming soon — registered so they appear in help
-program
-  .command("lint")
-  .description("Validate .lytos/ structure and content (coming soon)")
-  .action(() => {
-    console.error("Coming soon. Follow https://github.com/getlytos/lytos-cli for updates.");
-    process.exit(0);
-  });
+program.addCommand(lintCommand);
 
 program
   .command("doctor")
