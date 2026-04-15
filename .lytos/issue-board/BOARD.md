@@ -32,9 +32,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0008](3-in-progress/ISS-0008-lyt-lint.md) | Implement lyt lint command | P1-high | M |
+_No issues._
 
 ### 4-review (review/test)
 
@@ -51,6 +49,7 @@ _No issues._
 | [ISS-0005](5-done/ISS-0005-tests-board.md) | Integration tests for socle board | ? |
 | [ISS-0006](5-done/ISS-0006-ci-pipeline.md) | CI pipeline (GitHub Actions) | ? |
 | [ISS-0007](5-done/ISS-0007-npm-publish.md) | npm publish setup and first release | ? |
+| [ISS-0008](5-done/ISS-0008-lyt-lint.md) | Implement lyt lint command | 2026-04-15 |
 | [ISS-0011](5-done/ISS-0011-rename-method-repo-content.md) | Replace all socle references in method repo (lytos-method) | 2026-04-14 |
 | [ISS-0012](5-done/ISS-0012-rename-cli-repo-content.md) | Replace all socle references in CLI repo (lytos-cli) | 2026-04-14 |
 | [ISS-0013](5-done/ISS-0013-rename-website-content.md) | Replace all socle references in website repo | 2026-04-14 |
