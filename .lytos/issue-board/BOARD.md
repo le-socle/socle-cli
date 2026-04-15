@@ -26,7 +26,6 @@ _No issues._
 | [ISS-0020](1-backlog/ISS-0020-claim-assignee.md) | Add issue assignment with lyt claim/unclaim and board display | P1-high | M | — |
 | [ISS-0021](1-backlog/ISS-0021-role-guides.md) | Create role-based guides: developer and lead developer | P1-high | M | — |
 | [ISS-0023](1-backlog/ISS-0023-archive-system.md) | Archive system — separate done issues from active board for token efficiency | P1-high | M | — |
-| [ISS-0024](1-backlog/ISS-0024-onboarding-profiles-i18n.md) | Onboarding: user profiles, language selection, and guided briefing | P0-critical | L | — |
 
 ### 2-sprint (committed)
 
@@ -58,6 +57,7 @@ _No issues._
 | [ISS-0015](5-done/ISS-0015-configure-domains.md) | Configure lytos.org and lytos.dev domains | 2026-04-14 |
 | [ISS-0017](5-done/ISS-0017-board-terminal-display.md) | Enhance lyt board with rich terminal display | 2026-04-14 |
 | [ISS-0022](5-done/ISS-0022-add-codex-tool-option.md) | Add Codex (OpenAI) as AI tool option in lyt init | 2026-04-15 |
+| [ISS-0024](5-done/ISS-0024-onboarding-profiles-i18n.md) | Onboarding: user profiles, language selection, and guided briefing | 2026-04-15 |
 
 ---
 
