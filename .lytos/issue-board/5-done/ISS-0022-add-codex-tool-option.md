@@ -7,7 +7,7 @@ effort: S
 complexity: light
 skill: code-structure
 skills_aux: [testing]
-status: 3-in-progress
+status: 5-done
 branch: "feat/ISS-0022-codex-tool"
 depends: []
 created: 2026-04-15
