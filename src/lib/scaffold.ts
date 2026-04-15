@@ -14,6 +14,7 @@ import {
   getCortexFiles,
   boardTemplate,
   claudeTemplate,
+  codexTemplate,
   cursorrTemplate,
 } from "./templates.js";
 import type { DetectedStack } from "./detect-stack.js";
@@ -54,7 +55,7 @@ const REMOTE_FILES = [
 
 export interface ScaffoldOptions {
   projectName: string;
-  tool: "claude" | "cursor" | "none";
+  tool: "claude" | "cursor" | "codex" | "none";
   stack: Partial<DetectedStack>;
   cwd: string;
   dryRun: boolean;
@@ -209,6 +210,13 @@ export async function scaffold(
     writeFile(
       join(options.cwd, ".cursorrules"),
       cursorrTemplate(ctx),
+      options.dryRun,
+      result
+    );
+  } else if (options.tool === "codex") {
+    writeFile(
+      join(options.cwd, "agents.md"),
+      codexTemplate(ctx),
       options.dryRun,
       result
     );
