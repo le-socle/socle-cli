@@ -5,6 +5,7 @@ import { initCommand } from "./commands/init.js";
 import { boardCommand } from "./commands/board.js";
 import { lintCommand } from "./commands/lint.js";
 import { doctorCommand } from "./commands/doctor.js";
+import { showCommand } from "./commands/show.js";
 import { checkForUpdates } from "./lib/update-check.js";
 import { ok, error, bold, dim, green } from "./lib/output.js";
 
@@ -24,6 +25,7 @@ program.addCommand(initCommand);
 program.addCommand(boardCommand);
 program.addCommand(lintCommand);
 program.addCommand(doctorCommand);
+program.addCommand(showCommand);
 
 program
   .command("status")
