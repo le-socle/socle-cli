@@ -7,10 +7,11 @@ effort: M
 complexity: standard
 skill: code-structure
 skills_aux: [testing, documentation]
-status: 3-in-progress
+status: 5-done
 branch: fix/ISS-0031-oss-cleanup
 depends: []
 created: 2026-04-16
+updated: 2026-04-16
 ---
 # ISS-0031 — OSS cleanup — lint errors, README drift, detectStack bug, update check
 

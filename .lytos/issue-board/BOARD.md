@@ -32,9 +32,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0031](3-in-progress/ISS-0031-oss-cleanup.md) | OSS cleanup — lint errors, README drift, detectStack bug, update check | P0-critical | M |
+_No issues._
 
 ### 4-review (review/test)
 
@@ -67,6 +65,7 @@ _No issues._
 | [ISS-0028](5-done/ISS-0028-lyt-show-issue-detail.md) | Implement lyt show — display issue detail with progress | 2026-04-16 |
 | [ISS-0029](5-done/ISS-0029-lyt-start.md) | Implement lyt start — automate the mandatory start phase | 2026-04-16 |
 | [ISS-0030](5-done/ISS-0030-lyt-close.md) | Implement lyt close — automate the mandatory close phase | 2026-04-16 |
+| [ISS-0031](5-done/ISS-0031-oss-cleanup.md) | OSS cleanup — lint errors, README drift, detectStack bug, update check | 2026-04-16 |
 
 ---
 
