@@ -101,6 +101,7 @@ No magic values in production code.
 | No "if appropriate" | An agent does not decide on its own what is "appropriate". If a step in a skill is not applicable in the context, it flags it — it does not skip it |
 | Decision traceability | When an agent makes a technical choice (between two approaches, one lib over another), it mentions it explicitly with the reason, so the human can validate or correct |
 | No work without issue | Any work lasting more than 10 minutes or modifying more than 3 files **must** have an issue. The agent proposes creating one before starting untracked work |
+| Mandatory start phase | Before writing any code, the agent **must**: (1) move the issue file to `3-in-progress/` and update its frontmatter to `status: 3-in-progress`, (2) run `lyt board` to regenerate BOARD.md, (3) create a git branch `type/ISS-XXXX-slug` from main. **Never code on main.** If the agent starts coding without a branch, the human must stop it |
 | Mandatory close phase | After completing a task, the agent **must**: (1) update the issue frontmatter to `5-done`, (2) move the issue file to `5-done/`, (3) run `lyt board` to regenerate BOARD.md, (4) write to memory if learning occurred. No issue stays in `3-in-progress` when its work is complete |
 | Incomplete items generate follow-ups | Before closing an issue, review all checklist items. Any unchecked item must either be completed now or generate a new follow-up issue. Never close an issue with silent gaps |
 

@@ -4,6 +4,7 @@ import { createRequire } from "module";
 import { initCommand } from "./commands/init.js";
 import { boardCommand } from "./commands/board.js";
 import { lintCommand } from "./commands/lint.js";
+import { doctorCommand } from "./commands/doctor.js";
 import { checkForUpdates } from "./lib/update-check.js";
 import { ok, error, bold, dim, green } from "./lib/output.js";
 
@@ -22,14 +23,7 @@ program
 program.addCommand(initCommand);
 program.addCommand(boardCommand);
 program.addCommand(lintCommand);
-
-program
-  .command("doctor")
-  .description("Full diagnostic — missing files, broken links, stale memory (coming soon)")
-  .action(() => {
-    console.error("Coming soon. Follow https://github.com/getlytos/lytos-cli for updates.");
-    process.exit(0);
-  });
+program.addCommand(doctorCommand);
 
 program
   .command("status")

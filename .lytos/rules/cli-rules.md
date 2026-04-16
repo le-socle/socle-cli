@@ -37,6 +37,33 @@
 
 ---
 
+## Git workflow — mandatory before any code
+
+| Step | Action | Blocked if skipped |
+|------|--------|--------------------|
+| 1 | Move the issue file to `3-in-progress/` and update its frontmatter `status: 3-in-progress` | Yes — no work without visible status |
+| 2 | Run `lyt board` to regenerate BOARD.md | Yes — board must reflect reality |
+| 3 | Create a branch: `type/ISS-XXXX-slug` from main | Yes — never code on main |
+| 4 | Work on the branch, commit with `Refs: ISS-XXXX` | — |
+| 5 | When done: update frontmatter to `5-done`, move file, run `lyt board` | Yes — mandatory close phase |
+
+**No exception.** Even for "small" tasks. If the agent starts coding on main or without updating the board, the human must stop it.
+
+---
+
+## Continuous improvement — propagation rule
+
+When a rule, skill, or template is improved locally (in this project's `.lytos/`), the improvement **must** be propagated to:
+
+| Target | What to update | Why |
+|--------|---------------|-----|
+| **lytos-method** repo | `rules/`, `skills/`, `templates/` | The reference method must stay current — new users get the latest version |
+| **lytos-cli** templates | Files downloaded by `lyt init` | Every `lyt init` must produce up-to-date scaffolding |
+
+**The rule**: no local-only improvement. If it's good enough for us, it's good enough for everyone. Propagate in the same commit or create a follow-up issue.
+
+---
+
 ## Testing
 
 | Rule | Detail |
