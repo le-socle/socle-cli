@@ -119,6 +119,7 @@ This CLI is developed using Lytos itself. The `.lytos/` directory in this reposi
 ## Links
 
 - **Documentation** — [lytos.org](https://lytos.org)
+- **Tutorial** — [lytos-learn](https://github.com/getlytos/lytos-learn) — learn by doing in 7 steps
 - **The method** — [github.com/getlytos/lytos-method](https://github.com/getlytos/lytos-method)
 - **npm** — [npmjs.com/package/lytos-cli](https://www.npmjs.com/package/lytos-cli)
 
