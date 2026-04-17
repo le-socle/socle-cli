@@ -33,9 +33,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0036](3-in-progress/ISS-0036-add-learn-references.md) | Reference lytos-learn in method README, trainer kit, and org profile | P1-high | S |
+_No issues._
 
 ### 4-review (review/test)
 
@@ -71,6 +69,7 @@ _No issues._
 | [ISS-0031](5-done/ISS-0031-oss-cleanup.md) | OSS cleanup — lint errors, README drift, detectStack bug, update check | 2026-04-16 |
 | [ISS-0033](5-done/ISS-0033-git-hook-branch-guard.md) | Install git pre-commit hook to enforce branch naming convention | 2026-04-16 |
 | [ISS-0034](5-done/ISS-0034-fix-command-injection.md) | Fix command injection in git operations — sanitize branch names | 2026-04-16 |
+| [ISS-0036](5-done/ISS-0036-add-learn-references.md) | Reference lytos-learn in method README, trainer kit, and org profile | 2026-04-17 |
 
 ---
 

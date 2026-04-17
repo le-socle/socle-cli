@@ -6,10 +6,11 @@ priority: P1-high
 effort: S
 complexity: light
 skill: documentation
-status: 3-in-progress
+status: 5-done
 branch: chore/ISS-0036-add-learn-references
 depends: []
 created: 2026-04-17
+updated: 2026-04-17
 ---
 # ISS-0036 — Reference lytos-learn in method README, trainer kit, and org profile
 
