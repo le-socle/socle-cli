@@ -23,7 +23,6 @@ _No issues._
 | [ISS-0023](1-backlog/ISS-0023-archive-system.md) | Archive system — separate done issues from active board for token efficiency | P1-high | M | — |
 | [ISS-0025](1-backlog/ISS-0025-fr-templates.md) | Generate French templates when language is fr | P1-high | M | ISS-0024 |
 | [ISS-0026](1-backlog/ISS-0026-board-all-multi-repo.md) | Add lyt board --all for multi-repo overview | P2-normal | M | — |
-| [ISS-0027](1-backlog/ISS-0027-launch-readiness.md) | Launch readiness — fix CI badge, screenshots, demo, discussions | P0-critical | M | — |
 | [ISS-0032](1-backlog/ISS-0032-reproducible-init.md) | Make lyt init reproducible — bundle method files in npm package | P1-high | L | ISS-0031 |
 | [ISS-0035](1-backlog/ISS-0035-update-readme-homepage.md) | Update lytos-method READMEs and lytos.org homepage for launch | P1-high | M | — |
 
@@ -33,7 +32,9 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-_No issues._
+| # | Title | Priority | Effort |
+|---|-------|----------|--------|
+| [ISS-0027](3-in-progress/ISS-0027-launch-readiness.md) | Launch readiness — fix CI badge, screenshots, demo, discussions | P0-critical | M |
 
 ### 4-review (review/test)
 

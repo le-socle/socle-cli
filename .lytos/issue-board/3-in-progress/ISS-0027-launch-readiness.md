@@ -1,18 +1,17 @@
 ---
 id: ISS-0027
-title: "Launch readiness — fix CI badge, screenshots, demo, discussions"
+title: Launch readiness — fix CI badge, screenshots, demo, discussions
 type: chore
 priority: P0-critical
 effort: M
 complexity: standard
 skill: documentation
-status: 1-backlog
-branch: "chore/ISS-0027-launch-readiness"
+status: 3-in-progress
+branch: chore/ISS-0027-launch-readiness
 depends: []
 created: 2026-04-15
 updated: 2026-04-15
 ---
-
 # ISS-0027 — Launch readiness — fix CI badge, screenshots, demo, discussions
 
 ## Context

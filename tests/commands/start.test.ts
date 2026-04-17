@@ -99,6 +99,8 @@ created: 2026-04-14
 
   // Init git repo for branch creation
   execSync("git init -b main", { cwd, stdio: "pipe" });
+  execSync("git config user.email 'test@test.com'", { cwd, stdio: "pipe" });
+  execSync("git config user.name 'Test'", { cwd, stdio: "pipe" });
   execSync("git add -A && git commit -m 'init' --no-gpg-sign", { cwd, stdio: "pipe" });
 }
 
@@ -227,6 +229,8 @@ created: 2026-04-16
     );
 
     execSync("git init -b main", { cwd: fixture.cwd, stdio: "pipe" });
+    execSync("git config user.email 'test@test.com'", { cwd: fixture.cwd, stdio: "pipe" });
+    execSync("git config user.name 'Test'", { cwd: fixture.cwd, stdio: "pipe" });
     execSync("git add -A && git commit -m 'init' --no-gpg-sign", { cwd: fixture.cwd, stdio: "pipe" });
 
     const result = run("start ISS-0099", fixture.cwd);
