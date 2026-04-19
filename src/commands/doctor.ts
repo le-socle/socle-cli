@@ -10,7 +10,7 @@ import { Command } from "commander";
 import { existsSync } from "fs";
 import { resolve } from "path";
 import { diagnose, type DiagnosticResult } from "../lib/doctor.js";
-import { ok, error, bold, green, red, yellow, blue, dim } from "../lib/output.js";
+import { ok, error, bold, green, red, yellow, blue, cyan, dim } from "../lib/output.js";
 
 const CATEGORY_LABELS: Record<string, string> = {
   "broken-link": "Broken Links",
@@ -30,7 +30,7 @@ function displayResults(result: DiagnosticResult): void {
   console.error("");
 
   if (result.findings.length === 0) {
-    ok(`${bold("All diagnostics passed")} — ${result.filesChecked} files checked`);
+    ok(`${green(bold("All diagnostics passed"))} — ${result.filesChecked} files checked`);
     console.error("");
     displayScore(result.score);
     return;
@@ -46,7 +46,7 @@ function displayResults(result: DiagnosticResult): void {
 
   for (const [category, findings] of byCategory) {
     const label = CATEGORY_LABELS[category] || category;
-    console.error(`  ${bold(label)}`);
+    console.error(`  ${cyan(bold(label))}`);
 
     for (const f of findings) {
       const icon =
@@ -80,7 +80,7 @@ function displayResults(result: DiagnosticResult): void {
 function displayScore(score: number): void {
   const colorFn = scoreColor(score);
   const bar = buildScoreBar(score);
-  console.error(`  ${bold("Health score:")} ${colorFn(bold(`${score}%`))} ${bar}`);
+  console.error(`  ${cyan(bold("Health score:"))} ${colorFn(bold(`${score}%`))} ${bar}`);
   console.error("");
 }
 

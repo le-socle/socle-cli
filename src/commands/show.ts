@@ -15,7 +15,7 @@ import {
   type IssueDetail,
   type IssueSummary,
 } from "../lib/show.js";
-import { ok, error, bold, green, yellow, blue, dim } from "../lib/output.js";
+import { ok, error, bold, green, yellow, blue, cyan, dim } from "../lib/output.js";
 
 function progressBar(percent: number, width: number = 20): string {
   const filled = Math.round((percent / 100) * width);
@@ -39,20 +39,20 @@ function statusLabel(status: string): string {
 
 function displayDetail(issue: IssueDetail): void {
   console.error("");
-  console.error(`  ${bold(issue.id)} — ${bold(issue.title)}`);
-  console.error(`  ${statusLabel(issue.status)}  ${dim("·")}  Effort: ${issue.effort}  ${dim("·")}  ${issue.daysOpen}d`);
+  console.error(`  ${cyan(bold(issue.id))} ${dim("—")} ${cyan(bold(issue.title))}`);
+  console.error(`  ${statusLabel(issue.status)}  ${dim("·")}  ${blue("Effort:")} ${issue.effort}  ${dim("·")}  ${issue.daysOpen}d`);
   console.error("");
 
   // Progress
   if (issue.checklistTotal > 0) {
     const pct = issue.progress;
-    const colorFn = pct === 100 ? green : pct >= 50 ? yellow : dim;
+    const colorFn = pct === 100 ? green : pct >= 50 ? yellow : blue;
     console.error(`  ${progressBar(pct)}  ${colorFn(bold(`${issue.checklistDone}/${issue.checklistTotal}`))} ${colorFn(`${pct}%`)}`);
     console.error("");
 
     // Checklist
     for (const item of issue.checklist) {
-      const icon = item.done ? green("✓") : dim("○");
+      const icon = item.done ? green("✓") : blue("○");
       const text = item.done ? dim(item.text) : item.text;
       console.error(`  ${icon} ${text}`);
     }
@@ -64,10 +64,10 @@ function displayDetail(issue: IssueDetail): void {
 
   // Metadata
   const meta: string[] = [];
-  if (issue.skill) meta.push(`${dim("Skill:")} ${issue.skill}`);
-  if (issue.skillsAux.length > 0) meta.push(`${dim("Aux:")} ${issue.skillsAux.join(", ")}`);
-  if (issue.branch) meta.push(`${dim("Branch:")} ${issue.branch}`);
-  if (issue.complexity) meta.push(`${dim("Complexity:")} ${issue.complexity}`);
+  if (issue.skill) meta.push(`${blue("Skill:")} ${issue.skill}`);
+  if (issue.skillsAux.length > 0) meta.push(`${blue("Aux:")} ${issue.skillsAux.join(", ")}`);
+  if (issue.branch) meta.push(`${blue("Branch:")} ${issue.branch}`);
+  if (issue.complexity) meta.push(`${blue("Complexity:")} ${issue.complexity}`);
   for (const m of meta) {
     console.error(`  ${m}`);
   }
@@ -75,7 +75,7 @@ function displayDetail(issue: IssueDetail): void {
   // Dependencies
   if (issue.dependencies.length > 0) {
     console.error("");
-    console.error(`  ${dim("Dependencies:")}`);
+    console.error(`  ${blue("Dependencies:")}`);
     for (const dep of issue.dependencies) {
       const icon = dep.done ? green("✓") : yellow("○");
       const status = dep.done ? green("done") : yellow("pending");
@@ -88,17 +88,17 @@ function displayDetail(issue: IssueDetail): void {
 
 function displaySummaries(summaries: IssueSummary[]): void {
   console.error("");
-  console.error(`  ${bold("In Progress")} ${dim(`(${summaries.length})`)}`);
+  console.error(`  ${yellow(bold("In Progress"))} ${dim(`(${summaries.length})`)}`);
   console.error("");
 
   for (const s of summaries) {
     const pct = s.progress;
-    const colorFn = pct === 100 ? green : pct >= 50 ? yellow : dim;
+    const colorFn = pct === 100 ? green : pct >= 50 ? yellow : blue;
     const progressStr = s.checklistTotal > 0
       ? `${progressBar(pct, 15)}  ${colorFn(`${s.checklistDone}/${s.checklistTotal}`)} ${colorFn(`${pct}%`)}`
       : dim("no checklist");
 
-    console.error(`  ${dim(s.id)}  ${bold(s.title)}`);
+    console.error(`  ${cyan(s.id)}  ${cyan(bold(s.title))}`);
     console.error(`           ${progressStr}  ${dim(`·  ${s.effort}  ·  ${s.daysOpen}d`)}`);
     console.error("");
   }

@@ -11,7 +11,7 @@ import { basename, resolve } from "path";
 import { createInterface } from "readline";
 import { detectStack } from "../lib/detect-stack.js";
 import { scaffold } from "../lib/scaffold.js";
-import { info, ok, warn, error, bold, green, blue, dim, yellow } from "../lib/output.js";
+import { info, ok, warn, error, bold, green, blue, cyan, dim, yellow } from "../lib/output.js";
 import { checkForUpdates } from "../lib/update-check.js";
 import { createRequire } from "module";
 
@@ -60,146 +60,146 @@ function showBriefing(profile: Profile, lang: Lang): void {
 
   if (profile === "vibe-coder") {
     if (lang === "fr") {
-      console.error(bold("  L'IDÉE CLÉ"));
+      console.error(cyan(bold("  L'IDÉE CLÉ")));
       console.error("  Tout repose sur les issues — des tâches claires et précises.");
       console.error("  Une bonne issue = ton IA sait exactement quoi construire.");
       console.error("  Une issue vague = ton IA devine et produit du code générique.");
       console.error("");
-      console.error(bold("  COMMENT ÇA MARCHE"));
+      console.error(cyan(bold("  COMMENT ÇA MARCHE")));
       console.error("");
-      console.error(`  ${bold("Étape 1")} — ${yellow("BRAINSTORM")}`);
+      console.error(`  ${cyan(bold("Étape 1"))} — ${yellow("BRAINSTORM")}`);
       console.error("    Ouvre ton outil IA et décris ton idée de projet.");
       console.error("    L'IA va t'aider à écrire un manifest (l'identité du projet)");
       console.error("    et créer des issues (les tâches à accomplir).");
       console.error("");
-      console.error(`  ${bold("Étape 2")} — ${blue("ORGANISER")}`);
+      console.error(`  ${cyan(bold("Étape 2"))} — ${blue("ORGANISER")}`);
       console.error("    L'IA trie les tâches par priorité dans un kanban board.");
       console.error("    Tu valides ce qu'on fait en premier.");
-      console.error(`    Lance : ${bold("lyt board")} — pour voir ton board à tout moment.`);
+      console.error(`    Lance : ${cyan(bold("lyt board"))} — pour voir ton board à tout moment.`);
       console.error("");
-      console.error(`  ${bold("Étape 3")} — ${green("CONSTRUIRE")}`);
+      console.error(`  ${cyan(bold("Étape 3"))} — ${green("CONSTRUIRE")}`);
       console.error("    Travaille sur une issue à la fois avec ton IA.");
       console.error("    Chaque issue a une checklist — suis-la étape par étape.");
       console.error("    Quand c'est fini, l'IA la déplace en \"done\".");
       console.error("");
-      console.error(`  ${bold("Étape 4")} — ${dim("APPRENDRE")}`);
+      console.error(`  ${cyan(bold("Étape 4"))} — ${dim("APPRENDRE")}`);
       console.error("    L'IA sauvegarde ce qu'elle a appris dans memory/.");
       console.error("    À la prochaine session, elle se souvient de ton projet.");
       console.error("    Plus besoin de tout réexpliquer.");
       console.error("");
-      console.error(bold("  PROCHAINE ÉTAPE"));
+      console.error(cyan(bold("  PROCHAINE ÉTAPE")));
       console.error("  Ouvre ton outil IA et dis :");
-      console.error(`  ${bold("\"Aide-moi à configurer Lytos et planifier mon projet.\"")}`);
+      console.error(`  ${cyan(bold("\"Aide-moi à configurer Lytos et planifier mon projet.\""))}`);
     } else {
-      console.error(bold("  THE KEY IDEA"));
+      console.error(cyan(bold("  THE KEY IDEA")));
       console.error("  Everything starts with issues — small, clear tasks.");
       console.error("  A good issue = your AI knows exactly what to build.");
       console.error("  A vague issue = your AI guesses and produces generic code.");
       console.error("");
-      console.error(bold("  HOW IT WORKS"));
+      console.error(cyan(bold("  HOW IT WORKS")));
       console.error("");
-      console.error(`  ${bold("Step 1")} — ${yellow("BRAINSTORM")}`);
+      console.error(`  ${cyan(bold("Step 1"))} — ${yellow("BRAINSTORM")}`);
       console.error("    Open your AI tool and describe your project idea.");
       console.error("    The AI will help you write a manifest (your project's identity)");
       console.error("    and create issues (tasks to accomplish).");
       console.error("");
-      console.error(`  ${bold("Step 2")} — ${blue("ORGANIZE")}`);
+      console.error(`  ${cyan(bold("Step 2"))} — ${blue("ORGANIZE")}`);
       console.error("    The AI sorts tasks by priority in a kanban board.");
       console.error("    You validate what to do first.");
-      console.error(`    Run: ${bold("lyt board")} — to see your board at any time.`);
+      console.error(`    Run: ${cyan(bold("lyt board"))} — to see your board at any time.`);
       console.error("");
-      console.error(`  ${bold("Step 3")} — ${green("BUILD")}`);
+      console.error(`  ${cyan(bold("Step 3"))} — ${green("BUILD")}`);
       console.error("    Work on one issue at a time with your AI.");
       console.error("    Each issue has a checklist — follow it step by step.");
       console.error("    When it's done, the AI moves it to \"done\".");
       console.error("");
-      console.error(`  ${bold("Step 4")} — ${dim("LEARN")}`);
+      console.error(`  ${cyan(bold("Step 4"))} — ${dim("LEARN")}`);
       console.error("    The AI saves what it learned in memory/.");
       console.error("    Next session, it remembers your project.");
       console.error("    No more re-explaining everything.");
       console.error("");
-      console.error(bold("  NEXT STEP"));
+      console.error(cyan(bold("  NEXT STEP")));
       console.error("  Open your AI tool and say:");
-      console.error(`  ${bold("\"Help me configure Lytos and plan my project.\"")}`);
+      console.error(`  ${cyan(bold("\"Help me configure Lytos and plan my project.\""))}`);
     }
   } else if (profile === "developer") {
     if (lang === "fr") {
-      console.error(bold("  L'IDÉE CLÉ"));
+      console.error(cyan(bold("  L'IDÉE CLÉ")));
       console.error("  La qualité du code de ton IA dépend de tes issues.");
       console.error("  Une issue structurée avec contexte, checklist et definition of done");
       console.error("  = du code précis et testable du premier coup.");
-      console.error(`  Lance : ${bold("lyt board")} — ton cockpit projet.`);
+      console.error(`  Lance : ${cyan(bold("lyt board"))} — ton cockpit projet.`);
       console.error("");
-      console.error(bold("  STRUCTURE"));
+      console.error(cyan(bold("  STRUCTURE")));
       console.error("  .lytos/manifest.md      <- constitution du projet");
       console.error("  .lytos/skills/           <- 9 procédures opérationnelles");
       console.error("  .lytos/rules/            <- critères de qualité (appliqués)");
       console.error("  .lytos/issue-board/      <- kanban board (source de vérité)");
       console.error("  .lytos/memory/           <- savoir persistant");
       console.error("");
-      console.error(bold("  PROCHAINE ÉTAPE"));
+      console.error(cyan(bold("  PROCHAINE ÉTAPE")));
       console.error("  Ouvre ton outil IA et dis :");
-      console.error(`  ${bold("\"Aide-moi à configurer Lytos pour ce projet.\"")}`);
+      console.error(`  ${cyan(bold("\"Aide-moi à configurer Lytos pour ce projet.\""))}`);
     } else {
-      console.error(bold("  THE KEY IDEA"));
+      console.error(cyan(bold("  THE KEY IDEA")));
       console.error("  The quality of your AI output depends on your issues.");
       console.error("  A well-structured issue with context, checklist, and definition");
       console.error("  of done = precise, testable code on the first try.");
-      console.error(`  Run: ${bold("lyt board")} — your project cockpit.`);
+      console.error(`  Run: ${cyan(bold("lyt board"))} — your project cockpit.`);
       console.error("");
-      console.error(bold("  STRUCTURE"));
+      console.error(cyan(bold("  STRUCTURE")));
       console.error("  .lytos/manifest.md      <- project constitution");
       console.error("  .lytos/skills/           <- 9 operational procedures");
       console.error("  .lytos/rules/            <- quality criteria (enforced)");
       console.error("  .lytos/issue-board/      <- kanban board (source of truth)");
       console.error("  .lytos/memory/           <- persistent knowledge");
       console.error("");
-      console.error(bold("  NEXT STEP"));
+      console.error(cyan(bold("  NEXT STEP")));
       console.error("  Open your AI tool and say:");
-      console.error(`  ${bold("\"Help me configure Lytos for this project.\"")}`);
+      console.error(`  ${cyan(bold("\"Help me configure Lytos for this project.\""))}`);
     }
   } else {
     // lead
     if (lang === "fr") {
-      console.error(bold("  TON RÔLE"));
+      console.error(cyan(bold("  TON RÔLE")));
       console.error("  Tu es l'architecte du système. Tu définis :");
       console.error("  - Le manifest (identité et contraintes du projet)");
       console.error("  - Les rules (critères de qualité que l'IA applique)");
       console.error("  - Le sprint (quoi construire et dans quel ordre)");
       console.error("");
-      console.error("  Ton équipe utilise " + bold("lyt board") + " pour suivre l'avancement.");
+      console.error("  Ton équipe utilise " + cyan(bold("lyt board")) + " pour suivre l'avancement.");
       console.error("  La qualité de leur production dépend de la qualité");
       console.error("  des issues que tu définis.");
       console.error("");
-      console.error(bold("  FICHIERS CLÉS"));
+      console.error(cyan(bold("  FICHIERS CLÉS")));
       console.error("  .lytos/manifest.md      <- le fichier le plus impactant");
       console.error("  .lytos/rules/            <- ce que \"fini\" veut dire");
       console.error("  .lytos/issue-board/      <- ton kanban (YAML = source de vérité)");
       console.error("  .lytos/memory/           <- grandit à chaque sprint");
       console.error("");
-      console.error(bold("  PROCHAINE ÉTAPE"));
+      console.error(cyan(bold("  PROCHAINE ÉTAPE")));
       console.error("  Ouvre ton outil IA et dis :");
-      console.error(`  ${bold("\"Aide-moi à configurer Lytos et planifier le premier sprint.\"")}`);
+      console.error(`  ${cyan(bold("\"Aide-moi à configurer Lytos et planifier le premier sprint.\""))}`);
     } else {
-      console.error(bold("  YOUR ROLE"));
+      console.error(cyan(bold("  YOUR ROLE")));
       console.error("  You are the system architect. You define:");
       console.error("  - The manifest (project identity and constraints)");
       console.error("  - The rules (quality criteria your AI enforces)");
       console.error("  - The sprint (what to build and in what order)");
       console.error("");
-      console.error("  Your team uses " + bold("lyt board") + " to track progress.");
+      console.error("  Your team uses " + cyan(bold("lyt board")) + " to track progress.");
       console.error("  The quality of their output depends on the quality");
       console.error("  of the issues you define.");
       console.error("");
-      console.error(bold("  KEY FILES"));
+      console.error(cyan(bold("  KEY FILES")));
       console.error("  .lytos/manifest.md      <- highest-leverage file");
       console.error("  .lytos/rules/            <- what \"done\" means");
       console.error("  .lytos/issue-board/      <- your kanban (YAML = source of truth)");
       console.error("  .lytos/memory/           <- grows with each sprint");
       console.error("");
-      console.error(bold("  NEXT STEP"));
+      console.error(cyan(bold("  NEXT STEP")));
       console.error("  Open your AI tool and say:");
-      console.error(`  ${bold("\"Help me configure Lytos and plan the first sprint.\"")}`);
+      console.error(`  ${cyan(bold("\"Help me configure Lytos and plan the first sprint.\""))}`);
     }
   }
 
@@ -314,7 +314,7 @@ export const initCommand = new Command("init")
     // Dry run notice
     if (opts.dryRun) {
       console.error("");
-      info(`${bold("Dry run")} — nothing will be created.`);
+      info(`${yellow(bold("Dry run"))} — nothing will be created.`);
     }
 
     // Scaffold

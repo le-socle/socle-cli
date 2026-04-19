@@ -10,7 +10,7 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
 import { get } from "https";
-import { bold, yellow, dim } from "./output.js";
+import { bold, cyan, yellow, dim } from "./output.js";
 
 const PACKAGE_NAME = "lytos-cli";
 const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -99,10 +99,10 @@ export async function checkForUpdates(currentVersion: string): Promise<void> {
   if (isNewer(latest, currentVersion)) {
     console.error("");
     console.error(
-      `  ${yellow("⚠")} Update available: ${dim(currentVersion)} → ${bold(latest)}`
+      `  ${yellow("⚠")} Update available: ${dim(currentVersion)} → ${cyan(bold(latest))}`
     );
     console.error(
-      `    Run ${bold("lyt update")} to update`
+      `    Run ${cyan(bold("lyt update"))} to update`
     );
     console.error("");
   }

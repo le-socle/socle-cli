@@ -15,7 +15,7 @@ import {
   today,
   countChecklist,
 } from "../lib/issue-ops.js";
-import { ok, info, warn, error, bold, green, yellow, dim } from "../lib/output.js";
+import { ok, info, warn, error, bold, cyan, green, yellow, dim } from "../lib/output.js";
 
 export const closeCommand = new Command("close")
   .description("Close an issue — move to done, update board")
@@ -72,8 +72,8 @@ export const closeCommand = new Command("close")
         process.exit(1);
       }
       console.error("");
-      warn(`${bold(issueId)} has ${yellow(String(unchecked))} unchecked checklist item${unchecked > 1 ? "s" : ""} out of ${checklist.total}.`);
-      console.error(`  ${dim("Use")} ${bold("--force")} ${dim("to close anyway, or complete the items first.")}`);
+      warn(`${cyan(bold(issueId))} has ${yellow(String(unchecked))} unchecked checklist item${unchecked > 1 ? "s" : ""} out of ${checklist.total}.`);
+      console.error(`  ${dim("Use")} ${cyan(bold("--force"))} ${dim("to close anyway, or complete the items first.")}`);
       console.error("");
       process.exit(1);
     }
@@ -95,7 +95,7 @@ export const closeCommand = new Command("close")
 
     // Display result
     console.error("");
-    ok(`${bold(issueId)} closed`);
+    ok(`${cyan(bold(issueId))} closed`);
     if (checklist.total > 0) {
       info(`Checklist: ${green(`${checklist.done}/${checklist.total}`)} items completed`);
     }

@@ -8,9 +8,9 @@ complexity: standard
 skill: documentation
 status: 3-in-progress
 branch: chore/ISS-0027-launch-readiness
-depends: []
+depends: [ISS-0037]
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-18
 ---
 # ISS-0027 — Launch readiness — fix CI badge, screenshots, demo, discussions
 

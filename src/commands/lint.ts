@@ -9,12 +9,12 @@ import { Command } from "commander";
 import { existsSync } from "fs";
 import { resolve } from "path";
 import { lint, type LintResult } from "../lib/linter.js";
-import { ok, error, bold, red, yellow, dim } from "../lib/output.js";
+import { ok, error, bold, red, yellow, cyan, green, dim } from "../lib/output.js";
 
 function displayResults(result: LintResult): void {
   if (result.findings.length === 0) {
     console.error("");
-    ok(`${bold("All checks passed")} — ${result.filesChecked} files checked`);
+    ok(`${green(bold("All checks passed"))} — ${result.filesChecked} files checked`);
     console.error("");
     return;
   }
@@ -30,7 +30,7 @@ function displayResults(result: LintResult): void {
   }
 
   for (const [file, findings] of byFile) {
-    console.error(`  ${bold(file)}`);
+    console.error(`  ${cyan(bold(file))}`);
     for (const f of findings) {
       const icon = f.severity === "error" ? red("✗") : yellow("!");
       console.error(`    ${icon} ${f.message}`);

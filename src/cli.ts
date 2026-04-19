@@ -8,7 +8,7 @@ import { doctorCommand } from "./commands/doctor.js";
 import { showCommand } from "./commands/show.js";
 import { startCommand } from "./commands/start.js";
 import { closeCommand } from "./commands/close.js";
-import { ok, error, bold, green } from "./lib/output.js";
+import { ok, error, bold, cyan, green } from "./lib/output.js";
 
 const require = createRequire(import.meta.url);
 const { version: VERSION } = require("../package.json");
@@ -34,7 +34,7 @@ program
   .command("update")
   .description("Update lytos-cli to the latest version")
   .action(() => {
-    console.error(`\n  ${bold("Updating lytos-cli...")}\n`);
+    console.error(`\n  ${cyan(bold("Updating lytos-cli..."))}\n`);
     try {
       execSync("npm install -g lytos-cli@latest", { stdio: "inherit" });
       const newVersion = execSync("lyt --version", { encoding: "utf-8" }).trim();
