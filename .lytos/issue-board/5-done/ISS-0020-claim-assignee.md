@@ -7,11 +7,11 @@ effort: M
 complexity: standard
 skill: code-structure
 skills_aux: [testing]
-status: 3-in-progress
+status: 5-done
 branch: feat/ISS-0020-claim-assignee
 depends: []
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-04-19
 ---
 # ISS-0020 — Add issue assignment with lyt claim/unclaim and board display
 

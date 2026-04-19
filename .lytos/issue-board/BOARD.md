@@ -27,9 +27,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0020](3-in-progress/ISS-0020-claim-assignee.md) | Add issue assignment with lyt claim/unclaim and board display | P1-high | M |
+_No issues._
 
 ### 4-review (review/test)
 
