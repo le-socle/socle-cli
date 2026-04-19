@@ -17,11 +17,15 @@ interface TemplateContext {
 }
 
 export function manifestTemplate(ctx: TemplateContext): string {
+  const stackLabels = ctx.lang === "fr"
+    ? { language: "Langage", framework: "Framework", database: "Base de données", tests: "Tests" }
+    : { language: "Language", framework: "Framework", database: "Database", tests: "Tests" };
+
   const stackRows = [
-    `| Language | ${ctx.stack.language || ""} |`,
-    `| Framework | ${ctx.stack.framework || ""} |`,
-    `| Database | ${ctx.stack.database || ""} |`,
-    `| Tests | ${ctx.stack.tests || ""} |`,
+    `| ${stackLabels.language} | ${ctx.stack.language || ""} |`,
+    `| ${stackLabels.framework} | ${ctx.stack.framework || ""} |`,
+    `| ${stackLabels.database} | ${ctx.stack.database || ""} |`,
+    `| ${stackLabels.tests} | ${ctx.stack.tests || ""} |`,
   ].join("\n");
 
   if (ctx.lang === "fr") {

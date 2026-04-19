@@ -138,6 +138,30 @@ describe("lytos board", () => {
     expect(result.exitCode).toBe(0);
   });
 
+  it("next number considers archive/INDEX.md (no ID collision)", () => {
+    fixture = createBoardFixture();
+    // Seed archive with ISS-0037 — higher than any active issue
+    const archiveDir = join(fixture.cwd, ".lytos", "issue-board", "archive");
+    const { mkdirSync: mkd, writeFileSync: wfs } = require("fs");
+    mkd(archiveDir, { recursive: true });
+    wfs(
+      join(archiveDir, "INDEX.md"),
+      [
+        "# Archive Index",
+        "",
+        "| # | Title | Tags | Completed | Quarter |",
+        "|---|-------|------|-----------|---------|",
+        "| ISS-0037 | Legacy | | 2026-04-19 | 2026-Q2 |",
+        "",
+      ].join("\n")
+    );
+
+    const result = run("board --json", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+    const data = JSON.parse(result.stdout);
+    expect(data.nextNumber).toBe("ISS-0038");
+  });
+
   it("--all --dirs scans explicit directories and shows overview", () => {
     fixture = createBoardFixture();
     // Run from parent of fixture so --dirs can point at it

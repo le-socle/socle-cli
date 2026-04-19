@@ -23,6 +23,7 @@
 | ISS-0021 | Create role-based guides: developer and lead developer |  | 2026-04-14 | 2026-Q2 |
 | ISS-0022 | Add Codex (OpenAI) as AI tool option in lyt init |  | 2026-04-15 | 2026-Q2 |
 | ISS-0024 | Onboarding: user profiles, language selection, and guided briefing |  | 2026-04-15 | 2026-Q2 |
+| ISS-0026 | Add lyt board --all for multi-repo overview |  | 2026-04-19 | 2026-Q2 |
 | ISS-0028 | Implement lyt show — display issue detail with progress |  | 2026-04-16 | 2026-Q2 |
 | ISS-0029 | Implement lyt start — automate the mandatory start phase |  | 2026-04-16 | 2026-Q2 |
 | ISS-0030 | Implement lyt close — automate the mandatory close phase |  | 2026-04-16 | 2026-Q2 |

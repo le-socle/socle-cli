@@ -139,6 +139,57 @@ describe("lytos init", () => {
     expect(manifest).toContain("Test v2");
   });
 
+  it("generates English manifest with --lang en", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool none --lang en --yes', fixture.cwd);
+
+    const manifest = readFileSync(
+      join(fixture.cwd, ".lytos", "manifest.md"),
+      "utf-8"
+    );
+
+    // English section headers and stack labels
+    expect(manifest).toContain("Why this project exists");
+    expect(manifest).toContain("Tech stack");
+    expect(manifest).toContain("| Language |");
+    expect(manifest).toContain("| Framework |");
+    expect(manifest).toContain("| Database |");
+    expect(manifest).toContain("| Tests |");
+    expect(manifest).not.toContain("Pourquoi ce projet existe");
+  });
+
+  it("generates French manifest with --lang fr (including stack labels)", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool none --lang fr --yes', fixture.cwd);
+
+    const manifest = readFileSync(
+      join(fixture.cwd, ".lytos", "manifest.md"),
+      "utf-8"
+    );
+
+    // French section headers
+    expect(manifest).toContain("Pourquoi ce projet existe");
+    expect(manifest).toContain("Stack technique");
+    // French stack row labels (the bug this test pins)
+    expect(manifest).toContain("| Langage |");
+    expect(manifest).toContain("| Base de données |");
+    // English labels must not leak into French manifest
+    expect(manifest).not.toContain("| Language |");
+    expect(manifest).not.toContain("| Database |");
+    expect(manifest).not.toContain("Why this project exists");
+  });
+
+  it("generates French memory with --lang fr", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool none --lang fr --yes', fixture.cwd);
+
+    const memory = readFileSync(
+      join(fixture.cwd, ".lytos", "memory", "MEMORY.md"),
+      "utf-8"
+    );
+    expect(memory).toContain("Mémoire");
+  });
+
   it("creates cortex files with example content", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool none --yes', fixture.cwd);

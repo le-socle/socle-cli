@@ -10,7 +10,7 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname, basename } from "path";
 import { fileURLToPath } from "url";
 import { createInterface } from "readline";
-import { ok, warn, info, error, cyan, bold, green, dim } from "../lib/output.js";
+import { ok, info, error, cyan, bold, green, dim } from "../lib/output.js";
 
 const METHOD_DIR = join(dirname(fileURLToPath(import.meta.url)), "method");
 

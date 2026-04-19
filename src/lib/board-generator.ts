@@ -146,6 +146,17 @@ export function countArchived(boardDir: string): number {
   return readArchiveIndex(archiveDir).length;
 }
 
+/** Highest ISS number in archive/INDEX.md (0 if none). */
+function maxArchivedNumber(boardDir: string): number {
+  const archiveDir = join(boardDir, "archive");
+  let max = 0;
+  for (const entry of readArchiveIndex(archiveDir)) {
+    const m = entry.id.match(/ISS-(\d+)/);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  }
+  return max;
+}
+
 /**
  * Scans the issue-board directory and collects all issues with their frontmatter.
  */
@@ -194,7 +205,9 @@ export function collectIssues(boardDir: string): BoardData {
     }
   }
 
-  const nextNumber = `ISS-${String(maxNum + 1).padStart(4, "0")}`;
+  const archivedMax = maxArchivedNumber(boardDir);
+  const globalMax = Math.max(maxNum, archivedMax);
+  const nextNumber = `ISS-${String(globalMax + 1).padStart(4, "0")}`;
 
   return { issues, warnings, nextNumber };
 }

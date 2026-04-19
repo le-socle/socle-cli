@@ -146,3 +146,9 @@ Created by **Frederic Galliné**
 ## License
 
 MIT — see [LICENSE](./LICENSE)
+
+---
+
+## Star history
+
+[![Star History Chart](https://api.star-history.com/svg?repos=getlytos/lytos-cli,getlytos/lytos-method&type=Date)](https://www.star-history.com/#getlytos/lytos-cli&getlytos/lytos-method&Date)
