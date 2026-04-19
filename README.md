@@ -28,6 +28,10 @@ Or without installing:
 npx lytos-cli init
 ```
 
+![Lytos demo](docs/screenshots/lytos.gif)
+
+![lyt board](docs/screenshots/lyt-board.png)
+
 ---
 
 ## Commands
@@ -42,6 +46,8 @@ npx lytos-cli init
 | `lyt start ISS-XXXX` | Start an issue — move to in-progress, create branch, update board |
 | `lyt close ISS-XXXX` | Close an issue — move to done, update board (warns about unchecked items) |
 | `lyt update` | Update lytos-cli to the latest version |
+
+![lyt show](docs/screenshots/lyt-show.png)
 
 ---
 
@@ -105,6 +111,9 @@ A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-X
 - **No telemetry** — no tracking, no analytics, ever. Opt-out for update check: `LYT_NO_UPDATE_CHECK=1`
 - **Human-first** — the human defines the method, the AI follows it
 - **Fail with context** — when something is wrong, the CLI says what, where, and how to fix it
+
+![lyt lint](docs/screenshots/lyt-lint.png)
+![lyt doctor](docs/screenshots/lyt-doctor.png)
 
 ---
 
