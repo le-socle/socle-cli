@@ -28,6 +28,8 @@ Or without installing:
 npx lytos-cli init
 ```
 
+![Lytos demo](docs/screenshots/lytos.gif)
+
 ![lyt board](docs/screenshots/lyt-board.png)
 
 ---
