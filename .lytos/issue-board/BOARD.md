@@ -27,9 +27,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort | Depends |
-|---|-------|----------|--------|---------|
-| [ISS-0025](3-in-progress/ISS-0025-fr-templates.md) | Generate French templates when language is fr | P1-high | M | ISS-0024 |
+_No issues._
 
 ### 4-review (review/test)
 
