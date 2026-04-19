@@ -9,6 +9,7 @@ import { showCommand } from "./commands/show.js";
 import { startCommand } from "./commands/start.js";
 import { closeCommand } from "./commands/close.js";
 import { claimCommand, unclaimCommand } from "./commands/claim.js";
+import { upgradeCommand } from "./commands/upgrade.js";
 import { ok, error, bold, cyan, green } from "./lib/output.js";
 
 const require = createRequire(import.meta.url);
@@ -32,6 +33,7 @@ program.addCommand(startCommand);
 program.addCommand(closeCommand);
 program.addCommand(claimCommand);
 program.addCommand(unclaimCommand);
+program.addCommand(upgradeCommand);
 
 program
   .command("update")
