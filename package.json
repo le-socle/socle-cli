@@ -1,6 +1,6 @@
 {
   "name": "lytos-cli",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "CLI tool for Lytos — a human-first method for working with AI agents",
   "type": "module",
   "bin": {
