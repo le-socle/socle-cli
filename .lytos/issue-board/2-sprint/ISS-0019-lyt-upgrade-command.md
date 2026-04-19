@@ -1,19 +1,18 @@
 ---
 id: ISS-0019
-title: "Implement lyt upgrade — update method files without overwriting user work"
+title: Implement lyt upgrade — update method files without overwriting user work
 type: feature
 priority: P1-high
 effort: L
 complexity: standard
 skill: code-structure
 skills_aux: [testing]
-status: 1-backlog
-branch: "feat/ISS-0019-lyt-upgrade"
+status: 2-sprint
+branch: feat/ISS-0019-lyt-upgrade
 depends: []
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-04-19
 ---
-
 # ISS-0019 — Implement lyt upgrade — update method files without overwriting user work
 
 ## Context

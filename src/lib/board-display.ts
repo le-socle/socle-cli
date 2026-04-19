@@ -150,7 +150,11 @@ function formatIssue(di: DisplayIssue): string {
     prefix = "  " + "   ".repeat(depth - 1) + (isLast ? "└── " : "├── ");
   }
 
-  return `${prefix}${dim(id)}  ${colorPriority(priority)}  ${colorEffort(effort)}  ${displayTitle}`;
+  const assignee = typeof issue.frontmatter.assignee === "string" && issue.frontmatter.assignee
+    ? `  ${dim("@" + issue.frontmatter.assignee)}`
+    : "";
+
+  return `${prefix}${dim(id)}  ${colorPriority(priority)}  ${colorEffort(effort)}  ${displayTitle}${assignee}`;
 }
 
 /**

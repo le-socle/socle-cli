@@ -1,19 +1,18 @@
 ---
 id: ISS-0020
-title: "Add issue assignment with lyt claim/unclaim and board display"
+title: Add issue assignment with lyt claim/unclaim and board display
 type: feature
 priority: P1-high
 effort: M
 complexity: standard
 skill: code-structure
 skills_aux: [testing]
-status: 1-backlog
-branch: "feat/ISS-0020-claim-assignee"
+status: 3-in-progress
+branch: feat/ISS-0020-claim-assignee
 depends: []
 created: 2026-04-14
 updated: 2026-04-14
 ---
-
 # ISS-0020 — Add issue assignment with lyt claim/unclaim and board display
 
 ## Context
