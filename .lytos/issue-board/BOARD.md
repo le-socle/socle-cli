@@ -22,7 +22,6 @@ _No issues._
 | [ISS-0023](1-backlog/ISS-0023-archive-system.md) | Archive system — separate done issues from active board for token efficiency | P1-high | M | — |
 | [ISS-0025](1-backlog/ISS-0025-fr-templates.md) | Generate French templates when language is fr | P1-high | M | ISS-0024 |
 | [ISS-0026](1-backlog/ISS-0026-board-all-multi-repo.md) | Add lyt board --all for multi-repo overview | P2-normal | M | — |
-| [ISS-0032](1-backlog/ISS-0032-reproducible-init.md) | Make lyt init reproducible — bundle method files in npm package | P1-high | L | ISS-0031 |
 
 ### 2-sprint (committed)
 
@@ -30,9 +29,7 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort | Depends |
-|---|-------|----------|--------|---------|
-| [ISS-0027](3-in-progress/ISS-0027-launch-readiness.md) | Launch readiness — fix CI badge, screenshots, demo, discussions | P0-critical | M | ISS-0037 |
+_No issues._
 
 ### 4-review (review/test)
 
@@ -63,10 +60,12 @@ _No issues._
 | [ISS-0021](5-done/ISS-0021-role-guides.md) | Create role-based guides: developer and lead developer | 2026-04-14 |
 | [ISS-0022](5-done/ISS-0022-add-codex-tool-option.md) | Add Codex (OpenAI) as AI tool option in lyt init | 2026-04-15 |
 | [ISS-0024](5-done/ISS-0024-onboarding-profiles-i18n.md) | Onboarding: user profiles, language selection, and guided briefing | 2026-04-15 |
+| [ISS-0027](5-done/ISS-0027-launch-readiness.md) | Launch readiness — fix CI badge, screenshots, demo, discussions | 2026-04-19 |
 | [ISS-0028](5-done/ISS-0028-lyt-show-issue-detail.md) | Implement lyt show — display issue detail with progress | 2026-04-16 |
 | [ISS-0029](5-done/ISS-0029-lyt-start.md) | Implement lyt start — automate the mandatory start phase | 2026-04-16 |
 | [ISS-0030](5-done/ISS-0030-lyt-close.md) | Implement lyt close — automate the mandatory close phase | 2026-04-16 |
 | [ISS-0031](5-done/ISS-0031-oss-cleanup.md) | OSS cleanup — lint errors, README drift, detectStack bug, update check | 2026-04-16 |
+| [ISS-0032](5-done/ISS-0032-reproducible-init.md) | Make lyt init reproducible — bundle method files in npm package | 2026-04-19 |
 | [ISS-0033](5-done/ISS-0033-git-hook-branch-guard.md) | Install git pre-commit hook to enforce branch naming convention | 2026-04-16 |
 | [ISS-0034](5-done/ISS-0034-fix-command-injection.md) | Fix command injection in git operations — sanitize branch names | 2026-04-16 |
 | [ISS-0035](5-done/ISS-0035-update-readme-homepage.md) | Update lytos-method READMEs and lytos.org homepage for launch | 2026-04-18 |

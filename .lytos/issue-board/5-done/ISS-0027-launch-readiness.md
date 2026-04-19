@@ -6,11 +6,11 @@ priority: P0-critical
 effort: M
 complexity: standard
 skill: documentation
-status: 3-in-progress
+status: 5-done
 branch: chore/ISS-0027-launch-readiness
 depends: [ISS-0037]
 created: 2026-04-15
-updated: 2026-04-18
+updated: 2026-04-19
 ---
 # ISS-0027 — Launch readiness — fix CI badge, screenshots, demo, discussions
 
