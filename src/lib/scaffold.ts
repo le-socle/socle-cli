@@ -26,8 +26,14 @@ const METHOD_DIR = join(
   "method"
 );
 
-const SKILLS = [
-  "session-start",
+// session-start is a Lytos bootstrap protocol, kept as a flat file at
+// .lytos/skills/session-start.md and read at the start of every session.
+const SESSION_SKILL = "session-start";
+
+// Task skills follow the agentskills.io format: a folder containing a
+// SKILL.md with `name` + `description` frontmatter. Loaded on demand by
+// the AI tool's native skill discovery.
+const TASK_SKILLS = [
   "code-review",
   "testing",
   "documentation",
@@ -39,9 +45,10 @@ const SKILLS = [
 ];
 
 const REMOTE_FILES = [
-  ...SKILLS.map((s) => ({
-    remote: `skills/${s}.md`,
-    local: `skills/${s}.md`,
+  { remote: `skills/${SESSION_SKILL}.md`, local: `skills/${SESSION_SKILL}.md` },
+  ...TASK_SKILLS.map((s) => ({
+    remote: `skills/${s}/SKILL.md`,
+    local: `skills/${s}/SKILL.md`,
   })),
   { remote: "rules/default-rules.md", local: "rules/default-rules.md" },
   { remote: "rules/README.md", local: "rules/README.md" },

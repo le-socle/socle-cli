@@ -1,3 +1,8 @@
+---
+name: api-design
+description: Design and review REST APIs with consistent conventions, URL structure, status codes, and error formats. Use when creating endpoints, auditing an existing API for consistency or quality, or settling team disagreements on API conventions.
+---
+
 # Skill — API Design
 
 *This skill defines how to design and review REST APIs on a project using Lytos. An agent loaded with this skill knows the conventions, patterns, and checks required to produce a consistent, production-ready API.*

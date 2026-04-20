@@ -59,13 +59,27 @@ If complexity is not specified, assume `standard`. If the table is not filled in
 
 When orchestration tools support automatic model switching, this step will become automatic. Until then, the agent recommends and the human decides.
 
-#### The assigned skill
+#### Task skills (agentskills.io format)
 
-Read the `skill` field in the issue -> load the corresponding skill file.
+Lytos task skills (`testing`, `code-review`, `code-structure`, `documentation`, `git-workflow`, `deployment`, `security`, `api-design`) are stored as folders following the [agentskills.io](https://agentskills.io) open standard:
 
 ```
-Issue says "skill: testing" -> load .lytos/skills/testing.md
+.lytos/skills/<name>/SKILL.md
 ```
+
+Each `SKILL.md` declares its own `name` and `description` in YAML frontmatter. **Modern AI tools (Claude Code, Cursor, Codex, Gemini CLI, Copilot, Goose, etc.) discover these skills natively** via progressive disclosure — they read only the metadata at startup and load the full body when a task matches.
+
+The `skill` field in the issue frontmatter is **optional**:
+
+- If present, it is a hint: "for this issue, prefer the `<name>` skill". Useful for borderline tasks.
+- If absent, the tool decides via progressive disclosure based on the issue's title, description, and the skill descriptions.
+
+```
+Issue says "skill: testing" -> the tool loads .lytos/skills/testing/SKILL.md
+Issue has no skill field   -> the tool picks based on the task at hand
+```
+
+If the tool you use does not yet support agentskills.io discovery, fall back to reading the relevant `.lytos/skills/<name>/SKILL.md` manually based on the task or the optional `skill` field.
 
 #### The relevant memory sections
 

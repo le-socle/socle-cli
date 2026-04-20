@@ -1,3 +1,8 @@
+---
+name: deployment
+description: Prepare, execute, and validate a deployment — pre-flight checks, release procedure, post-deploy verification. Use before production releases, when setting up CI/CD, after a critical fix that must ship quickly, or to document the deployment procedure for a new project.
+---
+
 # Skill — Deployment
 
 *This skill defines how to prepare, execute, and validate a deployment. An agent loaded with this skill knows what to check before deploying, how to do it, and how to confirm everything works.*

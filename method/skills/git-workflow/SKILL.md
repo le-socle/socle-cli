@@ -1,3 +1,8 @@
+---
+name: git-workflow
+description: Apply Lytos Git conventions — branch naming, commit message format, merge workflow, and collaboration rules. Use when creating a branch, committing changes, opening a PR, or resolving a workflow conflict or question.
+---
+
 # Skill — Git Workflow
 
 *This skill defines the Git conventions to follow on a project using Lytos. It covers branch naming, commit format, merge workflow, and collaboration rules. An agent loaded with this skill applies these conventions without deviation.*

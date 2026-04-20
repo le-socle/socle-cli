@@ -1,3 +1,8 @@
+---
+name: documentation
+description: Document code, modules, and learnings — what to document, in what format, and when to update the project memory. Use after writing or modifying a public function, at sprint end to consolidate learnings into the cortex, when creating a module, or when writing or updating an issue.
+---
+
 # Skill — Documentation
 
 *This skill defines how to document code, modules, and learnings on a project using Lytos. An agent loaded with this skill knows what to document, in what format, and when to update the project memory.*

@@ -1,3 +1,8 @@
+---
+name: security
+description: Identify vulnerabilities, apply secure coding patterns, and enforce security best practices across any language. Use when writing code that handles user input, authentication, or authorization; during code review for OWASP Top 10 issues; when adding dependencies; or when configuring servers, APIs, or deployment pipelines.
+---
+
 # Skill — Security
 
 *This skill defines how to handle security on a project using Lytos. An agent loaded with this skill knows how to identify vulnerabilities, apply secure coding patterns, and enforce security best practices across any language.*

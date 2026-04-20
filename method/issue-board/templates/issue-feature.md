@@ -6,7 +6,10 @@ priority: P0-critical | P1-high | P2-normal | P3-low
 effort: XS | S | M | L | XL
 complexity: light | standard | heavy
 domain: []
-skill: "[main skill to invoke]"
+# `skill` is optional — modern AI tools discover task skills natively via
+# agentskills.io progressive disclosure. Set it only as an explicit hint
+# for borderline tasks. Leave empty otherwise.
+skill: ""
 skills_aux: []
 status: 0-icebox
 branch: "type/ISS-XXXX-slug-title"

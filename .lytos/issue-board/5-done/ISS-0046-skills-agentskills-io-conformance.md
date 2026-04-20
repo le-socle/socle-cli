@@ -8,10 +8,11 @@ complexity: standard
 skill: code-structure
 skills_aux: [documentation]
 scope: lytos-cli
-status: 1-backlog
+status: 5-done
 branch: "feat/ISS-0046-skills-agentskills-io"
 depends: []
 created: 2026-04-20
+updated: 2026-04-20
 ---
 
 # ISS-0046 — Adopt agentskills.io format for Lytos task skills

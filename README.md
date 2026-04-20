@@ -59,16 +59,16 @@ project/
     ├── manifest.md              # Intent — project identity and constraints
     ├── LYTOS.md                 # Method reference
     ├── config.yml               # Language and profile preferences
-    ├── skills/                  # Design — 9 reusable procedures
-    │   ├── session-start.md
-    │   ├── code-structure.md
-    │   ├── code-review.md
-    │   ├── testing.md
-    │   ├── documentation.md
-    │   ├── git-workflow.md
-    │   ├── deployment.md
-    │   ├── security.md
-    │   └── api-design.md
+    ├── skills/                  # Design — Lytos protocol + agentskills.io task skills
+    │   ├── session-start.md     # Lytos bootstrap protocol (flat)
+    │   ├── code-structure/SKILL.md
+    │   ├── code-review/SKILL.md
+    │   ├── testing/SKILL.md
+    │   ├── documentation/SKILL.md
+    │   ├── git-workflow/SKILL.md
+    │   ├── deployment/SKILL.md
+    │   ├── security/SKILL.md
+    │   └── api-design/SKILL.md  # 8 task skills (agentskills.io format)
     ├── rules/                   # Standards — quality criteria
     │   └── default-rules.md
     ├── issue-board/             # Progress — kanban board

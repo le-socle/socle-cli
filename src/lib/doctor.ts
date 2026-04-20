@@ -172,12 +172,19 @@ function checkMissingSkills(
 
   if (!existsSync(boardDir)) return { findings, filesChecked };
 
-  // Collect available skill names (filename without .md)
+  // Collect available skill names. Two formats are accepted:
+  //   - flat:   skills/<name>.md          (Lytos bootstrap protocols, e.g. session-start)
+  //   - folder: skills/<name>/SKILL.md    (agentskills.io task skills)
   const availableSkills = new Set<string>();
   if (existsSync(skillsDir)) {
-    for (const f of readdirSync(skillsDir)) {
-      if (f.endsWith(".md")) {
-        availableSkills.add(f.replace(/\.md$/, ""));
+    for (const entry of readdirSync(skillsDir, { withFileTypes: true })) {
+      if (entry.isFile() && entry.name.endsWith(".md")) {
+        availableSkills.add(entry.name.replace(/\.md$/, ""));
+      } else if (
+        entry.isDirectory() &&
+        existsSync(join(skillsDir, entry.name, "SKILL.md"))
+      ) {
+        availableSkills.add(entry.name);
       }
     }
   }
@@ -212,7 +219,7 @@ function checkMissingSkills(
           category: "missing-skill",
           file: relPath,
           message: `References skill "${skill}" which does not exist in skills/`,
-          fix: `Create skills/${skill}.md or fix the skill field in ${relPath}`,
+          fix: `Create skills/${skill}/SKILL.md or fix the skill field in ${relPath}`,
         });
       }
 
@@ -226,7 +233,7 @@ function checkMissingSkills(
               category: "missing-skill",
               file: relPath,
               message: `References auxiliary skill "${aux}" which does not exist in skills/`,
-              fix: `Create skills/${aux}.md or fix skills_aux in ${relPath}`,
+              fix: `Create skills/${aux}/SKILL.md or fix skills_aux in ${relPath}`,
             });
           }
         }

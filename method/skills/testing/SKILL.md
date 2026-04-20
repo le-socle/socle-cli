@@ -1,3 +1,8 @@
+---
+name: testing
+description: Write and review tests — unit, integration, and E2E — following the Testing Trophy model. Use after writing a feature, after fixing a bug (regression test required), during refactoring (existing tests must continue to pass), or during a quality audit to check overall coverage.
+---
+
 # Skill — Testing
 
 *This skill defines how to write tests on a project using Lytos. It covers unit tests and end-to-end tests. An agent loaded with this skill knows what to test, how to structure tests, and what coverage criteria to meet.*
