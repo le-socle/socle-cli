@@ -120,6 +120,21 @@ describe("lytos init", () => {
     expect(entries).not.toContain("agents.md");
   });
 
+  it("scaffolds .lytos/.gitignore that protects 6-private-notes/ (ISS-0049)", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool none --yes', fixture.cwd);
+
+    const gitignorePath = join(fixture.cwd, ".lytos/.gitignore");
+    expect(existsSync(gitignorePath)).toBe(true);
+    const content = readFileSync(gitignorePath, "utf-8");
+    expect(content).toContain("issue-board/6-private-notes/*");
+    expect(content).toContain("!issue-board/6-private-notes/.gitkeep");
+
+    // The folder itself exists with a .gitkeep so the ignore rule has a
+    // real target and users can drop private notes in right away.
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/6-private-notes/.gitkeep"))).toBe(true);
+  });
+
   it("creates .github/copilot-instructions.md when --tool copilot", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool copilot --yes', fixture.cwd);

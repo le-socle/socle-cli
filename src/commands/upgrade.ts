@@ -29,6 +29,7 @@ const UPGRADEABLE_FILES = [
   "rules/default-rules.md",
   "rules/README.md",
   "LYTOS.md",
+  ".gitignore",
   "templates/sprint.md",
   "issue-board/templates/issue-feature.md",
   "issue-board/templates/issue-task.md",

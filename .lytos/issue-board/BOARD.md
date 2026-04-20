@@ -21,7 +21,6 @@ _No issues._
 | [ISS-0042](1-backlog/ISS-0042-claim-as-draft-pr.md) | lyt claim: atomic claim via branch + push + draft PR (full race-proof design) | P1-high | L | ISS-0041 |
 | [ISS-0043](1-backlog/ISS-0043-board-all-remote.md) | lyt board --all --remote: lead-view from origin, not local | P2-normal | S | — |
 | [ISS-0047](1-backlog/ISS-0047-skill-import.md) | lyt skill: import agentskills.io skills into a Lytos project | P2-normal | L | ISS-0046 |
-| [ISS-0049](1-backlog/ISS-0049-scaffold-gitignore-private-notes.md) | lyt init: ship a .lytos/.gitignore that protects 6-private-notes/ automatically | P2-normal | XS | — |
 | [ISS-0050](1-backlog/ISS-0050-cursor-rules-modern-convention.md) | lyt init --tool cursor: use modern .cursor/rules/*.mdc convention | P2-normal | XS | — |
 
 ### 2-sprint (committed)
@@ -36,6 +35,7 @@ _No issues._
 
 | # | Title | Priority | Effort | Depends |
 |---|-------|----------|--------|---------|
+| [ISS-0049](3-in-progress/ISS-0049-scaffold-gitignore-private-notes.md) | lyt init: ship a .lytos/.gitignore that protects 6-private-notes/ automatically | P2-normal | XS | — |
 | [ISS-0039](4-review/ISS-0039-adapters-copilot-gemini-windsurf.md) | Add --tool adapters for Copilot, Gemini and Windsurf | P1-high | M | ISS-0038 |
 
 ### Done

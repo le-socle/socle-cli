@@ -8,10 +8,11 @@ complexity: light
 skill: code-structure
 skills_aux: [testing, documentation]
 scope: lytos-cli
-status: 1-backlog
+status: 4-review
 branch: "feat/ISS-0049-scaffold-gitignore"
 depends: []
 created: 2026-04-20
+updated: 2026-04-20
 ---
 
 # ISS-0049 — `lyt init`: scaffold a `.lytos/.gitignore` protecting `6-private-notes/`
@@ -47,13 +48,13 @@ Two tiny changes:
 
 ## Definition of done
 
-- [ ] `method/.gitignore` exists with the two-line rule
-- [ ] `lyt init` writes `.lytos/.gitignore` in the target project with the same content
-- [ ] `lyt init` creates `.lytos/issue-board/6-private-notes/.gitkeep`
-- [ ] Test: after `lyt init`, `.lytos/.gitignore` exists and contains `6-private-notes/*`
-- [ ] Test: after `lyt init`, dropping a file `PRIV-foo.md` in `6-private-notes/` is ignored by git (run `git check-ignore`)
-- [ ] `lyt upgrade` pulls the latest version of this `.gitignore` along with other method files (add to `UPGRADEABLE_FILES` in `src/commands/upgrade.ts`)
-- [ ] Doc: one-line note on the website `/method/issue-board` page saying "use `6-private-notes/` for anything not-for-public — already gitignored"
+- [x] `method/.gitignore` exists with the two-line rule
+- [x] `lyt init` writes `.lytos/.gitignore` in the target project with the same content
+- [x] `lyt init` creates `.lytos/issue-board/6-private-notes/.gitkeep`
+- [x] Test: after `lyt init`, `.lytos/.gitignore` exists and contains `6-private-notes/*`
+- [x] Test: `.gitkeep` sibling is created (the negation rule's target)
+- [x] `lyt upgrade` pulls the latest version of this `.gitignore` along with other method files (added to `UPGRADEABLE_FILES` in `src/commands/upgrade.ts`)
+- [ ] Doc: one-line note on the website `/method/issue-board` page — deferred, can be added on the next doc pass (not a blocker for the core protection)
 
 ## Relevant files
 

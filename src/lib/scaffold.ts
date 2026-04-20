@@ -56,6 +56,8 @@ const REMOTE_FILES = [
   { remote: "rules/default-rules.md", local: "rules/default-rules.md" },
   { remote: "rules/README.md", local: "rules/README.md" },
   { remote: "LYTOS.md", local: "LYTOS.md" },
+  // Gitignore that protects 6-private-notes/ from accidental commits
+  { remote: ".gitignore", local: ".gitignore" },
   { remote: "templates/sprint.md", local: "templates/sprint.md" },
   {
     remote: "issue-board/templates/issue-feature.md",
@@ -146,6 +148,7 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
     "issue-board/3-in-progress",
     "issue-board/4-review",
     "issue-board/5-done",
+    "issue-board/6-private-notes",
     "issue-board/archive",
     "issue-board/templates",
   ];
@@ -162,6 +165,7 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
     "3-in-progress",
     "4-review",
     "5-done",
+    "6-private-notes",
   ];
   for (const dir of kanbanDirs) {
     writeFile(
