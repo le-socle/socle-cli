@@ -31,15 +31,19 @@ _No issues._
 
 ### 3-in-progress (in dev)
 
-| # | Title | Priority | Effort |
-|---|-------|----------|--------|
-| [ISS-0038](3-in-progress/ISS-0038-fix-agents-md-casing.md) | Fix AGENTS.md casing for Codex tool — breaks on Linux/CI | P1-high | XS |
+_No issues._
 
 ### 4-review (review/test)
 
 _No issues._
 
-### Done
+### 5-done
+
+| # | Title | Completed |
+|---|-------|-----------|
+| [ISS-0038](5-done/ISS-0038-fix-agents-md-casing.md) | Fix AGENTS.md casing for Codex tool — breaks on Linux/CI | 2026-04-20 |
+
+### Done (archived)
 
 39 issues archived → [archive/INDEX.md](archive/INDEX.md)
 

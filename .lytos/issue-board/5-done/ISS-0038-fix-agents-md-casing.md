@@ -7,7 +7,7 @@ effort: XS
 complexity: light
 skill: code-structure
 skills_aux: [testing]
-status: 3-in-progress
+status: 5-done
 branch: "fix/ISS-0038-agents-md-casing"
 depends: []
 created: 2026-04-19
