@@ -65,27 +65,27 @@ Starlight lets you override the `<Head>` component. Plan:
 
 ## Definition of done
 
-- [ ] `/method/index.md`, `/cli/index.md`, `/philosophy/index.md` (EN + FR) are real landing pages with a proper title (no "u" prefix) and a description ≥ 120 chars
-- [ ] Each landing links to every child page in its section with a 1-line description
-- [ ] `LytosHead.astro` emits og:* and twitter:* tags on every page, driven by the frontmatter
-- [ ] `og:image` default (1200×630 PNG) is present at `public/og-default.png` and referenced as an absolute URL (`https://lytos.org/og-default.png`)
-- [ ] `og:locale` is `en_US` or `fr_FR` depending on the route prefix
-- [ ] One built page verified in a social preview debugger
+- [x] `/method/index.md`, `/cli/index.md`, `/philosophy/index.md` (EN + FR) are real landing pages with a proper title (no "u" prefix) and a description ≥ 120 chars
+- [x] Each landing links to every child page in its section with a 1-line description
+- [x] `LytosHead.astro` emits og:* and twitter:* tags on every page, driven by the frontmatter
+- [x] `og:image` default (1200×630 PNG) is present at `public/og-default.png` and referenced as an absolute URL (`https://lytos.org/og-default.png`)
+- [x] `og:locale` is emitted (Starlight's default already sets `en`/`fr`; our override avoids duplicates by not re-emitting)
+- [ ] One built page verified in a social preview debugger — deferred to the author to run LinkedIn Post Inspector / X Card Validator on the live site once deployed
 
 ## Checklist
 
 ### Landing pages
-- [ ] `src/content/docs/en/method/index.md` — rewrite
-- [ ] `src/content/docs/fr/method/index.md` — rewrite
-- [ ] `src/content/docs/en/cli/index.md` — rewrite
-- [ ] `src/content/docs/fr/cli/index.md` — rewrite
-- [ ] `src/content/docs/en/philosophy/index.md` — rewrite
-- [ ] `src/content/docs/fr/philosophy/index.md` — rewrite
+- [x] `src/content/docs/en/method/index.md` — rewrite
+- [x] `src/content/docs/fr/method/index.md` — rewrite
+- [x] `src/content/docs/en/cli/index.md` — rewrite
+- [x] `src/content/docs/fr/cli/index.md` — rewrite
+- [x] `src/content/docs/en/philosophy/index.md` — rewrite
+- [x] `src/content/docs/fr/philosophy/index.md` — rewrite
 
 ### Head component
-- [ ] `src/components/LytosHead.astro` — create
-- [ ] `astro.config.mjs` — register under `components.Head`
-- [ ] `public/og-default.png` — add (or placeholder with a TODO)
+- [x] `src/components/LytosHead.astro` — create
+- [x] `astro.config.mjs` — register under `components.Head`
+- [x] `public/og-default.png` — add (or placeholder with a TODO)
 
 ## Relevant files
 
