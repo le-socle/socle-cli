@@ -31,7 +31,8 @@ These 5 pillars are the method. Everything else (agent documentation, tool adapt
 | `memory/cortex/*.md` | Specialized zones (architecture, backend, frontend, patterns, bugs, business, sprints) | Load only what's relevant to the task |
 | `rules/default-rules.md` | Universal quality criteria | At each session |
 | `rules/*-rules.md` | Project-specific rules (if they exist) | At each session |
-| `skills/*.md` | Operational procedures (code-review, testing, documentation, etc.) | Load the skill assigned to the task |
+| `skills/session-start.md` | Lytos bootstrap protocol — what to read at the start of any session | At each session |
+| `skills/<name>/SKILL.md` | Task skills in the [agentskills.io](https://agentskills.io) open standard format (code-review, testing, documentation, etc.) | Discovered natively by AI tools via progressive disclosure; the issue's optional `skill` field is a hint |
 | `issue-board/BOARD.md` | Kanban view — task progress status | When working on a task |
 | `issue-board/[status]/ISS-*.md` | Issues with YAML frontmatter (source of truth) | Read the assigned issue |
 | `scripts/generate-board.py` | Regenerates BOARD.md from the frontmatter | Use at the end of a task if needed |
@@ -87,7 +88,7 @@ If the human says "write clean code", reformulate it as a verifiable trade-off.
 
 Issues have YAML frontmatter. The important fields:
 - `complexity: light | standard | heavy` — determines which model to use (see table in the manifest)
-- `skill` — the main skill to load
+- `skill` — **optional** hint: name a specific task skill to prefer for this issue. Most tools discover the right skill automatically via agentskills.io progressive disclosure; only set this for borderline tasks
 - `depends` — issues that must be completed before this one
 - `status` — the canonical status (source of truth). The file should also be in the matching folder, but if there's a conflict, the frontmatter takes precedence
 
