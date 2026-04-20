@@ -86,7 +86,7 @@ project/
     └── templates/               # Issue and sprint templates
 ```
 
-`lyt init` also detects the project's stack (language, framework, test runner, package manager) and pre-fills the manifest. It generates the appropriate adapter file for the chosen AI tool — `CLAUDE.md`, `.cursorrules`, `AGENTS.md`, `.github/copilot-instructions.md`, `GEMINI.md`, or `.windsurfrules`.
+`lyt init` also detects the project's stack (language, framework, test runner, package manager) and pre-fills the manifest. It generates the appropriate adapter file for the chosen AI tool — `CLAUDE.md`, `.cursor/rules/lytos.mdc`, `AGENTS.md`, `.github/copilot-instructions.md`, `GEMINI.md`, or `.windsurfrules`.
 
 A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-XXXX-slug`). This prevents untracked work on `main` — regardless of which AI tool or model is used.
 
@@ -97,7 +97,7 @@ A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-X
 | Tool | What `lyt init` generates |
 |------|--------------------------|
 | **Claude Code** | `CLAUDE.md` at project root |
-| **Cursor** | `.cursorrules` at project root |
+| **Cursor** | `.cursor/rules/lytos.mdc` (modern Cursor rule with YAML front-matter) |
 | **Codex (OpenAI)** | `AGENTS.md` at project root |
 | **GitHub Copilot** | `.github/copilot-instructions.md` |
 | **Gemini CLI** | `GEMINI.md` at project root |

@@ -8,10 +8,11 @@ complexity: light
 skill: code-structure
 skills_aux: [testing, documentation]
 scope: lytos-cli
-status: 1-backlog
+status: 3-in-progress
 branch: "refactor/ISS-0050-cursor-rules-mdc"
 depends: []
 created: 2026-04-20
+updated: 2026-04-20
 ---
 
 # ISS-0050 — `lyt init --tool cursor` should use `.cursor/rules/*.mdc`

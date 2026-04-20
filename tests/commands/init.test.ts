@@ -100,11 +100,21 @@ describe("lytos init", () => {
     expect(content).toContain("manifest.md");
   });
 
-  it("creates .cursorrules when --tool cursor", () => {
+  it("creates .cursor/rules/lytos.mdc when --tool cursor (ISS-0050)", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool cursor --yes', fixture.cwd);
 
-    expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(true);
+    const target = join(fixture.cwd, ".cursor/rules/lytos.mdc");
+    expect(existsSync(target)).toBe(true);
+    // Legacy flat file must not appear
+    expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(false);
+
+    const content = readFileSync(target, "utf-8");
+    // Valid YAML front-matter so Cursor picks the rule up
+    expect(content).toMatch(/^---\n[\s\S]*?alwaysApply: true[\s\S]*?\n---/);
+    expect(content).toContain("globs: [\"**/*\"]");
+    // Body still references .lytos/
+    expect(content).toContain("@.lytos/manifest.md");
   });
 
   it("creates AGENTS.md (uppercase) when --tool codex", () => {
@@ -177,6 +187,7 @@ describe("lytos init", () => {
 
     expect(existsSync(join(fixture.cwd, "CLAUDE.md"))).toBe(false);
     expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(false);
+    expect(existsSync(join(fixture.cwd, ".cursor/rules/lytos.mdc"))).toBe(false);
     expect(existsSync(join(fixture.cwd, "GEMINI.md"))).toBe(false);
     expect(existsSync(join(fixture.cwd, ".windsurfrules"))).toBe(false);
     expect(existsSync(join(fixture.cwd, ".github/copilot-instructions.md"))).toBe(false);

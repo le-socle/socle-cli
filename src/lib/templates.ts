@@ -598,8 +598,17 @@ Documentation: ${REPO_URL}
 `;
 }
 
-export function cursorrTemplate(_ctx: TemplateContext): string {
-  return `This project uses Lytos — a human-first method for working with AI agents.
+export function cursorRulesTemplate(_ctx: TemplateContext): string {
+  // Modern Cursor convention: .cursor/rules/*.mdc with YAML front-matter.
+  // `alwaysApply: true` + `globs: ["**/*"]` mirror the legacy .cursorrules
+  // behavior — the rule is active on every file in the project.
+  return `---
+description: Lytos project instructions — read .lytos/ at session start
+globs: ["**/*"]
+alwaysApply: true
+---
+
+This project uses Lytos — a human-first method for working with AI agents.
 
 First session (setup): if the manifest is empty, read @.lytos/LYTOS.md to understand the method.
 

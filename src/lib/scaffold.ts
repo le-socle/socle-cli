@@ -16,7 +16,7 @@ import {
   boardTemplate,
   claudeTemplate,
   codexTemplate,
-  cursorrTemplate,
+  cursorRulesTemplate,
   copilotTemplate,
   geminiTemplate,
   windsurfTemplate,
@@ -243,9 +243,12 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
       result
     );
   } else if (options.tool === "cursor") {
+    // Modern Cursor convention: per-rule .mdc file under .cursor/rules/
+    // (the legacy `.cursorrules` flat file is still read but is on the way
+    // out; the new format supports scoping and activation metadata).
     writeFile(
-      join(options.cwd, ".cursorrules"),
-      cursorrTemplate(ctx),
+      join(options.cwd, ".cursor", "rules", "lytos.mdc"),
+      cursorRulesTemplate(ctx),
       options.dryRun,
       result
     );
