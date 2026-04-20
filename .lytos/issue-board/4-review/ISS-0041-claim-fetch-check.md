@@ -7,7 +7,7 @@ effort: S
 complexity: standard
 skill: code-structure
 skills_aux: [testing, git-workflow]
-status: 3-in-progress
+status: 4-review
 branch: "fix/ISS-0041-claim-fetch-check"
 depends: []
 created: 2026-04-19

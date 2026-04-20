@@ -19,7 +19,6 @@ _No issues._
 |---|-------|----------|--------|---------|
 | [ISS-0039](1-backlog/ISS-0039-adapters-copilot-gemini-windsurf.md) | Add --tool adapters for Copilot, Gemini and Windsurf | P1-high | M | ISS-0038 |
 | [ISS-0040](1-backlog/ISS-0040-cloud-app-compatibility.md) | Verify Lytos compatibility with Claude Code Desktop and Codex web app | P2-normal | S | — |
-| [ISS-0041](1-backlog/ISS-0041-claim-fetch-check.md) | lyt claim/start: fetch + check origin before moving an issue | P1-high | S | — |
 | [ISS-0042](1-backlog/ISS-0042-claim-as-draft-pr.md) | lyt claim: atomic claim via branch + push + draft PR (full race-proof design) | P1-high | L | ISS-0041 |
 | [ISS-0043](1-backlog/ISS-0043-board-all-remote.md) | lyt board --all --remote: lead-view from origin, not local | P2-normal | S | — |
 | [ISS-0045](1-backlog/ISS-0045-website-seo-stubs-og.md) | [website] Replace stub index pages + add Open Graph / Twitter Card meta | P1-high | M | — |
@@ -35,7 +34,9 @@ _No issues._
 
 ### 4-review (review/test)
 
-_No issues._
+| # | Title | Priority | Effort | Branch |
+|---|-------|----------|--------|--------|
+| [ISS-0041](4-review/ISS-0041-claim-fetch-check.md) | lyt claim/start: fetch + check origin before moving an issue | P1-high | S | `fix/ISS-0041-claim-fetch-check` |
 
 ### Done
 
