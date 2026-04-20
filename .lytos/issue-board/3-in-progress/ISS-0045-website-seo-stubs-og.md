@@ -8,10 +8,11 @@ complexity: standard
 skill: code-structure
 skills_aux: [documentation]
 scope: lytos-website
-status: 1-backlog
+status: 3-in-progress
 branch: "feat/ISS-0045-website-seo-stubs-og"
 depends: []
 created: 2026-04-20
+updated: 2026-04-20
 ---
 
 # ISS-0045 — Fix stub section-index pages + add Open Graph / Twitter Card meta
