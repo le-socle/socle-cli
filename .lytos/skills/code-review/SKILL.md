@@ -1,3 +1,8 @@
+---
+name: code-review
+description: Perform a structured code review — what to check, in what order, and how to formulate constructive feedback. Use before merging a PR, on demand for a specific file or module, or for end-of-sprint quality audits.
+---
+
 # Skill — Code Review
 
 *This skill defines how to perform a code review on a project using Lytos. An agent loaded with this skill knows exactly what to check, in what order, and how to formulate feedback.*

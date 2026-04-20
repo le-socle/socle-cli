@@ -1,3 +1,8 @@
+---
+name: code-structure
+description: Apply file structure, naming, and code organization rules to produce clean, consistent, maintainable code. Use when writing new code, refactoring, creating a new module or component, or as a complement to code review.
+---
+
 # Skill — Code Structure
 
 *This skill defines the rules for file structure, naming, and code organization on a project using Lytos. An agent loaded with this skill produces clean, consistent, and maintainable code.*
