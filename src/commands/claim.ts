@@ -8,9 +8,9 @@ import { execFileSync } from "child_process";
 import { writeFileSync, renameSync } from "fs";
 import { join } from "path";
 import { existsSync } from "fs";
-import { locateIssue, ensureBranch, regenerateBoard, today } from "../lib/issue-ops.js";
+import { locateIssue, ensureBranch, regenerateBoard, today, checkOriginFresh } from "../lib/issue-ops.js";
 import { serializeFrontmatter } from "../lib/frontmatter.js";
-import { ok, error, info, cyan, bold } from "../lib/output.js";
+import { ok, error, info, warn, cyan, bold } from "../lib/output.js";
 
 function findLytosDir(cwd: string): string | null {
   const candidate = join(cwd, ".lytos");
@@ -61,6 +61,23 @@ export const claimCommand = new Command("claim")
       error(`${issueId} is already claimed by @${currentAssignee}`);
       info("Use --force to override.");
       process.exit(1);
+    }
+
+    // Origin-freshness check: refuse to claim against a stale local main or
+    // when the issue is already in 3-in-progress on origin under someone else.
+    if (!opts.force) {
+      const check = checkOriginFresh(lytosDir, issueId, gitUser);
+      if (check.status === "behind" || check.status === "diverged") {
+        error(check.message!);
+        process.exit(1);
+      }
+      if (check.status === "already-claimed") {
+        error(check.message!);
+        process.exit(1);
+      }
+      if (check.status === "offline") {
+        warn(check.message!);
+      }
     }
 
     const branch = typeof issue.frontmatter.branch === "string"

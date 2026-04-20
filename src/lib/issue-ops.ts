@@ -149,6 +149,150 @@ export function today(): string {
 }
 
 /**
+ * Result of an origin-freshness check before claiming / starting an issue.
+ *
+ * - `ok`              : origin is reachable and the issue is free to claim locally
+ * - `behind`          : local main is behind origin — user must `git pull` first
+ * - `diverged`        : local main has diverged from origin — user must resolve
+ * - `already-claimed` : the same issue is in 3-in-progress on origin with a
+ *                       different assignee — likely a concurrent claim
+ * - `offline`         : `git fetch` failed (network or auth). Caller should warn
+ *                       and proceed with local state only.
+ * - `not-applicable`  : not a git repo / no origin remote / origin has no main.
+ *                       Caller should skip the check silently.
+ */
+export interface OriginCheckResult {
+  status: "ok" | "behind" | "diverged" | "already-claimed" | "offline" | "not-applicable";
+  message?: string;
+  assignee?: string;
+}
+
+/**
+ * Check that the local main is fresh against origin AND that the given issue
+ * isn't already claimed on origin by someone else. Used by `lyt claim` and
+ * `lyt start` to prevent concurrent claims.
+ *
+ * All git calls are network-timeout-bounded and `stdio: "pipe"` so this never
+ * leaks noise into the caller's output.
+ */
+export function checkOriginFresh(
+  lytosDir: string,
+  issueId: string,
+  gitUser: string,
+  opts: { mainBranch?: string; fetchTimeoutMs?: number } = {}
+): OriginCheckResult {
+  const mainBranch = opts.mainBranch ?? "main";
+  const fetchTimeoutMs = opts.fetchTimeoutMs ?? 10_000;
+
+  // Not a git repo → skip silently
+  try {
+    execFileSync("git", ["rev-parse", "--is-inside-work-tree"], { stdio: "pipe" });
+  } catch {
+    return { status: "not-applicable" };
+  }
+
+  // No origin remote → skip silently
+  try {
+    execFileSync("git", ["remote", "get-url", "origin"], { stdio: "pipe" });
+  } catch {
+    return { status: "not-applicable" };
+  }
+
+  // Fetch (best effort)
+  try {
+    execFileSync("git", ["fetch", "--quiet", "origin", mainBranch], {
+      stdio: "pipe",
+      timeout: fetchTimeoutMs,
+    });
+  } catch {
+    return { status: "offline", message: `Could not fetch origin/${mainBranch} — proceeding with local state only` };
+  }
+
+  // origin/main exists?
+  try {
+    execFileSync("git", ["rev-parse", "--verify", `origin/${mainBranch}`], { stdio: "pipe" });
+  } catch {
+    return { status: "not-applicable" };
+  }
+
+  // Check ancestry
+  let localIsAncestor = false;
+  let originIsAncestor = false;
+  try {
+    execFileSync("git", ["merge-base", "--is-ancestor", mainBranch, `origin/${mainBranch}`], { stdio: "pipe" });
+    localIsAncestor = true;
+  } catch { /* non-zero exit = not an ancestor */ }
+  try {
+    execFileSync("git", ["merge-base", "--is-ancestor", `origin/${mainBranch}`, mainBranch], { stdio: "pipe" });
+    originIsAncestor = true;
+  } catch { /* non-zero exit = not an ancestor */ }
+
+  if (localIsAncestor && !originIsAncestor) {
+    return {
+      status: "behind",
+      message: `Your local ${mainBranch} is behind origin. Run \`git pull\` on ${mainBranch}, then retry.`,
+    };
+  }
+  if (!localIsAncestor && !originIsAncestor) {
+    return {
+      status: "diverged",
+      message: `Your local ${mainBranch} has diverged from origin. Resolve before claiming.`,
+    };
+  }
+  // Else: local == origin, or local is ahead (unpushed commits). Both are fine.
+
+  // Is the same issue already in 3-in-progress on origin, with a different assignee?
+  const normalizedId = issueId.toUpperCase();
+  let pathOnOrigin: string | null = null;
+  try {
+    const out = execFileSync(
+      "git",
+      ["ls-tree", "-r", "--name-only", `origin/${mainBranch}`, ".lytos/issue-board/"],
+      { encoding: "utf-8", stdio: "pipe" }
+    );
+    for (const line of out.split("\n")) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      const fileName = trimmed.split("/").pop() ?? "";
+      if (fileName.toUpperCase().startsWith(normalizedId) && fileName.endsWith(".md")) {
+        pathOnOrigin = trimmed;
+        break;
+      }
+    }
+  } catch {
+    return { status: "ok" };
+  }
+
+  if (!pathOnOrigin) return { status: "ok" };
+  if (!pathOnOrigin.includes("/3-in-progress/")) return { status: "ok" };
+
+  let content: string;
+  try {
+    content = execFileSync("git", ["show", `origin/${mainBranch}:${pathOnOrigin}`], {
+      encoding: "utf-8",
+      stdio: "pipe",
+    });
+  } catch {
+    return { status: "ok" };
+  }
+
+  const fm = parseFrontmatter(content);
+  if (!fm) return { status: "ok" };
+
+  const originAssignee = typeof fm.assignee === "string" ? fm.assignee : undefined;
+  if (originAssignee && originAssignee !== gitUser) {
+    const date = typeof fm.updated === "string" ? fm.updated : "?";
+    return {
+      status: "already-claimed",
+      message: `${issueId} was claimed by @${originAssignee} on ${date}. Use --force to override.`,
+      assignee: originAssignee,
+    };
+  }
+
+  return { status: "ok" };
+}
+
+/**
  * Count checklist items in markdown content.
  */
 export function countChecklist(content: string): { done: number; total: number } {
