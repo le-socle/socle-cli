@@ -8,10 +8,11 @@ complexity: standard
 skill: ""
 skills_aux: [code-structure, testing, documentation]
 scope: lytos-cli
-status: 1-backlog
+status: 3-in-progress
 branch: "feat/ISS-0048-review-flow"
 depends: []
 created: 2026-04-20
+updated: 2026-04-20
 ---
 
 # ISS-0048 — Review step before close + batch `lyt close`
