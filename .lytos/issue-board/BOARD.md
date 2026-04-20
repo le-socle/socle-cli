@@ -24,7 +24,6 @@ _No issues._
 | [ISS-0043](1-backlog/ISS-0043-board-all-remote.md) | lyt board --all --remote: lead-view from origin, not local | P2-normal | S | — |
 | [ISS-0045](1-backlog/ISS-0045-website-seo-stubs-og.md) | [website] Replace stub index pages + add Open Graph / Twitter Card meta | P1-high | M | — |
 | [ISS-0047](1-backlog/ISS-0047-skill-import.md) | lyt skill: import agentskills.io skills into a Lytos project | P2-normal | L | ISS-0046 |
-| [ISS-0048](1-backlog/ISS-0048-review-flow.md) | Introduce review step before close — skill + batch `lyt close` | P1-high | S | — |
 
 ### 2-sprint (committed)
 
@@ -43,6 +42,7 @@ _No issues._
 | # | Title | Completed |
 |---|-------|-----------|
 | [ISS-0038](5-done/ISS-0038-fix-agents-md-casing.md) | Fix AGENTS.md casing for Codex tool — breaks on Linux/CI | 2026-04-20 |
+| [ISS-0048](5-done/ISS-0048-review-flow.md) | Introduce review step before close — skill + batch `lyt close` | 2026-04-20 |
 
 ### Done (archived)
 

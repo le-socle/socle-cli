@@ -138,6 +138,76 @@ created: 2026-04-15
   );
 }
 
+// Batch-close fixture: two clean review issues + one with unchecked items.
+function createBatchReviewFixture(cwd: string): void {
+  const lyt = (p: string) => resolve(cwd, ".lytos", p);
+
+  for (const dir of [
+    "skills", "rules", "memory/cortex",
+    "issue-board/0-icebox", "issue-board/1-backlog",
+    "issue-board/2-sprint", "issue-board/3-in-progress",
+    "issue-board/4-review", "issue-board/5-done",
+  ]) {
+    mkdirSync(lyt(dir), { recursive: true });
+  }
+
+  writeFileSync(
+    lyt("issue-board/4-review/ISS-0010-clean-a.md"),
+    `---
+id: ISS-0010
+title: "Clean A"
+type: feat
+priority: P1-high
+status: 4-review
+depends: []
+created: 2026-04-20
+---
+
+# ISS-0010 — Clean A
+
+- [x] done
+`
+  );
+
+  writeFileSync(
+    lyt("issue-board/4-review/ISS-0011-clean-b.md"),
+    `---
+id: ISS-0011
+title: "Clean B"
+type: feat
+priority: P1-high
+status: 4-review
+depends: []
+created: 2026-04-20
+---
+
+# ISS-0011 — Clean B
+
+- [x] done
+- [x] done
+`
+  );
+
+  writeFileSync(
+    lyt("issue-board/4-review/ISS-0012-unchecked.md"),
+    `---
+id: ISS-0012
+title: "Still has unchecked"
+type: feat
+priority: P1-high
+status: 4-review
+depends: []
+created: 2026-04-20
+---
+
+# ISS-0012 — Still has unchecked
+
+- [x] done
+- [ ] not done
+`
+  );
+}
+
 let fixture: Fixture;
 
 afterEach(() => {
@@ -229,5 +299,88 @@ describe("lyt close", () => {
     expect(data.status).toBe("closed");
     expect(data.checklist.done).toBe(3);
     expect(data.checklist.total).toBe(3);
+  });
+});
+
+describe("lyt close (batch, no argument)", () => {
+  it("reports empty 4-review gracefully", () => {
+    fixture = createEmptyFixture();
+    createCloseFixture(fixture.cwd);
+    // Move the only review issue out so 4-review is empty
+    writeFileSync(
+      join(fixture.cwd, ".lytos/issue-board/5-done/ISS-0005-review.md"),
+      readFileSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0005-review.md"), "utf-8")
+    );
+    require("fs").unlinkSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0005-review.md"));
+
+    const result = run("close --yes", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toContain("No issues in 4-review");
+  });
+
+  it("--yes promotes every clean issue in 4-review to 5-done", () => {
+    fixture = createEmptyFixture();
+    createBatchReviewFixture(fixture.cwd);
+
+    const result = run("close --yes", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/5-done/ISS-0010-clean-a.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/5-done/ISS-0011-clean-b.md"))).toBe(true);
+    // ISS-0012 has unchecked items → skipped (no --force)
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0012-unchecked.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/5-done/ISS-0012-unchecked.md"))).toBe(false);
+  });
+
+  it("skips issues with unchecked items by default and warns", () => {
+    fixture = createEmptyFixture();
+    createBatchReviewFixture(fixture.cwd);
+
+    const result = run("close --yes", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toContain("ISS-0012");
+    expect(result.stderr).toContain("skipped");
+    expect(result.stderr).toMatch(/2 closed.*1 skipped/);
+  });
+
+  it("--yes --force promotes even unchecked issues", () => {
+    fixture = createEmptyFixture();
+    createBatchReviewFixture(fixture.cwd);
+
+    const result = run("close --yes --force", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/5-done/ISS-0012-unchecked.md"))).toBe(true);
+    expect(result.stderr).toMatch(/3 closed/);
+  });
+
+  it("--dry-run previews without changing anything", () => {
+    fixture = createEmptyFixture();
+    createBatchReviewFixture(fixture.cwd);
+
+    const result = run("close --dry-run", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    // Issues still in 4-review
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0010-clean-a.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0011-clean-b.md"))).toBe(true);
+    expect(existsSync(join(fixture.cwd, ".lytos/issue-board/4-review/ISS-0012-unchecked.md"))).toBe(true);
+    expect(result.stderr).toContain("Dry run");
+  });
+
+  it("--yes --json emits a summary of closed and skipped", () => {
+    fixture = createEmptyFixture();
+    createBatchReviewFixture(fixture.cwd);
+
+    const result = run("close --yes --json", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    const data = JSON.parse(result.stdout);
+    expect(data.status).toBe("done");
+    expect(data.closed).toEqual(expect.arrayContaining(["ISS-0010", "ISS-0011"]));
+    expect(data.skipped).toHaveLength(1);
+    expect(data.skipped[0].id).toBe("ISS-0012");
   });
 });

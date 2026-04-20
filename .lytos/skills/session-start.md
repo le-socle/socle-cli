@@ -206,7 +206,7 @@ The review needs the full quality framework, not detailed technical context.
 
 ## Task completion — 3 mandatory actions
 
-When the task is done (all done criteria met), the agent performs these 3 actions in this order.
+When the task is done coding (all done criteria met), the agent performs these 3 actions in this order. **Finishing coding does not mean the issue is "done" — it means the issue is ready for review**. The human (or CI, or a peer) then validates and runs `lyt close` to promote the issue to `5-done`.
 
 **Exception — bootstrap/multi-task sessions**: When working on multiple issues in one session (e.g., project setup, creating the sprint, initial scaffolding), it is acceptable to batch the issue updates at the end of the session rather than after each individual task. The key rule remains: by the time you commit, every completed issue must have its frontmatter and folder updated.
 
@@ -215,8 +215,8 @@ When the task is done (all done criteria met), the agent performs these 3 action
 The YAML frontmatter is the **source of truth**. Update the `status` field:
 
 ```yaml
-status: 5-done    # was 3-in-progress
-updated: 2026-04-12
+status: 4-review    # was 3-in-progress
+updated: 2026-04-20
 ```
 
 ### 2. Move the issue file
@@ -224,12 +224,21 @@ updated: 2026-04-12
 The folder represents the status visually. Move the file:
 
 ```bash
-git mv .lytos/issue-board/3-in-progress/ISS-XXXX-title.md .lytos/issue-board/5-done/
+git mv .lytos/issue-board/3-in-progress/ISS-XXXX-title.md .lytos/issue-board/4-review/
 ```
 
 ### 3. Update the BOARD.md
 
-Move the issue line to the corresponding section in BOARD.md. If the issue moves to `5-done`, add the completion date.
+Move the issue line to the corresponding section in BOARD.md.
+
+### The close step (human or CI)
+
+Once validation is green, either:
+
+- `lyt close ISS-XXXX` — promote one issue from `4-review/` to `5-done/`, or
+- `lyt close` — batch-promote every issue in `4-review/` at once (prompts for confirmation; `--yes` skips it).
+
+The agent normally stops at step 3 and lets the human decide when reviews are complete. A trivial fix can still go directly to `5-done/` via `lyt close ISS-XXXX` while the issue is in `3-in-progress/` — it's an explicit skip-review shortcut, not the default path.
 
 ### If learning occurred
 
