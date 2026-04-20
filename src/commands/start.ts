@@ -8,18 +8,29 @@
 import { Command } from "commander";
 import { existsSync } from "fs";
 import { resolve } from "path";
+import { execFileSync } from "child_process";
 import {
   locateIssue,
   moveIssue,
   regenerateBoard,
   ensureBranch,
+  checkOriginFresh,
 } from "../lib/issue-ops.js";
 import { parseIssueDetail } from "../lib/show.js";
 import { ok, info, warn, error, bold, cyan, green } from "../lib/output.js";
 
+function getGitUser(): string {
+  try {
+    return execFileSync("git", ["config", "user.name"], { encoding: "utf-8" }).trim();
+  } catch {
+    return "unknown";
+  }
+}
+
 export const startCommand = new Command("start")
   .description("Start working on an issue — move to in-progress, create branch, update board")
   .argument("<issue-id>", "Issue ID (e.g. ISS-0029)")
+  .option("--force", "Start even when origin is ahead or the issue is claimed on origin", false)
   .option("--json", "Output result as JSON", false)
   .action((issueId: string, opts) => {
     const cwd = process.cwd();
@@ -54,6 +65,22 @@ export const startCommand = new Command("start")
         error(`Cannot start ${issueId} — it's already done.`);
       }
       process.exit(1);
+    }
+
+    // Origin-freshness check — same as lyt claim
+    if (!opts.force) {
+      const check = checkOriginFresh(lytosDir, issueId, getGitUser());
+      if (check.status === "behind" || check.status === "diverged" || check.status === "already-claimed") {
+        if (opts.json) {
+          console.log(JSON.stringify({ status: "error", reason: check.status, message: check.message }));
+        } else {
+          error(check.message!);
+        }
+        process.exit(1);
+      }
+      if (check.status === "offline" && !opts.json) {
+        warn(check.message!);
+      }
     }
 
     // 1. Move to in-progress

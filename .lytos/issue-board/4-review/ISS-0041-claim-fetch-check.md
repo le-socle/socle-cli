@@ -7,10 +7,11 @@ effort: S
 complexity: standard
 skill: code-structure
 skills_aux: [testing, git-workflow]
-status: 1-backlog
+status: 4-review
 branch: "fix/ISS-0041-claim-fetch-check"
 depends: []
 created: 2026-04-19
+updated: 2026-04-20
 ---
 
 # ISS-0041 — lyt claim/start: fetch + check origin before moving an issue
