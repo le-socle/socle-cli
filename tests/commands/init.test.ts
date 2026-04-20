@@ -7,7 +7,7 @@
 
 import { describe, it, expect, afterEach } from "vitest";
 import { execSync } from "child_process";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "fs";
 import { resolve, join } from "path";
 import {
   createEmptyFixture,
@@ -107,12 +107,28 @@ describe("lytos init", () => {
     expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(true);
   });
 
+  it("creates AGENTS.md (uppercase) when --tool codex", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool codex --yes', fixture.cwd);
+
+    // The Codex CLI reads AGENTS.md with uppercase letters. On case-sensitive
+    // filesystems (Linux, CI) the exact casing is load-bearing — verify by
+    // reading the directory listing, not via existsSync which is case-insensitive
+    // on macOS and would pass either way.
+    const entries = readdirSync(fixture.cwd);
+    expect(entries).toContain("AGENTS.md");
+    expect(entries).not.toContain("agents.md");
+  });
+
   it("does not create tool config when --tool none", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool none --yes', fixture.cwd);
 
     expect(existsSync(join(fixture.cwd, "CLAUDE.md"))).toBe(false);
     expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(false);
+    const entries = readdirSync(fixture.cwd);
+    expect(entries).not.toContain("AGENTS.md");
+    expect(entries).not.toContain("agents.md");
   });
 
   it("fails if .lytos/ already exists", () => {

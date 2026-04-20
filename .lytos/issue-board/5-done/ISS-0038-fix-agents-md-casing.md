@@ -7,10 +7,11 @@ effort: XS
 complexity: light
 skill: code-structure
 skills_aux: [testing]
-status: 1-backlog
+status: 5-done
 branch: "fix/ISS-0038-agents-md-casing"
 depends: []
 created: 2026-04-19
+updated: 2026-04-20
 ---
 
 # ISS-0038 — Fix AGENTS.md casing for Codex tool

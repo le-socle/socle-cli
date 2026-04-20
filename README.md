@@ -85,7 +85,7 @@ project/
     └── templates/               # Issue and sprint templates
 ```
 
-`lyt init` also detects the project's stack (language, framework, test runner, package manager) and pre-fills the manifest. It generates the appropriate adapter file for the chosen AI tool — `CLAUDE.md`, `.cursorrules`, or `agents.md`.
+`lyt init` also detects the project's stack (language, framework, test runner, package manager) and pre-fills the manifest. It generates the appropriate adapter file for the chosen AI tool — `CLAUDE.md`, `.cursorrules`, or `AGENTS.md`.
 
 A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-XXXX-slug`). This prevents untracked work on `main` — regardless of which AI tool or model is used.
 
@@ -97,7 +97,7 @@ A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-X
 |------|--------------------------|
 | **Claude Code** | `CLAUDE.md` at project root |
 | **Cursor** | `.cursorrules` at project root |
-| **Codex (OpenAI)** | `agents.md` at project root |
+| **Codex (OpenAI)** | `AGENTS.md` at project root |
 | **Others** | The `.lytos/` directory is plain Markdown — any LLM can read it |
 
 > *"Choose your AI. Don't belong to it."*

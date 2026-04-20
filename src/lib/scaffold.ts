@@ -233,7 +233,7 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
     );
   } else if (options.tool === "codex") {
     writeFile(
-      join(options.cwd, "agents.md"),
+      join(options.cwd, "AGENTS.md"),
       codexTemplate(ctx),
       options.dryRun,
       result
