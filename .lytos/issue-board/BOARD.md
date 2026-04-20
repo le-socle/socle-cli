@@ -37,16 +37,9 @@ _No issues._
 
 _No issues._
 
-### 5-done
+### Done
 
-| # | Title | Completed |
-|---|-------|-----------|
-| [ISS-0038](5-done/ISS-0038-fix-agents-md-casing.md) | Fix AGENTS.md casing for Codex tool — breaks on Linux/CI | 2026-04-20 |
-| [ISS-0048](5-done/ISS-0048-review-flow.md) | Introduce review step before close — skill + batch `lyt close` | 2026-04-20 |
-
-### Done (archived)
-
-39 issues archived → [archive/INDEX.md](archive/INDEX.md)
+41 issues archived → [archive/INDEX.md](archive/INDEX.md)
 
 ---
 
