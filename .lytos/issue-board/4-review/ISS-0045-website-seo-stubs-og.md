@@ -8,7 +8,7 @@ complexity: standard
 skill: code-structure
 skills_aux: [documentation]
 scope: lytos-website
-status: 3-in-progress
+status: 4-review
 branch: "feat/ISS-0045-website-seo-stubs-og"
 depends: []
 created: 2026-04-20
