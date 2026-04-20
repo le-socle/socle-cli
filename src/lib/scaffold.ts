@@ -17,6 +17,9 @@ import {
   claudeTemplate,
   codexTemplate,
   cursorrTemplate,
+  copilotTemplate,
+  geminiTemplate,
+  windsurfTemplate,
 } from "./templates.js";
 import type { DetectedStack } from "./detect-stack.js";
 import { installPreCommitHook } from "./hooks.js";
@@ -64,9 +67,18 @@ const REMOTE_FILES = [
   },
 ];
 
+export type LytosTool =
+  | "claude"
+  | "cursor"
+  | "codex"
+  | "copilot"
+  | "gemini"
+  | "windsurf"
+  | "none";
+
 export interface ScaffoldOptions {
   projectName: string;
-  tool: "claude" | "cursor" | "codex" | "none";
+  tool: LytosTool;
   lang: "en" | "fr";
   profile: "vibe-coder" | "developer" | "lead";
   stack: Partial<DetectedStack>;
@@ -216,7 +228,9 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
     }
   }
 
-  // Create AI tool config at project root
+  // Create AI tool config at project root.
+  // Each tool has a well-established file-name convention; see the bridge
+  // table in README.md / the website compatibility page.
   if (options.tool === "claude") {
     writeFile(
       join(options.cwd, "CLAUDE.md"),
@@ -235,6 +249,29 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
     writeFile(
       join(options.cwd, "AGENTS.md"),
       codexTemplate(ctx),
+      options.dryRun,
+      result
+    );
+  } else if (options.tool === "copilot") {
+    // Copilot expects `.github/copilot-instructions.md` (nested — writeFile
+    // creates parent dirs).
+    writeFile(
+      join(options.cwd, ".github", "copilot-instructions.md"),
+      copilotTemplate(ctx),
+      options.dryRun,
+      result
+    );
+  } else if (options.tool === "gemini") {
+    writeFile(
+      join(options.cwd, "GEMINI.md"),
+      geminiTemplate(ctx),
+      options.dryRun,
+      result
+    );
+  } else if (options.tool === "windsurf") {
+    writeFile(
+      join(options.cwd, ".windsurfrules"),
+      windsurfTemplate(ctx),
       options.dryRun,
       result
     );

@@ -213,7 +213,7 @@ export const initCommand = new Command("init")
   .option("--name <name>", "Project name")
   .option(
     "--tool <tool>",
-    "AI tool to configure (claude, cursor, codex, none)",
+    "AI tool to configure (claude, cursor, codex, copilot, gemini, windsurf, none)",
     ""
   )
   .option(
@@ -301,13 +301,19 @@ export const initCommand = new Command("init")
           { key: "1", label: "Claude Code" },
           { key: "2", label: "Cursor" },
           { key: "3", label: "Codex (OpenAI)" },
-          { key: "4", label: lang === "fr" ? "Autre / Aucun" : "Other / None" },
+          { key: "4", label: "GitHub Copilot" },
+          { key: "5", label: "Gemini CLI" },
+          { key: "6", label: "Windsurf" },
+          { key: "7", label: lang === "fr" ? "Autre / Aucun" : "Other / None" },
         ]
       );
       tool =
         choice === "1" ? "claude" :
         choice === "2" ? "cursor" :
-        choice === "3" ? "codex" : "none";
+        choice === "3" ? "codex" :
+        choice === "4" ? "copilot" :
+        choice === "5" ? "gemini" :
+        choice === "6" ? "windsurf" : "none";
     }
     tool = tool || "none";
 
@@ -324,7 +330,7 @@ export const initCommand = new Command("init")
 
     const result = scaffold({
       projectName,
-      tool: tool as "claude" | "cursor" | "codex" | "none",
+      tool: tool as "claude" | "cursor" | "codex" | "copilot" | "gemini" | "windsurf" | "none",
       lang,
       profile,
       stack,

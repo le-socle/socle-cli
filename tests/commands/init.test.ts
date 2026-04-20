@@ -120,12 +120,51 @@ describe("lytos init", () => {
     expect(entries).not.toContain("agents.md");
   });
 
+  it("creates .github/copilot-instructions.md when --tool copilot", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool copilot --yes', fixture.cwd);
+
+    const target = join(fixture.cwd, ".github/copilot-instructions.md");
+    expect(existsSync(target)).toBe(true);
+    const content = readFileSync(target, "utf-8");
+    expect(content).toContain("Lytos");
+    expect(content).toContain(".lytos/manifest.md");
+    expect(content).toContain("session-start.md");
+  });
+
+  it("creates GEMINI.md (uppercase) when --tool gemini", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool gemini --yes', fixture.cwd);
+
+    const entries = readdirSync(fixture.cwd);
+    expect(entries).toContain("GEMINI.md");
+    expect(entries).not.toContain("gemini.md");
+    const content = readFileSync(join(fixture.cwd, "GEMINI.md"), "utf-8");
+    expect(content).toContain("Lytos");
+    expect(content).toContain("@.lytos/manifest.md");
+  });
+
+  it("creates .windsurfrules when --tool windsurf", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool windsurf --yes', fixture.cwd);
+
+    const target = join(fixture.cwd, ".windsurfrules");
+    expect(existsSync(target)).toBe(true);
+    const content = readFileSync(target, "utf-8");
+    expect(content).toContain("Lytos");
+    expect(content).toContain(".lytos/manifest.md");
+    expect(content).toContain("session-start.md");
+  });
+
   it("does not create tool config when --tool none", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool none --yes', fixture.cwd);
 
     expect(existsSync(join(fixture.cwd, "CLAUDE.md"))).toBe(false);
     expect(existsSync(join(fixture.cwd, ".cursorrules"))).toBe(false);
+    expect(existsSync(join(fixture.cwd, "GEMINI.md"))).toBe(false);
+    expect(existsSync(join(fixture.cwd, ".windsurfrules"))).toBe(false);
+    expect(existsSync(join(fixture.cwd, ".github/copilot-instructions.md"))).toBe(false);
     const entries = readdirSync(fixture.cwd);
     expect(entries).not.toContain("AGENTS.md");
     expect(entries).not.toContain("agents.md");
