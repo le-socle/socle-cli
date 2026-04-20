@@ -7,7 +7,7 @@
 
 import { Command } from "commander";
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
-import { join, dirname, basename } from "path";
+import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createInterface } from "readline";
 import { ok, info, error, cyan, bold, green, dim } from "../lib/output.js";
@@ -15,15 +15,17 @@ import { ok, info, error, cyan, bold, green, dim } from "../lib/output.js";
 const METHOD_DIR = join(dirname(fileURLToPath(import.meta.url)), "method");
 
 const UPGRADEABLE_FILES = [
+  // session-start is a Lytos bootstrap protocol, kept flat
   "skills/session-start.md",
-  "skills/code-review.md",
-  "skills/testing.md",
-  "skills/documentation.md",
-  "skills/git-workflow.md",
-  "skills/code-structure.md",
-  "skills/deployment.md",
-  "skills/security.md",
-  "skills/api-design.md",
+  // Task skills follow agentskills.io format: <name>/SKILL.md
+  "skills/code-review/SKILL.md",
+  "skills/testing/SKILL.md",
+  "skills/documentation/SKILL.md",
+  "skills/git-workflow/SKILL.md",
+  "skills/code-structure/SKILL.md",
+  "skills/deployment/SKILL.md",
+  "skills/security/SKILL.md",
+  "skills/api-design/SKILL.md",
   "rules/default-rules.md",
   "rules/README.md",
   "LYTOS.md",
@@ -105,7 +107,7 @@ export const upgradeCommand = new Command("upgrade")
       }
 
       // Ask user
-      process.stderr.write(`  ${cyan("~")} ${basename(relPath)} differs — update? [y/N] `);
+      process.stderr.write(`  ${cyan("~")} ${relPath} differs — update? [y/N] `);
       const confirm = await askConfirm("");
       if (confirm) {
         writeFileSync(localPath, bundled, "utf-8");

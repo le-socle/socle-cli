@@ -64,8 +64,14 @@ This is a test project.
   writeFileSync(lyt("memory/MEMORY.md"), "# Memory\nIndex.");
   writeFileSync(lyt("rules/default-rules.md"), "# Rules\nDefault rules.");
   writeFileSync(lyt("issue-board/BOARD.md"), "# Board\nEmpty.");
+  // session-start stays flat (Lytos bootstrap protocol)
   writeFileSync(lyt("skills/session-start.md"), "# Session Start\nSkill.");
-  writeFileSync(lyt("skills/code-structure.md"), "# Code Structure\nSkill.");
+  // Task skills follow agentskills.io folder format
+  mkdirSync(lyt("skills/code-structure"), { recursive: true });
+  writeFileSync(
+    lyt("skills/code-structure/SKILL.md"),
+    "---\nname: code-structure\ndescription: test fixture\n---\n\n# Code Structure\nSkill."
+  );
 }
 
 let fixture: Fixture;
