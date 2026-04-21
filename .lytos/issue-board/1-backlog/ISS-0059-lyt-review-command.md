@@ -110,6 +110,8 @@ The implementer doesn't need to re-create the branch (it still exists). They pic
 
 ## Definition of done
 
+### Command surface
+
 - [ ] `lyt review` without args lists all 4-review issues with an "audited ✓ / pending" marker
 - [ ] `lyt review ISS-XXXX` prints a self-contained prompt with all 9 sections from §3
 - [ ] The prompt is usable cold by a fresh AI session — manual verification with at least 2 distinct vendors
@@ -117,11 +119,32 @@ The implementer doesn't need to re-create the branch (it still exists). They pic
 - [ ] NO_GO triggers the file move + frontmatter update; GO leaves the file where it is
 - [ ] `lyt review --all --export` writes one prompt file per pending issue under `.lytos/review/<iss-id>.prompt.md`
 - [ ] If the issue already has an `## Audit — <date>` block, emit a warning and offer `--overwrite` to re-audit
+
+### Tests
+
 - [ ] Tests cover: prompt generation, verdict parsing (GO and NO_GO), file move on NO_GO, idempotent re-audit with `--overwrite`, invalid audit response handling
 - [ ] Coverage ≥ 80% on `src/commands/review.ts`
-- [ ] Doc: new page `/cli/review` (EN + FR) on the website documenting both flows
-- [ ] README (EN + FR) command table updated
-- [ ] LYTOS.md (method + bundled) describes the implementer / auditor split
+
+### Help & motivation to use a fresh auditor
+
+The cross-model split is the whole point of the feature. The CLI help and the docs must push this clearly — otherwise users default to asking the implementing session to audit itself.
+
+- [ ] `lyt --help` top-level examples block mentions `lyt review` as a dedicated workflow step
+- [ ] `lyt review --help` includes an explicit motivation block:
+  > *Use a fresh AI session for the audit — ideally a different vendor or model than the one that implemented the issue. At minimum, a blank chat with no prior context. A model auditing its own code shares the cognitive biases that caused any mistake in the first place.*
+- [ ] The exported prompt's role header restates the same rule in the first paragraph: "you are auditing, not the implementer"
+
+### Documentation
+
+- [ ] New page `/cli/review` (EN + FR) on the website. Must cover:
+  - What the command does
+  - The two flows (agentic / chat)
+  - **Why the auditor must not be the implementer** — with 4 arguments: cognitive-bias independence, review-practice parity (nobody validates their own PR), compliance / audit trail, and live proof of Lytos's model-independence thesis
+  - Concrete examples (e.g. "implemented by Claude Code, audited by GPT-5")
+  - What a good audit block looks like — with a filled example
+- [ ] README (EN + FR) command table updated with `lyt review` row
+- [ ] Website `/workflow/` page team workflow — insert a `Reviewer (different AI)` step between `Dev + AI — Implementation` and `Dev — Opens a PR`
+- [ ] LYTOS.md (method + bundled) describes the implementer / auditor split as a first-class Lytos pattern, not a CLI curiosity
 
 ## Relevant files
 
@@ -135,6 +158,11 @@ The implementer doesn't need to re-create the branch (it still exists). They pic
 ## Notes
 
 - **Marketing angle:** this command is a live proof of Lytos's model-independence thesis. Same repo, same context, implemented by Claude, audited by GPT (or vice versa), without anyone rewiring anything. Worth a blog post once shipped.
+- **Motivation arguments to land in the docs** (used by both `/cli/review` page and the CLI help):
+  1. *Cognitive biases are model-specific.* A model that audits its own code reads its own reasoning as obviously correct — it can't spot the blind spot that caused the bug.
+  2. *Nobody validates their own PR.* Code review exists because distance matters. A fresh auditor restores that distance, even when the two reviewers are AI.
+  3. *Compliance & traceability.* Many regulated contexts (finance, health, public sector) require review independence. An auditor model distinct from the implementer gives an artifact a compliance officer can point at.
+  4. *Proves Lytos's promise.* The whole point of putting the context in the repo is that any model can pick it up. Alternating vendors per review is the cleanest demonstration that you're not locked in.
 - **Cross-model expectations:** the prompt must be written in plain markdown with no model-specific idioms (no XML tags, no JSON-only contracts). Any capable LLM (Claude 4.x+, GPT-4.x+, Gemini 2.x+, Codex, Mistral Large, Windsurf Cascade) should be able to follow it.
 - **Trust boundary:** the CLI parses whatever verdict the auditor returned. It does not second-guess. If the auditor says GO, it's GO — the human still decides via `lyt close`.
 - **Out of scope (follow-ups):**
