@@ -47,6 +47,17 @@ npx lytos-cli init
 
 In 2 minutes, your repo has its manifest, rules, and board. From there, the AI knows your project.
 
+### Mixed-team setup: one repo, several AI tools
+
+On a repo where some developers use Claude Code, others Cursor, others Codex, `lyt init` can scaffold every bridge file in one shot:
+
+```bash
+lyt init --tool claude,cursor,copilot       # CSV: only what the team uses
+lyt init --all-tools                        # every shipping adapter at once
+```
+
+Every bridge points at the same `.lytos/` directory, so switching tools does not require reconfiguring the project. `none` is accepted in the list as a no-op, so scripts can pass `"none,claude"` without a special case. Unknown values exit with an error before any file is written.
+
 ![Lytos demo](docs/screenshots/lytos.gif)
 
 ![lyt board](docs/screenshots/lyt-board.png)

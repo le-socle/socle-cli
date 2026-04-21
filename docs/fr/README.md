@@ -47,6 +47,17 @@ npx lytos-cli init
 
 En 2 minutes, votre dépôt a son manifest, ses rules, son board. À partir de là, l'IA connaît votre projet.
 
+### Setup d'équipe mixte : un repo, plusieurs outils IA
+
+Sur un repo où certains développeurs utilisent Claude Code, d'autres Cursor, d'autres Codex, `lyt init` peut générer tous les bridge files en une seule fois :
+
+```bash
+lyt init --tool claude,cursor,copilot       # CSV : seulement ce que l'équipe utilise
+lyt init --all-tools                        # tous les adaptateurs shippants d'un coup
+```
+
+Chaque bridge pointe vers le même dossier `.lytos/`, donc changer d'outil ne demande aucune reconfiguration du projet. `none` est accepté dans la liste en no-op, pour que des scripts puissent passer `"none,claude"` sans cas particulier. Les valeurs inconnues sortent en erreur avant qu'aucun fichier ne soit écrit.
+
 ![Démo Lytos](../screenshots/lytos.gif)
 
 ![lyt board](../screenshots/lyt-board.png)
