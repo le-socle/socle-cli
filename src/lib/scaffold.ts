@@ -33,6 +33,20 @@ const METHOD_DIR = join(
 // .lytos/skills/session-start.md and read at the start of every session.
 const SESSION_SKILL = "session-start";
 
+// Kanban folders that must always exist under issue-board/. Each one
+// gets a .gitkeep on init and on upgrade so the structure is preserved
+// even when a column is empty (and so .gitignore rules on private-notes
+// have a real folder to apply to).
+export const KANBAN_DIRS = [
+  "0-icebox",
+  "1-backlog",
+  "2-sprint",
+  "3-in-progress",
+  "4-review",
+  "5-done",
+  "6-private-notes",
+];
+
 // Task skills follow the agentskills.io format: a folder containing a
 // SKILL.md with `name` + `description` frontmatter. Loaded on demand by
 // the AI tool's native skill discovery.
@@ -158,16 +172,7 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
   }
 
   // Create .gitkeep files in empty Kanban folders
-  const kanbanDirs = [
-    "0-icebox",
-    "1-backlog",
-    "2-sprint",
-    "3-in-progress",
-    "4-review",
-    "5-done",
-    "6-private-notes",
-  ];
-  for (const dir of kanbanDirs) {
+  for (const dir of KANBAN_DIRS) {
     writeFile(
       join(lytosDir, "issue-board", dir, ".gitkeep"),
       "",

@@ -62,3 +62,19 @@ Without these adapters, users on those tools have to hand-write a bridge file th
 - Every bridge file points at `.lytos/` and survives `lyt upgrade`
 - Docs list the supported tools with exact file-path convention
 - 7 tests pass (one per tool filename assertion)
+
+## Audit — 2026-04-21
+
+**Status: OK**
+
+Checks performed:
+
+- CLI: the 3 tools are exposed in `src/commands/init.ts` (`copilot`, `gemini`, `windsurf`).
+- Scaffold: the 3 bridges are written at the right paths in `src/lib/scaffold.ts`:
+  `.github/copilot-instructions.md`, `GEMINI.md`, `.windsurfrules`.
+- Tests: `npm test -- tests/commands/init.test.ts` passes at `18/18`, including the dedicated Copilot / Gemini / Windsurf cases.
+- Docs: the CLI README and the `method/compatibility` page on the website (EN + FR) list the 3 adapters as native.
+
+Conclusion:
+
+- Nothing to fix on this issue from the audit standpoint. It can be validated as-is.

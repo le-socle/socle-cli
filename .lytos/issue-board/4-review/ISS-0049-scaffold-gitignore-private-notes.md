@@ -68,3 +68,19 @@ Two tiny changes:
 
 - This protection is the kind of thing we should have shipped with the very first `lyt init`. The bug is that nothing leaked yet — not that nothing could have.
 - No migration needed for users who already ran `lyt init` before this fix lands: `lyt upgrade` will pull the new `.gitignore` (and create the folder if missing).
+
+## Audit — 2026-04-21
+
+**Status: blocking remarks to fix before validation**
+
+Blocking remark:
+
+- The initial scaffold is correct, but `lyt upgrade` doesn't recreate `issue-board/6-private-notes/.gitkeep` for legacy projects.
+- In `src/commands/upgrade.ts`, the `UPGRADEABLE_FILES` list only contains method files, and the upgrade loop only adds those files. It can restore `.lytos/.gitignore`, but cannot recreate `issue-board/6-private-notes/` nor its `.gitkeep`.
+- Manual check on 2026-04-21: in a temp folder with only `.lytos/`, `node dist/cli.js upgrade --force` does add `.lytos/.gitignore`, but leaves `issue-board/6-private-notes/.gitkeep` absent.
+
+What to do:
+
+- [x] Extend `lyt upgrade` to recreate `issue-board/6-private-notes/.gitkeep` and its parent folder when the existing install is missing them. *(PR #3, branch `fix/ISS-0049-upgrade-private-notes`)*
+- [x] Add a regression test in `tests/commands/upgrade.test.ts` covering a legacy project without `.lytos/.gitignore` and without `issue-board/6-private-notes/.gitkeep`. *(2 tests added in PR #3: `--force` recreation + `--dry-run` preview)*
+- [ ] Re-validate that `lyt init` and `lyt upgrade` provide the same level of protection against accidental commits of private notes. *(manual check by reviewer after merge)*
