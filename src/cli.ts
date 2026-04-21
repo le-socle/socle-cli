@@ -24,6 +24,22 @@ program
   )
   .version(VERSION);
 
+program.on("--help", () => {
+  console.log("");
+  console.log("Examples:");
+  console.log("  lyt init --tool claude");
+  console.log("  lyt init --tool claude,cursor,copilot");
+  console.log("  lyt init --all-tools");
+  console.log("  lyt board");
+  console.log("  lyt board --all");
+  console.log("  lyt start ISS-0053");
+  console.log("  lyt close ISS-0053");
+  console.log("  lyt close --dry-run");
+  console.log("  lyt upgrade --dry-run");
+  console.log("");
+  console.log('Use "lyt <command> --help" for command-specific options and arguments.');
+});
+
 program.addCommand(initCommand);
 program.addCommand(boardCommand);
 program.addCommand(lintCommand);
