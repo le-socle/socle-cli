@@ -109,6 +109,15 @@ project/
 
 A pre-commit hook is installed to enforce branch naming conventions (`type/ISS-XXXX-slug`). This prevents untracked work on `main` — regardless of which AI tool or model is used.
 
+### Startup depth — lightweight vs standard
+
+The `session-start` skill reads the current issue's frontmatter to decide how much context the AI loads before starting.
+
+- **Lightweight startup** is allowed only when the issue is explicitly `effort: XS` **and** `complexity: light`. The AI still loads the mandatory safety baseline (manifest, MEMORY, default rules, BOARD, the issue itself), but defers cortex notes, project-specific rule files, and broad codebase exploration until the issue clearly needs them.
+- **Standard startup** remains mandatory for every other combination. If either field is missing, the AI defaults to standard. If the task grows mid-session, it immediately upgrades from lightweight to standard.
+
+This is how small issues stay fast without burning the context window, and why `effort` and `complexity` in issue frontmatter are load-bearing — they are not just prioritization hints.
+
 ---
 
 ## Works with any AI tool

@@ -8,7 +8,7 @@ complexity: standard
 domain: [workflow, skills, context]
 skill: ""
 skills_aux: [documentation, code-structure]
-status: 3-in-progress
+status: 4-review
 branch: "feat/ISS-0055-lightweight-startup-path"
 depends: []
 created: 2026-04-21
