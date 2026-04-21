@@ -8,7 +8,7 @@ complexity: standard
 domain: [cli, init]
 skill: ""
 skills_aux: []
-status: 3-in-progress
+status: 4-review
 branch: "feat/ISS-0053-multi-tool-init"
 depends: []
 created: 2026-04-21
