@@ -7,7 +7,7 @@
 
 import { describe, it, expect, afterEach } from "vitest";
 import { spawnSync } from "child_process";
-import { existsSync, readFileSync, writeFileSync, unlinkSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, unlinkSync, rmSync } from "fs";
 import { resolve, join } from "path";
 import { createEmptyFixture, type Fixture } from "../helpers/fixtures.js";
 
@@ -105,6 +105,47 @@ describe("lyt upgrade", () => {
     expect(result.exitCode).toBe(0);
     expect(existsSync(skillPath)).toBe(true);
     expect(result.stderr).toContain("(new)");
+  });
+
+  it("recreates a missing 6-private-notes/.gitkeep (legacy project)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes", fixture.cwd);
+
+    // Simulate a project that pre-dates the 6-private-notes column:
+    // wipe the folder entirely, including its .gitkeep.
+    const privateNotesDir = join(
+      fixture.cwd,
+      ".lytos",
+      "issue-board",
+      "6-private-notes"
+    );
+    rmSync(privateNotesDir, { recursive: true, force: true });
+    expect(existsSync(privateNotesDir)).toBe(false);
+
+    const result = run("upgrade --force", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+
+    const gitkeep = join(privateNotesDir, ".gitkeep");
+    expect(existsSync(gitkeep)).toBe(true);
+    expect(result.stderr).toContain("issue-board/6-private-notes/.gitkeep");
+  });
+
+  it("--dry-run reports missing kanban .gitkeeps without writing them", () => {
+    fixture = createEmptyFixture();
+    run("init --yes", fixture.cwd);
+
+    const privateNotesDir = join(
+      fixture.cwd,
+      ".lytos",
+      "issue-board",
+      "6-private-notes"
+    );
+    rmSync(privateNotesDir, { recursive: true, force: true });
+
+    const result = run("upgrade --dry-run", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toContain("issue-board/6-private-notes/.gitkeep");
+    expect(existsSync(privateNotesDir)).toBe(false);
   });
 
   it("never touches manifest.md when it has been modified", () => {

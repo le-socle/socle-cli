@@ -11,6 +11,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createInterface } from "readline";
 import { ok, info, error, cyan, bold, green, dim } from "../lib/output.js";
+import { KANBAN_DIRS } from "../lib/scaffold.js";
 
 const METHOD_DIR = join(dirname(fileURLToPath(import.meta.url)), "method");
 
@@ -118,6 +119,21 @@ export const upgradeCommand = new Command("upgrade")
         console.error(`    ${dim("skipped")}`);
         skipped++;
       }
+    }
+
+    // Ensure every Kanban folder + its .gitkeep exist. Older projects
+    // (init'd before the 6-private-notes column was added, or before
+    // .gitignore-protected private notes shipped) may be missing them.
+    for (const dir of KANBAN_DIRS) {
+      const gitkeepPath = join(lytosDir, "issue-board", dir, ".gitkeep");
+      if (existsSync(gitkeepPath)) continue;
+
+      if (!opts.dryRun) {
+        mkdirSync(dirname(gitkeepPath), { recursive: true });
+        writeFileSync(gitkeepPath, "", "utf-8");
+      }
+      console.error(`  ${green("+")} ${dim(`issue-board/${dir}/.gitkeep`)} ${dim("(new)")}`);
+      added++;
     }
 
     console.error("");
