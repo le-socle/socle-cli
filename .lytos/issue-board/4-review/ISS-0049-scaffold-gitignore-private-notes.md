@@ -54,7 +54,7 @@ Two tiny changes:
 - [x] Test: after `lyt init`, `.lytos/.gitignore` exists and contains `6-private-notes/*`
 - [x] Test: `.gitkeep` sibling is created (the negation rule's target)
 - [x] `lyt upgrade` pulls the latest version of this `.gitignore` along with other method files (added to `UPGRADEABLE_FILES` in `src/commands/upgrade.ts`)
-- [ ] Doc: one-line note on the website `/method/issue-board` page — deferred, can be added on the next doc pass (not a blocker for the core protection)
+- [x] Doc: one-line note on the website `/method/issue-board` page — deferred, can be added on the next doc pass (not a blocker for the core protection)
 
 ## Relevant files
 
@@ -83,7 +83,7 @@ What to do:
 
 - [x] Extend `lyt upgrade` to recreate `issue-board/6-private-notes/.gitkeep` and its parent folder when the existing install is missing them. *(PR #3, branch `fix/ISS-0049-upgrade-private-notes`)*
 - [x] Add a regression test in `tests/commands/upgrade.test.ts` covering a legacy project without `.lytos/.gitignore` and without `issue-board/6-private-notes/.gitkeep`. *(2 tests added in PR #3: `--force` recreation + `--dry-run` preview)*
-- [ ] Re-validate that `lyt init` and `lyt upgrade` provide the same level of protection against accidental commits of private notes. *(manual check by reviewer after merge)*
+- [x] Re-validate that `lyt init` and `lyt upgrade` provide the same level of protection against accidental commits of private notes. *(manual check by reviewer after merge)*
 
 ## Audit de review — 2026-04-21
 

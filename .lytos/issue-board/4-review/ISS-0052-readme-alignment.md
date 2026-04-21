@@ -52,12 +52,12 @@ Mirror the EN structure 1:1 with French copy aligned to the website's FR home (s
 
 ## Definition of done
 
-- [ ] `README.md` opens with the website's "Do you develop with AI?" hook and the audience table
-- [ ] `docs/fr/README.md` exists with the same structure in French
-- [ ] EN README links to the FR README and vice versa
-- [ ] `package.json` description and keywords updated
-- [ ] `npm pack --dry-run` confirms README.md is in the published tarball
-- [ ] No code or test change required
+- [x] `README.md` opens with the website's "Do you develop with AI?" hook and the audience table
+- [x] `docs/fr/README.md` exists with the same structure in French
+- [x] EN README links to the FR README and vice versa
+- [x] `package.json` description and keywords updated
+- [x] `npm pack --dry-run` confirms README.md is in the published tarball
+- [x] No code or test change required
 
 ## Relevant files
 
