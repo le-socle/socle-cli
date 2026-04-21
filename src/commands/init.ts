@@ -114,7 +114,8 @@ function showBriefing(profile: Profile, lang: Lang): void {
       console.error(`  ${cyan(bold("Étape 3"))} — ${green("CONSTRUIRE")}`);
       console.error("    Travaille sur une issue à la fois avec ton IA.");
       console.error("    Chaque issue a une checklist — suis-la étape par étape.");
-      console.error("    Quand c'est fini, l'IA la déplace en \"done\".");
+      console.error("    Quand le code est prêt, l'IA déplace l'issue en \"review\".");
+      console.error("    Le passage en \"done\" se fait ensuite explicitement après validation.");
       console.error("");
       console.error(`  ${cyan(bold("Étape 4"))} — ${dim("APPRENDRE")}`);
       console.error("    L'IA sauvegarde ce qu'elle a appris dans memory/.");
@@ -145,7 +146,8 @@ function showBriefing(profile: Profile, lang: Lang): void {
       console.error(`  ${cyan(bold("Step 3"))} — ${green("BUILD")}`);
       console.error("    Work on one issue at a time with your AI.");
       console.error("    Each issue has a checklist — follow it step by step.");
-      console.error("    When it's done, the AI moves it to \"done\".");
+      console.error("    When the code is ready, the AI moves the issue to \"review\".");
+      console.error("    It only goes to \"done\" after an explicit validation step.");
       console.error("");
       console.error(`  ${cyan(bold("Step 4"))} — ${dim("LEARN")}`);
       console.error("    The AI saves what it learned in memory/.");
@@ -264,6 +266,16 @@ export const initCommand = new Command("init")
   .option("--yes", "Skip prompts, use defaults", false)
   .option("--force", "Override existing .lytos/ directory", false)
   .option("--dry-run", "Show what would be created without creating", false)
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt init");
+    console.log('  lyt init --name "Acme API" --tool claude');
+    console.log("  lyt init --tool claude,cursor,copilot");
+    console.log("  lyt init --all-tools");
+    console.log("  lyt init --tool none --lang fr --profile lead");
+    console.log("  lyt init --all-tools --dry-run");
+  })
   .action(async (opts) => {
     const cwd = process.cwd();
     const lytosDir = resolve(cwd, ".lytos");

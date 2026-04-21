@@ -33,9 +33,11 @@ These 5 pillars are the method. Everything else (agent documentation, tool adapt
 | `rules/*-rules.md` | Project-specific rules (if they exist) | At each session |
 | `skills/session-start.md` | Lytos bootstrap protocol — what to read at the start of any session | At each session |
 | `skills/<name>/SKILL.md` | Task skills in the [agentskills.io](https://agentskills.io) open standard format (code-review, testing, documentation, etc.) | Discovered natively by AI tools via progressive disclosure; the issue's optional `skill` field is a hint |
-| `issue-board/BOARD.md` | Kanban view — task progress status | When working on a task |
+| `issue-board/BOARD.md` | Kanban view — task progress status, including the review gate before done | When working on a task |
 | `issue-board/[status]/ISS-*.md` | Issues with YAML frontmatter (source of truth) | Read the assigned issue |
 | `scripts/generate-board.py` | Regenerates BOARD.md from the frontmatter | Use at the end of a task if needed |
+
+AI bridge files such as `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, `.cursor/rules/lytos.mdc`, `GEMINI.md`, or `.windsurfrules` are supporting adapters. When Lytos is re-initialized, existing bridge files are preserved by default unless the human explicitly requests overwrite.
 
 ## How the pieces fit together
 
@@ -92,11 +94,19 @@ Issues have YAML frontmatter. The important fields:
 - `depends` — issues that must be completed before this one
 - `status` — the canonical status (source of truth). The file should also be in the matching folder, but if there's a conflict, the frontmatter takes precedence
 
+## Status flow
+
+The normal task lifecycle is:
+
+`1-backlog → 2-sprint → 3-in-progress → 4-review → 5-done`
+
+The key point is that finishing code does not immediately mean "done". Work stops in `4-review` until the human, CI, or another validation gate explicitly approves promotion to `5-done`.
+
 ## Expected behavior
 
 1. **Don't interpret silently** — if an instruction is ambiguous, ask rather than guess
 2. **Trace decisions** — when a technical choice is made, mention it with the reason
-3. **At the end of a task** — update the issue's frontmatter, move the file, update the BOARD.md
+3. **At the end of coding** — update the issue's frontmatter to `4-review`, move the file, update the BOARD.md. Promotion to `5-done` happens only after explicit validation
 4. **Enrich the memory** — if a significant learning occurs, add it to the corresponding cortex file
 
 ---

@@ -45,6 +45,15 @@ export const boardCommand = new Command("board")
     "--dirs <paths>",
     "Comma-separated list of directories to include in overview"
   )
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt board");
+    console.log("  lyt board --check");
+    console.log("  lyt board --json");
+    console.log("  lyt board --all");
+    console.log("  lyt board --dirs ../lytos-cli,../lytos-website");
+  })
   .action((opts) => {
     const cwd = process.cwd();
 

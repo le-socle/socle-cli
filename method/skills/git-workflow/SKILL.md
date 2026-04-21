@@ -145,7 +145,7 @@ The issue folder represents its status. Move the `.md` file at each step change.
 8. Code review             ->  via the code-review skill
 9. Corrections if needed   ->  additional commits on the branch
 10. Merge                  ->  squash & merge, delete the branch
-                               move to 5-done/
+                               if validation is complete: run `lyt close` to promote from 4-review/ to 5-done/
                                update BOARD.md
 11. Update the memory      -> if learning occurred
 ```

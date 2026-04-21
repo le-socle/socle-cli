@@ -45,7 +45,7 @@
 | 2 | Run `lyt board` to regenerate BOARD.md | Yes — board must reflect reality |
 | 3 | Create a branch: `type/ISS-XXXX-slug` from main | Yes — never code on main |
 | 4 | Work on the branch, commit with `Refs: ISS-XXXX` | — |
-| 5 | When done: update frontmatter to `5-done`, move file, run `lyt board` | Yes — mandatory close phase |
+| 5 | When coding is complete: update frontmatter to `4-review`, move file, run `lyt board`; promote to `5-done` only via explicit `lyt close` validation | Yes — mandatory close phase |
 
 **No exception.** Even for "small" tasks. If the agent starts coding on main or without updating the board, the human must stop it.
 

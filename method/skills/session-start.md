@@ -37,7 +37,38 @@ Determine which issue needs to be worked on. Possible sources:
 
 **Expected result**: an identified issue file, e.g. `issue-board/3-in-progress/ISS-0012-title.md`.
 
-### 3. Load task-specific context
+### 3. Choose the startup depth from issue metadata
+
+Startup depth is not a guess. It comes from the issue frontmatter:
+
+- **Lightweight startup** is allowed only when the issue is explicitly `effort: XS` **and** `complexity: light`
+- **Standard startup** remains mandatory for every other combination
+
+If one field is missing, default to standard startup. If the task grows during the session, immediately upgrade from lightweight to standard.
+
+#### Lightweight startup (`effort: XS` + `complexity: light`)
+
+Still load the mandatory safety baseline:
+
+- `.lytos/manifest.md`
+- `.lytos/memory/MEMORY.md`
+- `.lytos/rules/default-rules.md`
+- `.lytos/issue-board/BOARD.md`
+- the issue file itself
+
+Then keep the rest proportional:
+
+- recommend the right model from the manifest, as usual
+- load task skills only through native progressive disclosure, or manually only if the issue explicitly points to a skill or the tool lacks discovery
+- defer cortex files until the issue clearly needs past architectural or domain knowledge
+- defer project-specific rule files until the touched area actually matches them
+- defer broad codebase exploration; start with the files directly named by the issue or the smallest obvious surface
+
+#### Standard startup (everything else)
+
+Follow the normal protocol below: load the issue, then the relevant skills, memory sections, specific rules, and technical context before coding.
+
+### 4. Load task-specific context
 
 Once the issue is identified, load **only** what is relevant:
 
@@ -111,7 +142,7 @@ The manifest says "Simplicity over flexibility"
 
 If the principles don't cover the situation, flag the trade-off to the human rather than guessing.
 
-### 4. Check work status
+### 5. Check work status
 
 Before starting to code:
 
@@ -122,7 +153,7 @@ Before starting to code:
 
 If a branch already exists, switch to it. Otherwise, create it following the convention: `type/ISS-XXXX-title-kebab`.
 
-### 5. Context summary
+### 6. Context summary
 
 Before starting work, formulate (mentally or explicitly):
 
@@ -167,6 +198,7 @@ During a session, the human will have new ideas, spot problems, think of improve
 - **Do not re-read all skills** — only the one assigned to the task
 - **Do not browse the entire source code** — limit yourself to the files related to the issue
 - **Do not start coding before having context** — an agent without context produces generic code
+- **Do not use the lightweight path by intuition** — it is allowed only for `effort: XS` + `complexity: light`
 
 ---
 

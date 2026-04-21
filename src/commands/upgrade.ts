@@ -49,6 +49,13 @@ export const upgradeCommand = new Command("upgrade")
   .description("Update method files in .lytos/ from the bundled version")
   .option("--force", "Overwrite all changed files without confirmation")
   .option("--dry-run", "Show what would change without applying")
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt upgrade");
+    console.log("  lyt upgrade --dry-run");
+    console.log("  lyt upgrade --force");
+  })
   .action(async (opts: { force?: boolean; dryRun?: boolean }) => {
     const cwd = process.cwd();
     const lytosDir = join(cwd, ".lytos");

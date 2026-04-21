@@ -32,6 +32,13 @@ export const startCommand = new Command("start")
   .argument("<issue-id>", "Issue ID (e.g. ISS-0029)")
   .option("--force", "Start even when origin is ahead or the issue is claimed on origin", false)
   .option("--json", "Output result as JSON", false)
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt start ISS-0053");
+    console.log("  lyt start ISS-0053 --force");
+    console.log("  lyt start ISS-0053 --json");
+  })
   .action((issueId: string, opts) => {
     const cwd = process.cwd();
     const lytosDir = resolve(cwd, ".lytos");

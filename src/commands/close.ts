@@ -50,6 +50,16 @@ export const closeCommand = new Command("close")
   .option("--yes", "Skip the batch confirmation prompt", false)
   .option("--dry-run", "Preview what would close, change nothing", false)
   .option("--json", "Output result as JSON", false)
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt close ISS-0053");
+    console.log("  lyt close ISS-0053 --force");
+    console.log("  lyt close");
+    console.log("  lyt close --yes");
+    console.log("  lyt close --dry-run");
+    console.log("  lyt close --yes --force");
+  })
   .action(async (issueId: string | undefined, opts: CloseOptions) => {
     const cwd = process.cwd();
     const lytosDir = resolve(cwd, ".lytos");

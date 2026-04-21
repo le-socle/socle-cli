@@ -46,6 +46,12 @@ export const claimCommand = new Command("claim")
   .description("Assign an issue to yourself and move it to in-progress")
   .argument("<issue-id>", "Issue ID (e.g. ISS-0012)")
   .option("--force", "Claim even if already assigned to someone else")
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt claim ISS-0042");
+    console.log("  lyt claim ISS-0042 --force");
+  })
   .action((issueId: string, opts: { force?: boolean }) => {
     const cwd = process.cwd();
     const lytosDir = findLytosDir(cwd);
@@ -97,6 +103,12 @@ export const unclaimCommand = new Command("unclaim")
   .description("Remove your assignment from an issue and move it back to sprint")
   .argument("<issue-id>", "Issue ID (e.g. ISS-0012)")
   .option("--force", "Unclaim even if assigned to someone else")
+  .on("--help", () => {
+    console.log("");
+    console.log("Examples:");
+    console.log("  lyt unclaim ISS-0042");
+    console.log("  lyt unclaim ISS-0042 --force");
+  })
   .action((issueId: string, opts: { force?: boolean }) => {
     const cwd = process.cwd();
     const lytosDir = findLytosDir(cwd);

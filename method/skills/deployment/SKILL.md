@@ -135,7 +135,9 @@ SLOs are not aspirational — they are promises. Measure them. When you burn thr
 
 After a successful deployment:
 
-- Update the issue (status -> `5-done`)
+- Update the issue for the post-deploy state:
+  - move to `4-review` if validation still has to happen
+  - or run `lyt close ISS-XXXX` if deployment is the explicit validation step and the issue can now go to `5-done`
 - Update the BOARD.md
 - If a problem was encountered and resolved -> add it to `cortex/bugs.md`
 - If a deployment procedure changed -> update this skill or the project notes
