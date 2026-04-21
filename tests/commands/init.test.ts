@@ -181,6 +181,54 @@ describe("lytos init", () => {
     expect(content).toContain("session-start.md");
   });
 
+  it("preserves an existing customized CLAUDE.md on --force by default (ISS-0054)", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool claude --yes', fixture.cwd);
+
+    const bridgePath = join(fixture.cwd, "CLAUDE.md");
+    writeFileSync(bridgePath, "# Custom CLAUDE bridge\n\nProject-specific instructions.", "utf-8");
+
+    const result = run('init --name "Test v2" --tool claude --yes --force', fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    const content = readFileSync(bridgePath, "utf-8");
+    expect(content).toContain("Project-specific instructions.");
+    expect(content).not.toContain("This project uses **Lytos**");
+  });
+
+  it("overwrites an existing customized CLAUDE.md only with --overwrite-bridges (ISS-0054)", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool claude --yes', fixture.cwd);
+
+    const bridgePath = join(fixture.cwd, "CLAUDE.md");
+    writeFileSync(bridgePath, "# Custom CLAUDE bridge\n\nProject-specific instructions.", "utf-8");
+
+    const result = run(
+      'init --name "Test v2" --tool claude --yes --force --overwrite-bridges',
+      fixture.cwd
+    );
+
+    expect(result.exitCode).toBe(0);
+    const content = readFileSync(bridgePath, "utf-8");
+    expect(content).toContain("This project uses **Lytos**");
+    expect(content).not.toContain("Project-specific instructions.");
+  });
+
+  it("preserves an existing nested bridge file on --force by default (ISS-0054)", () => {
+    fixture = createEmptyFixture();
+    run('init --name "Test" --tool copilot --yes', fixture.cwd);
+
+    const bridgePath = join(fixture.cwd, ".github/copilot-instructions.md");
+    writeFileSync(bridgePath, "# Custom Copilot bridge\n\nRepo-specific instructions.", "utf-8");
+
+    const result = run('init --name "Test v2" --tool copilot --yes --force', fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    const content = readFileSync(bridgePath, "utf-8");
+    expect(content).toContain("Repo-specific instructions.");
+    expect(content).not.toContain("This project uses **Lytos**");
+  });
+
   it("does not create tool config when --tool none", () => {
     fixture = createEmptyFixture();
     run('init --name "Test" --tool none --yes', fixture.cwd);

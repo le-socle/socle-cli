@@ -265,6 +265,11 @@ export const initCommand = new Command("init")
   .option("--lang <lang>", "Language (en, fr)", "")
   .option("--yes", "Skip prompts, use defaults", false)
   .option("--force", "Override existing .lytos/ directory", false)
+  .option(
+    "--overwrite-bridges",
+    "Overwrite existing AI bridge files such as CLAUDE.md or AGENTS.md during re-init",
+    false
+  )
   .option("--dry-run", "Show what would be created without creating", false)
   .on("--help", () => {
     console.log("");
@@ -273,6 +278,7 @@ export const initCommand = new Command("init")
     console.log('  lyt init --name "Acme API" --tool claude');
     console.log("  lyt init --tool claude,cursor,copilot");
     console.log("  lyt init --all-tools");
+    console.log("  lyt init --tool claude --force --overwrite-bridges");
     console.log("  lyt init --tool none --lang fr --profile lead");
     console.log("  lyt init --all-tools --dry-run");
   })
@@ -416,6 +422,7 @@ export const initCommand = new Command("init")
       stack,
       cwd,
       dryRun: opts.dryRun,
+      overwriteBridges: opts.overwriteBridges,
     });
 
     // Report
@@ -423,10 +430,10 @@ export const initCommand = new Command("init")
       warn(w);
     }
 
-    ok(lang === "fr"
-      ? `${result.filesCreated.length} fichiers créés`
-      : `${result.filesCreated.length} files created`
-    );
+    const summary = lang === "fr"
+      ? `${result.filesCreated.length} fichiers créés${result.filesSkipped.length > 0 ? ` · ${result.filesSkipped.length} bridges préservés` : ""}`
+      : `${result.filesCreated.length} files created${result.filesSkipped.length > 0 ? ` · ${result.filesSkipped.length} bridges preserved` : ""}`;
+    ok(summary);
 
     // Show adapted briefing
     showBriefing(profile, lang);

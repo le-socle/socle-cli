@@ -6,7 +6,7 @@
  */
 
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from "fs";
-import { join, dirname } from "path";
+import { join, dirname, relative } from "path";
 import { fileURLToPath } from "url";
 import {
   manifestTemplate,
@@ -119,6 +119,7 @@ export interface ScaffoldOptions {
   stack: Partial<DetectedStack>;
   cwd: string;
   dryRun: boolean;
+  overwriteBridges: boolean;
 }
 
 export interface ScaffoldResult {
@@ -150,6 +151,31 @@ function writeFile(
   ensureDir(join(path, ".."), false);
   writeFileSync(path, content, "utf-8");
   result.filesCreated.push(path);
+}
+
+function writeBridgeFile(
+  path: string,
+  content: string,
+  options: Pick<ScaffoldOptions, "cwd" | "dryRun" | "overwriteBridges">,
+  result: ScaffoldResult
+): void {
+  if (existsSync(path) && !options.overwriteBridges) {
+    result.filesSkipped.push(path);
+    const displayPath = relative(options.cwd, path) || path;
+    const existing = readFileSync(path, "utf-8");
+    if (existing === content) {
+      result.warnings.push(
+        `Kept existing AI bridge ${displayPath} (already matches generated content).`
+      );
+    } else {
+      result.warnings.push(
+        `Preserved existing AI bridge ${displayPath} — use --overwrite-bridges to replace it.`
+      );
+    }
+    return;
+  }
+
+  writeFile(path, content, options.dryRun, result);
 }
 
 export function scaffold(options: ScaffoldOptions): ScaffoldResult {
@@ -263,50 +289,50 @@ export function scaffold(options: ScaffoldOptions): ScaffoldResult {
   const uniqueTools = Array.from(new Set(options.tools));
   for (const tool of uniqueTools) {
     if (tool === "claude") {
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, "CLAUDE.md"),
         claudeTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     } else if (tool === "cursor") {
       // Modern Cursor convention: per-rule .mdc file under .cursor/rules/
       // (the legacy `.cursorrules` flat file is still read but is on the way
       // out; the new format supports scoping and activation metadata).
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, ".cursor", "rules", "lytos.mdc"),
         cursorRulesTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     } else if (tool === "codex") {
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, "AGENTS.md"),
         codexTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     } else if (tool === "copilot") {
       // Copilot expects `.github/copilot-instructions.md` (nested — writeFile
       // creates parent dirs).
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, ".github", "copilot-instructions.md"),
         copilotTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     } else if (tool === "gemini") {
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, "GEMINI.md"),
         geminiTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     } else if (tool === "windsurf") {
-      writeFile(
+      writeBridgeFile(
         join(options.cwd, ".windsurfrules"),
         windsurfTemplate(ctx),
-        options.dryRun,
+        options,
         result
       );
     }
