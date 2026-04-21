@@ -8,7 +8,7 @@ complexity: standard
 domain: [cli, init, upgrade]
 skill: 
 skills_aux: [code-structure, documentation]
-status: 3-in-progress
+status: 4-review
 branch: feat/ISS-0054-preserve-custom-ai-bridges
 depends: []
 created: 2026-04-21
