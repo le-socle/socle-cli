@@ -54,16 +54,16 @@ If `none` is in the list with other tools, treat it as a no-op for that slot (ge
 
 ## Definition of done
 
-- [ ] `lyt init --tool claude,cursor,copilot` generates all three bridges
-- [ ] `lyt init --tool claude --tool cursor` generates both (if we go repeated-flag)
-- [ ] `lyt init --all-tools` generates the six shipping adapters
-- [ ] Interactive mode offers a "multiple" choice that accepts CSV
-- [ ] Unknown tool names error out with a clear message (exit 2)
-- [ ] `--force` re-runs still regenerate all requested bridges
-- [ ] Tests cover: single-tool (backwards compat), CSV, repeated flag, `--all-tools`, invalid tool, `none` mixed with others
-- [ ] Coverage ≥ 80% on the updated paths
-- [ ] README (en + fr) shows the multi-tool example
-- [ ] Website `/cli/init` page mentions the multi-tool option
+- [x] `lyt init --tool claude,cursor,copilot` generates all three bridges
+- [ ] `lyt init --tool claude --tool cursor` generates both (if we go repeated-flag) *(not needed — CSV covers the multi-tool case; repeated-flag is a nicety that can land later if requested)*
+- [x] `lyt init --all-tools` generates the six shipping adapters
+- [x] Interactive mode offers a "multiple" choice that accepts CSV *(also offers 'All tools')*
+- [x] Unknown tool names error out with a clear message (exit 2)
+- [x] `--force` re-runs still regenerate all requested bridges *(preserve-bridges policy added in ISS-0054 — use `--force --overwrite-bridges` to also replace existing bridges)*
+- [x] Tests cover: single-tool (backwards compat), CSV, `--all-tools`, invalid tool, `none` mixed with others *(5 new tests in init.test.ts)*
+- [x] Coverage ≥ 80% on the updated paths
+- [x] README (en + fr) shows the multi-tool example *(PR #10 — "Mixed-team setup" block)*
+- [x] Website `/cli/init` page mentions the multi-tool option *(PR #10 — Usage + Options table rewritten)*
 
 ## Relevant files
 
@@ -93,7 +93,7 @@ Ce qui ne va pas :
 
 Points à corriger :
 
-- ajouter des exemples `--tool claude,cursor,copilot` et `--all-tools` dans les README EN/FR
-- mettre à jour `../lytos-website/src/content/docs/en/cli/init.md`
-- mettre à jour `../lytos-website/src/content/docs/fr/cli/init.md`
-- vérifier que la doc explique bien le comportement de `none` dans une liste mixte
+- [x] ajouter des exemples `--tool claude,cursor,copilot` et `--all-tools` dans les README EN/FR *("Mixed-team setup" block)*
+- [x] mettre à jour `../lytos-website/src/content/docs/en/cli/init.md` *(Usage block rewritten, Options table extended, legacy Cursor path corrected)*
+- [x] mettre à jour `../lytos-website/src/content/docs/fr/cli/init.md` *(mirror EN)*
+- [x] vérifier que la doc explique bien le comportement de `none` dans une liste mixte *(couvert dans les deux README et les deux /cli/init)*
