@@ -106,8 +106,9 @@ The key point is that finishing code does not immediately mean "done". Work stop
 
 1. **Don't interpret silently** — if an instruction is ambiguous, ask rather than guess
 2. **Trace decisions** — when a technical choice is made, mention it with the reason
-3. **At the end of coding** — update the issue's frontmatter to `4-review`, move the file, update the BOARD.md. Promotion to `5-done` happens only after explicit validation
-4. **Enrich the memory** — if a significant learning occurs, add it to the corresponding cortex file
+3. **Tick the DoD as you go** — when a Definition-of-Done item is done, tick it immediately in the issue file, before moving to the next. Batching ticks at end-of-task silently misses items and produces false NO_GO verdicts in review
+4. **At the end of coding** — update the issue's frontmatter to `4-review`, move the file, update the BOARD.md. Promotion to `5-done` happens only after explicit validation
+5. **Enrich the memory** — if a significant learning occurs, add it to the corresponding cortex file
 
 ---
 
