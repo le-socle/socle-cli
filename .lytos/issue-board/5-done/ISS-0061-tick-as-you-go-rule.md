@@ -6,15 +6,14 @@ priority: P1-high
 effort: XS
 complexity: light
 domain: [method, skills]
-skill: "documentation"
+skill: documentation
 skills_aux: []
-status: 4-review
-branch: "feat/ISS-0061-tick-as-you-go"
+status: 5-done
+branch: feat/ISS-0061-tick-as-you-go
 depends: []
 created: 2026-04-22
 updated: 2026-04-22
 ---
-
 # ISS-0061 — Codify tick-as-you-go as a Lytos practice
 
 ## Context

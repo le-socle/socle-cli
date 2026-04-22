@@ -42,10 +42,7 @@ _Aucune issue._
 
 ### 4-review (review/test)
 
-| # | Titre | Priorité | Effort |
-|---|-------|----------|--------|
-| [ISS-0054](4-review/ISS-0054-preserve-custom-ai-bridges.md) | Preserve custom AI bridge files on init/upgrade instead of overwriting them | P1-high | M |
-| [ISS-0061](4-review/ISS-0061-tick-as-you-go-rule.md) | Codify tick-as-you-go: tick DoD checkboxes immediately, never in batch | P1-high | XS |
+_Aucune issue._
 
 ### 5-done (terminé)
 
@@ -54,7 +51,9 @@ _Aucune issue._
 | [ISS-0039](5-done/ISS-0039-adapters-copilot-gemini-windsurf.md) | Add --tool adapters for Copilot, Gemini and Windsurf | 2026-04-21 |
 | [ISS-0049](5-done/ISS-0049-scaffold-gitignore-private-notes.md) | lyt init: ship a .lytos/.gitignore that protects 6-private-notes/ automatically | 2026-04-21 |
 | [ISS-0052](5-done/ISS-0052-readme-alignment.md) | Align lytos-cli README and npm metadata with the website's hook + audience pattern | 2026-04-21 |
+| [ISS-0054](5-done/ISS-0054-preserve-custom-ai-bridges.md) | Preserve custom AI bridge files on init/upgrade instead of overwriting them | 2026-04-22 |
 | [ISS-0058](5-done/ISS-0058-update-lytos-md-review-first.md) | Update LYTOS.md to reflect review-first workflow and bridge preservation | 2026-04-21 |
+| [ISS-0061](5-done/ISS-0061-tick-as-you-go-rule.md) | Codify tick-as-you-go: tick DoD checkboxes immediately, never in batch | 2026-04-22 |
 
 ---
 
