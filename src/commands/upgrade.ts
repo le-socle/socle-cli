@@ -10,8 +10,12 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createInterface } from "readline";
-import { ok, info, error, cyan, bold, green, dim } from "../lib/output.js";
+import { ok, info, warn, error, cyan, bold, green, dim } from "../lib/output.js";
 import { KANBAN_DIRS } from "../lib/scaffold.js";
+import {
+  migrateCursorRules,
+  type CursorMigrationResult,
+} from "../lib/cursor-migration.js";
 
 const METHOD_DIR = join(dirname(fileURLToPath(import.meta.url)), "method");
 
@@ -50,14 +54,20 @@ export const upgradeCommand = new Command("upgrade")
   .description("Update method files in .lytos/ from the bundled version")
   .option("--force", "Overwrite all changed files without confirmation")
   .option("--dry-run", "Show what would change without applying")
+  .option(
+    "--migrate-cursor",
+    "Migrate a legacy .cursorrules file to .cursor/rules/lytos.mdc (keeps the original content, wraps it with the modern front-matter)",
+    false
+  )
   .on("--help", () => {
     console.log("");
     console.log("Examples:");
     console.log("  lyt upgrade");
     console.log("  lyt upgrade --dry-run");
     console.log("  lyt upgrade --force");
+    console.log("  lyt upgrade --migrate-cursor");
   })
-  .action(async (opts: { force?: boolean; dryRun?: boolean }) => {
+  .action(async (opts: { force?: boolean; dryRun?: boolean; migrateCursor?: boolean }) => {
     const cwd = process.cwd();
     const lytosDir = join(cwd, ".lytos");
 
@@ -141,6 +151,31 @@ export const upgradeCommand = new Command("upgrade")
       }
       console.error(`  ${green("+")} ${dim(`issue-board/${dir}/.gitkeep`)} ${dim("(new)")}`);
       added++;
+    }
+
+    // Optional one-shot migration: legacy .cursorrules → .cursor/rules/lytos.mdc
+    let cursorResult: CursorMigrationResult | null = null;
+    if (opts.migrateCursor) {
+      cursorResult = migrateCursorRules(cwd, { dryRun: opts.dryRun });
+      switch (cursorResult.status) {
+        case "migrated":
+          console.error(`  ${green("✓")} ${dim(".cursorrules → .cursor/rules/lytos.mdc")} ${dim("(migrated)")}`);
+          updated++;
+          break;
+        case "dry-run":
+          console.error(`  ${cyan("~")} ${dim(".cursorrules → .cursor/rules/lytos.mdc")} ${dim("(would migrate)")}`);
+          skipped++;
+          break;
+        case "both-present":
+          warn(
+            "Legacy .cursorrules AND .cursor/rules/lytos.mdc both present — neither touched. " +
+              "Review and delete the legacy file once you've reconciled any differences."
+          );
+          break;
+        case "no-legacy":
+          info("No legacy .cursorrules to migrate.");
+          break;
+      }
     }
 
     console.error("");

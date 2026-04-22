@@ -8,7 +8,7 @@ complexity: light
 skill: code-structure
 skills_aux: [testing, documentation]
 scope: lytos-cli
-status: 3-in-progress
+status: 4-review
 branch: "refactor/ISS-0050-cursor-rules-mdc"
 depends: []
 created: 2026-04-20

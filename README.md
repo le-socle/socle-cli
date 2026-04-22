@@ -65,6 +65,7 @@ In 2 minutes, your repo has its manifest, rules, and board. From there, the AI k
 | `lyt start ISS-XXXX` | Start an issue — move to in-progress, create branch, update board |
 | `lyt close ISS-XXXX` | Close one issue — promote to `5-done` from `4-review` (or explicitly from in-progress), warns about unchecked items |
 | `lyt close` | Batch-close every issue in 4-review/ → 5-done/ (asks to confirm; `--yes` skips the prompt; `--dry-run` previews) |
+| `lyt upgrade` | Pull the latest method files into `.lytos/`. `--migrate-cursor` converts a legacy `.cursorrules` to `.cursor/rules/lytos.mdc`. |
 | `lyt update` | Update lytos-cli to the latest version |
 
 ![lyt show](docs/screenshots/lyt-show.png)

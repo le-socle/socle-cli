@@ -161,4 +161,92 @@ describe("lyt upgrade", () => {
     const after = readFileSync(manifest, "utf-8");
     expect(after).toBe(userContent);
   });
+
+  it("--migrate-cursor moves legacy .cursorrules to .cursor/rules/lytos.mdc (ISS-0050)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes --tool none", fixture.cwd);
+
+    const legacy = join(fixture.cwd, ".cursorrules");
+    const modern = join(fixture.cwd, ".cursor", "rules", "lytos.mdc");
+    const legacyContent = "# Our project rules\n\nAlways use Tailwind, never CSS modules.\n";
+    writeFileSync(legacy, legacyContent, "utf-8");
+
+    const result = run("upgrade --migrate-cursor --force", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+
+    // Legacy file removed, modern file written
+    expect(existsSync(legacy)).toBe(false);
+    expect(existsSync(modern)).toBe(true);
+
+    const migrated = readFileSync(modern, "utf-8");
+    // Wrapped in the modern front-matter
+    expect(migrated).toMatch(/^---\n[\s\S]*?alwaysApply: true[\s\S]*?\n---\n/);
+    // Original content preserved verbatim in the body
+    expect(migrated).toContain("Always use Tailwind, never CSS modules.");
+  });
+
+  it("--migrate-cursor with --dry-run leaves everything in place (ISS-0050)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes --tool none", fixture.cwd);
+
+    const legacy = join(fixture.cwd, ".cursorrules");
+    const modern = join(fixture.cwd, ".cursor", "rules", "lytos.mdc");
+    writeFileSync(legacy, "legacy content\n", "utf-8");
+
+    const result = run("upgrade --migrate-cursor --dry-run", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+    expect(existsSync(legacy)).toBe(true);
+    expect(existsSync(modern)).toBe(false);
+    expect(result.stderr).toContain("would migrate");
+  });
+
+  it("--migrate-cursor with both files present refuses to touch either (ISS-0050)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes --tool cursor", fixture.cwd);
+
+    // Modern path is already there after `init --tool cursor`; add a legacy
+    // file on top so we simulate a half-migrated project.
+    const legacy = join(fixture.cwd, ".cursorrules");
+    const modern = join(fixture.cwd, ".cursor", "rules", "lytos.mdc");
+    writeFileSync(legacy, "legacy content\n", "utf-8");
+    const modernBefore = readFileSync(modern, "utf-8");
+
+    const result = run("upgrade --migrate-cursor --force", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+
+    // Neither file was touched
+    expect(existsSync(legacy)).toBe(true);
+    expect(readFileSync(legacy, "utf-8")).toBe("legacy content\n");
+    expect(readFileSync(modern, "utf-8")).toBe(modernBefore);
+    // Warning surfaces the conflict
+    expect(result.stderr).toContain("both present");
+  });
+
+  it("--migrate-cursor is a no-op when no legacy .cursorrules exists (ISS-0050)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes --tool none", fixture.cwd);
+
+    const result = run("upgrade --migrate-cursor --force", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toContain("No legacy .cursorrules");
+  });
+
+  it("--migrate-cursor is idempotent — running twice is safe (ISS-0050)", () => {
+    fixture = createEmptyFixture();
+    run("init --yes --tool none", fixture.cwd);
+
+    const legacy = join(fixture.cwd, ".cursorrules");
+    const modern = join(fixture.cwd, ".cursor", "rules", "lytos.mdc");
+    writeFileSync(legacy, "first run content\n", "utf-8");
+
+    const first = run("upgrade --migrate-cursor --force", fixture.cwd);
+    expect(first.exitCode).toBe(0);
+    const afterFirst = readFileSync(modern, "utf-8");
+
+    // Second run: legacy is gone, modern is untouched, no error
+    const second = run("upgrade --migrate-cursor --force", fixture.cwd);
+    expect(second.exitCode).toBe(0);
+    expect(second.stderr).toContain("No legacy .cursorrules");
+    expect(readFileSync(modern, "utf-8")).toBe(afterFirst);
+  });
 });
