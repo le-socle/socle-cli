@@ -122,6 +122,15 @@ project/
 
 Un hook pre-commit est installé pour faire respecter les conventions de nommage de branches (`type/ISS-XXXX-slug`). Cela évite tout travail non tracé sur `main` — quel que soit l'outil IA ou le modèle utilisé.
 
+### Profondeur de startup — léger vs standard
+
+La skill `session-start` lit le frontmatter de l'issue en cours pour décider combien de contexte l'IA charge avant de démarrer.
+
+- **Startup léger** autorisé uniquement quand l'issue est explicitement `effort: XS` **et** `complexity: light`. L'IA charge quand même la baseline de sécurité obligatoire (manifest, MEMORY, default rules, BOARD, l'issue elle-même), mais diffère les notes cortex, les rules spécifiques au projet et l'exploration large du codebase tant que l'issue n'en a pas besoin.
+- **Startup standard** reste obligatoire pour toute autre combinaison. Si un des deux champs manque, l'IA retombe sur standard. Si la tâche grossit en cours de session, elle repasse immédiatement en standard.
+
+C'est ainsi que les petites issues restent rapides sans brûler la fenêtre de contexte — et c'est pour ça que `effort` et `complexity` dans le frontmatter portent vraiment quelque chose : ce ne sont pas juste des indicateurs de priorisation.
+
 ### Les bridge files personnalisés sont préservés
 
 Lancer `lyt init --force` sur un projet existant régénère `.lytos/` sans écraser les personnalisations locales que vous avez apportées à votre bridge IA (`CLAUDE.md`, `.cursor/rules/lytos.mdc`, `AGENTS.md`, `.github/copilot-instructions.md`, `GEMINI.md`, `.windsurfrules`). Si le bridge existe déjà, il est conservé tel quel et le CLI affiche un warning pour signaler que le fichier a été sauté.
