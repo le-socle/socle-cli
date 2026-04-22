@@ -30,6 +30,7 @@ const STATUS_FOLDERS = [
   "2-sprint",
   "3-in-progress",
   "4-review",
+  "5-done",
 ];
 
 const STATUS_LABELS: Record<string, string> = {
@@ -38,6 +39,7 @@ const STATUS_LABELS: Record<string, string> = {
   "2-sprint": "committed",
   "3-in-progress": "in dev",
   "4-review": "review/test",
+  "5-done": "recently completed",
 };
 
 interface ArchivedIssue {
@@ -344,7 +346,7 @@ export function generateBoardMarkdown(data: BoardData, archivedCount = 0): strin
   }
 
   // Archive summary
-  lines.push("### Done");
+  lines.push("### Archive");
   lines.push("");
   if (archivedCount > 0) {
     lines.push(`${archivedCount} issues archived → [archive/INDEX.md](archive/INDEX.md)`);

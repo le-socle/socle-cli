@@ -59,6 +59,7 @@ En 2 minutes, votre dépôt a son manifest, ses rules, son board. À partir de l
 |----------|-----------------|
 | `lyt init` | Génère `.lytos/` dans un projet (interactif, détecte la stack) |
 | `lyt board` | Régénère BOARD.md depuis le frontmatter YAML des issues |
+| `lyt archive` | Déplace les issues terminées de `5-done/` vers `archive/<quarter>/` (défaut : plus de 7 jours). `--all`, `--older-than <Nd>`, `--dry-run` |
 | `lyt lint` | Valide la structure et le contenu de `.lytos/` |
 | `lyt doctor` | Diagnostic complet — liens cassés, mémoire obsolète, skills manquants, score de santé |
 | `lyt show [ISS-XXXX]` | Affiche le détail d'une issue avec sa progression, ou toutes les issues en cours |

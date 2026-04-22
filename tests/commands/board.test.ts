@@ -82,7 +82,7 @@ describe("lytos board", () => {
 
     const data = JSON.parse(result.stdout);
     expect(data.nextNumber).toBe("ISS-0005");
-    expect(data.columns).toHaveLength(5);
+    expect(data.columns).toHaveLength(6);
 
     // Find the 3-in-progress column
     // ISS-0002 is genuinely in-progress. ISS-0004 is in 1-backlog/ folder

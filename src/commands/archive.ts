@@ -8,9 +8,14 @@
  */
 
 import { Command } from "commander";
-import { existsSync } from "fs";
+import { existsSync, writeFileSync } from "fs";
 import { join } from "path";
-import { archiveIssues } from "../lib/board-generator.js";
+import {
+  archiveIssues,
+  collectIssues,
+  countArchived,
+  generateBoardMarkdown,
+} from "../lib/board-generator.js";
 import { ok, info, warn, error, cyan, bold, green, dim } from "../lib/output.js";
 
 function findBoardDir(cwd: string): string | null {
@@ -118,6 +123,13 @@ export const archiveCommand = new Command("archive")
     }
 
     if (result.moved.length > 0) {
+      // Auto-regenerate BOARD.md so the "archived" counter stays in sync
+      // without forcing users to remember a second command after archive.
+      const data = collectIssues(boardDir);
+      const archivedCount = countArchived(boardDir);
+      const boardPath = join(boardDir, "BOARD.md");
+      writeFileSync(boardPath, generateBoardMarkdown(data, archivedCount), "utf-8");
+
       const verb = result.moved.length === 1 ? "issue" : "issues";
       ok(
         cyan(bold(`${result.moved.length} ${verb} archived`)) +
@@ -125,9 +137,7 @@ export const archiveCommand = new Command("archive")
             ? ` · ${result.skippedTooRecent.length} kept in 5-done/`
             : "")
       );
-      info(
-        "Run `lyt board` to refresh BOARD.md with the new archive counts."
-      );
+      info(`BOARD.md refreshed with ${archivedCount} archived total.`);
     } else {
       warn(
         `Nothing old enough to archive yet (${result.skippedTooRecent.length} in 5-done/, all too recent).`

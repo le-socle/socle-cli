@@ -59,6 +59,7 @@ In 2 minutes, your repo has its manifest, rules, and board. From there, the AI k
 |---------|-------------|
 | `lyt init` | Scaffold `.lytos/` in a project (interactive, detects the stack) |
 | `lyt board` | Regenerate BOARD.md from issue YAML frontmatter |
+| `lyt archive` | Move completed issues from `5-done/` to `archive/<quarter>/` (default: older than 7 days). `--all`, `--older-than <Nd>`, `--dry-run` |
 | `lyt lint` | Validate `.lytos/` structure and content |
 | `lyt doctor` | Full diagnostic — broken links, stale memory, missing skills, health score |
 | `lyt show [ISS-XXXX]` | Display issue detail with progress bar, or all in-progress issues |
