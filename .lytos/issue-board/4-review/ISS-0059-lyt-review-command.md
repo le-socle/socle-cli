@@ -117,12 +117,12 @@ The implementer doesn't need to re-create the branch (it still exists). They pic
 - [ ] The prompt is usable cold by a fresh AI session — manual verification with at least 2 distinct vendors *(human action, post-merge — this is how we will audit PRs #10–#14)*
 - [x] `lyt review ISS-XXXX --accept <file>` parses a returned audit, writes the block into the issue file
 - [x] NO_GO triggers the file move + frontmatter update; GO leaves the file where it is
-- [ ] `lyt review --all --export` writes one prompt file per pending issue under `.lytos/review/<iss-id>.prompt.md` *(out of MVP scope — noted as follow-up in PR #15)*
-- [ ] If the issue already has an `## Audit — <date>` block, emit a warning and offer `--overwrite` to re-audit *(out of MVP scope — noted as follow-up)*
+- [x] `lyt review --all --export` writes one prompt file per pending issue under `.lytos/review/<iss-id>.prompt.md`
+- [x] If the issue already has an `## Audit — <date>` block, emit a warning and offer `--overwrite` to re-audit
 
 ### Tests
 
-- [x] Tests cover: prompt generation, verdict parsing (GO and NO_GO), file move on NO_GO, invalid audit response handling *(8 tests; `--overwrite` re-audit case is a follow-up)*
+- [x] Tests cover: prompt generation, verdict parsing (GO and NO_GO), file move on NO_GO, idempotent re-audit with `--overwrite`, invalid audit response handling *(12 tests)*
 - [x] Coverage ≥ 80% on `src/commands/review.ts`
 
 ### Help & motivation to use a fresh auditor
@@ -136,15 +136,15 @@ The cross-model split is the whole point of the feature. The CLI help and the do
 
 ### Documentation
 
-- [ ] New page `/cli/review` (EN + FR) on the website. Must cover: *(out of MVP scope — noted as follow-up in PR #15)*
+- [x] New page `/cli/review` (EN + FR) on the website. Covers:
   - What the command does
   - The two flows (agentic / chat)
   - **Why the auditor must not be the implementer** — with 4 arguments: cognitive-bias independence, review-practice parity (nobody validates their own PR), compliance / audit trail, and live proof of Lytos's model-independence thesis
   - Concrete examples (e.g. "implemented by Claude Code, audited by GPT-5")
   - What a good audit block looks like — with a filled example
 - [x] README (EN + FR) command table updated with `lyt review` row
-- [ ] Website `/workflow/` page team workflow — insert a `Reviewer (different AI)` step between `Dev + AI — Implementation` and `Dev — Opens a PR` *(out of MVP scope — noted as follow-up)*
-- [ ] LYTOS.md (method + bundled) describes the implementer / auditor split as a first-class Lytos pattern, not a CLI curiosity *(out of MVP scope — noted as follow-up)*
+- [x] Website `/workflow/` page team workflow — inserted a `Reviewer (different AI)` step between `Dev + AI — Implementation` and `Dev — Opens a PR`
+- [x] LYTOS.md (method + bundled) describes the implementer / auditor split as a first-class Lytos pattern, not a CLI curiosity
 
 ## Relevant files
 
