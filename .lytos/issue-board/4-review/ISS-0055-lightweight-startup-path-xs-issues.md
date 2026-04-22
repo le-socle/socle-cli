@@ -8,8 +8,8 @@ complexity: standard
 domain: [workflow, skills, context]
 skill: ""
 skills_aux: [documentation, code-structure]
-status: 3-in-progress
-branch: "feat/ISS-0055-lightweight-startup-path"
+status: 4-review
+branch: "fix/ISS-0055-docs-lightweight-startup"
 depends: []
 created: 2026-04-21
 updated: 2026-04-22
@@ -109,3 +109,20 @@ Points à corriger :
 - répliquer la règle dans une doc website publique sur le startup flow
 - vérifier que cette doc reprend bien la frontière `effort: XS` + `complexity: light`
 - rappeler explicitement ce qui reste obligatoire même en chemin léger
+
+## Verification — 2026-04-22 (post-NO_GO)
+
+Re-checked the website and the public doc IS in place — the previous audit missed it.
+
+**`lytos-website/src/content/docs/en/method/skills.md`** (shipped in commit `d5fa722` "docs(method/skills): document lightweight vs standard startup depth (ISS-0055)"):
+
+- Section `## Startup depth — lightweight vs standard` near line 67
+- Line 69 explicitly anchors the rule on the issue's frontmatter
+- Line 71 spells out the gate: `effort: XS` **and** `complexity: light` — anything else falls back to standard. Mandatory safety baseline (manifest, `memory/MEMORY.md`, default rules, `BOARD.md`, issue file) is listed verbatim.
+- Line 72 reminds that a missing field defaults to standard, and that mid-session growth immediately upgrades back to standard.
+
+**`lytos-website/src/content/docs/fr/method/skills.md`** — same section under `## Profondeur de startup — léger vs standard` (line 67), with the FR `Startup léger` wording on line 71 mirroring the EN gate and the same mandatory-baseline list.
+
+The README EN/FR alignment shipped in this branch's earlier commit `2af0a4e` covers the local entry-point doc requirement.
+
+All DoD items remain ticked. Move to `4-review`.
