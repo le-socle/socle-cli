@@ -12,7 +12,7 @@ status: 4-review
 branch: feat/ISS-0054-preserve-custom-ai-bridges
 depends: []
 created: 2026-04-21
-updated: 2026-04-21
+updated: 2026-04-22
 ---
 # ISS-0054 — Preserve custom AI bridge files on init/upgrade instead of overwriting them
 
@@ -95,6 +95,20 @@ Ce qui ne va pas :
 
 Points à corriger :
 
-- [x] ajouter une section explicite dans `README.md` sur "preserve by default / overwrite explicitly" *(PR #11 — "Customized bridge files are preserved" subsection)*
-- [x] répliquer l'information dans `docs/fr/README.md` *(mirror EN)*
-- [x] ajouter au moins un exemple concret de ré-init avec `--force --overwrite-bridges` *(deux blocs code côte à côte avec et sans `--overwrite-bridges`)*
+- ajouter une section explicite dans `README.md` sur "preserve by default / overwrite explicitly"
+- répliquer l'information dans `docs/fr/README.md`
+- ajouter au moins un exemple concret de ré-init avec `--force --overwrite-bridges`
+
+## Audit de review — 2026-04-22
+
+**Verdict: GO**
+
+La documentation attendue est livrée. `README.md` et `docs/fr/README.md` expliquent clairement la politique "preserve by default / overwrite explicitly", documentent `--overwrite-bridges`, et donnent un exemple concret de ré-init avec `--force --overwrite-bridges`.
+
+Points vérifiés :
+
+- politique de préservation expliquée côté README EN
+- politique de préservation expliquée côté README FR
+- exemple concret de ré-init avec overwrite explicite
+
+Pas de finding bloquant sur ce diff.
