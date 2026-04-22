@@ -1,20 +1,19 @@
 ---
 id: ISS-0055
-title: "Add a lightweight startup path for XS issues to reduce context overhead"
+title: Add a lightweight startup path for XS issues to reduce context overhead
 type: feat
 priority: P1-high
 effort: M
 complexity: standard
 domain: [workflow, skills, context]
-skill: ""
+skill: 
 skills_aux: [documentation, code-structure]
-status: 4-review
-branch: "fix/ISS-0055-docs-lightweight-startup"
+status: 5-done
+branch: fix/ISS-0055-docs-lightweight-startup
 depends: []
 created: 2026-04-21
 updated: 2026-04-22
 ---
-
 # ISS-0055 — Add a lightweight startup path for XS issues to reduce context overhead
 
 ## Context
@@ -126,3 +125,20 @@ Re-checked the website and the public doc IS in place — the previous audit mis
 The README EN/FR alignment shipped in this branch's earlier commit `2af0a4e` covers the local entry-point doc requirement.
 
 All DoD items remain ticked. Move to `4-review`.
+
+## Audit de review — 2026-04-22
+
+**Verdict: GO**
+
+Points vérifiés :
+
+- la règle de startup léger est explicitement bornée à `effort: XS` + `complexity: light`, avec fallback standard si un champ manque (`method/skills/session-start.md`, `.lytos/skills/session-start.md`)
+- la baseline de sécurité obligatoire reste inchangée même en mode léger (`manifest`, `MEMORY`, `default-rules`, `BOARD`, issue)
+- README EN/FR expose bien la distinction lightweight vs standard et la montée immédiate vers le mode standard si la tâche grossit
+- la doc publique website `method/skills` EN/FR reprend bien la même frontière et les mêmes garde-fous
+
+Validation :
+
+- revue documentaire croisée locale + website ; pas de surface logique supplémentaire à tester automatiquement dans le CLI
+
+Pas de finding bloquant sur le diff audité.

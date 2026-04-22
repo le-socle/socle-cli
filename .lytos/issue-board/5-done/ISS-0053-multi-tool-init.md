@@ -6,15 +6,14 @@ priority: P2-normal
 effort: S
 complexity: standard
 domain: [cli, init]
-skill: ""
+skill: 
 skills_aux: []
-status: 4-review
-branch: "fix/ISS-0053-docs-multi-tool"
+status: 5-done
+branch: fix/ISS-0053-docs-multi-tool
 depends: []
 created: 2026-04-21
 updated: 2026-04-22
 ---
-
 # ISS-0053 — `lyt init`: scaffold multiple tool bridges in one run
 
 ## Context
@@ -136,3 +135,21 @@ Re-checked the website pages and found the previous audit was incorrect — both
 - `tests/commands/init.test.ts:264` "scaffolds every bridge when --all-tools (ISS-0053)"
 
 All DoD items ticked. The issue moves to `4-review`; promotion to `5-done` is for `lyt close`.
+
+## Audit de review — 2026-04-22
+
+**Verdict: GO**
+
+Points vérifiés :
+
+- `--tool <tools>` accepte bien un CSV validé/dédupliqué, avec erreur claire sur valeur inconnue (`src/commands/init.ts`)
+- `--all-tools` génère bien les six bridges, et `none` reste un no-op en liste mixte (`src/commands/init.ts`, `src/lib/scaffold.ts`, `tests/commands/init.test.ts`)
+- le prompt interactif expose bien l'entrée "Multiple (CSV)" / "Plusieurs (CSV)" (`src/commands/init.ts`)
+- README EN/FR et doc website EN/FR `cli/init` documentent le cas équipe mixte, `--all-tools` et le comportement de `none`
+
+Validation locale :
+
+- `npm run build`
+- `npx vitest run tests/commands/upgrade.test.ts tests/commands/archive.test.ts tests/commands/init.test.ts`
+
+Pas de finding bloquant sur le diff audité.

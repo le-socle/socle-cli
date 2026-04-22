@@ -1,20 +1,19 @@
 ---
 id: ISS-0051
-title: "Replace auto-archive in lyt board with a manual lyt archive command"
+title: Replace auto-archive in lyt board with a manual lyt archive command
 type: feat
 priority: P2-normal
 effort: M
 complexity: standard
 domain: [cli, board]
-skill: ""
+skill: 
 skills_aux: []
-status: 4-review
-branch: "fix/ISS-0051-finalize-archive"
+status: 5-done
+branch: fix/ISS-0051-finalize-archive
 depends: []
 created: 2026-04-21
 updated: 2026-04-22
 ---
-
 # ISS-0051 — Replace auto-archive in `lyt board` with a manual `lyt archive` command
 
 ## Context
@@ -191,3 +190,21 @@ Fix in this branch:
 - New regression test in `tests/commands/archive.test.ts` (`BOARD.md lists issues still in 5-done/`) — closes a freshly-completed issue and asserts both `5-done` and the issue id appear in BOARD.md.
 - Updated `tests/commands/board.test.ts` JSON-columns assertion from 5 → 6 to match the new pipeline length.
 - Full suite green: `124 passed`.
+
+## Audit de review — 2026-04-22
+
+**Verdict: GO**
+
+Points vérifiés :
+
+- `lyt board` ne déclenche plus d'archive implicite ; il se contente de régénérer `BOARD.md` (`src/commands/board.ts`, `tests/commands/archive.test.ts`)
+- `lyt archive` couvre bien seuil par défaut 7 jours, `--older-than`, `--all`, `--dry-run`, et recalcule `BOARD.md` après déplacement (`src/commands/archive.ts`, `src/lib/board-generator.ts`, `tests/commands/archive.test.ts`)
+- le board conserve désormais explicitement la colonne `5-done` et affiche les issues en fenêtre de rétention (`src/lib/board-generator.ts`, `tests/commands/archive.test.ts`, `tests/commands/board.test.ts`)
+- les docs website EN/FR `cli/archive`, `cli/overview`, `method/issue-board` et la sidebar sont présentes ; le suivi hook côté `lytos-method` existe bien via `ISS-0021`
+
+Validation locale :
+
+- `npm run build`
+- `npx vitest run tests/commands/upgrade.test.ts tests/commands/archive.test.ts tests/commands/init.test.ts`
+
+Pas de finding bloquant sur le diff audité.
