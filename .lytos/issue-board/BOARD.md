@@ -4,7 +4,7 @@
 > La source de vérité est le frontmatter YAML de chaque issue.
 >
 > **Dernière génération** : 2026-04-22
-> **Prochain numéro** : ISS-0060
+> **Prochain numéro** : ISS-0062
 
 ---
 
@@ -25,6 +25,7 @@ _Aucune issue._
 | [ISS-0056](1-backlog/ISS-0056-reduce-board-regeneration-friction.md) | Reduce friction from mandatory `lyt board` regeneration on every issue move | P2-normal | S | — |
 | [ISS-0057](1-backlog/ISS-0057-validate-lytos-on-real-feature.md) | Validate Lytos on a real feature workflow with human controls | P1-high | M | — |
 | [ISS-0059](1-backlog/ISS-0059-lyt-review-command.md) | Add lyt review command for cross-model code audit | P1-high | M | — |
+| [ISS-0060](1-backlog/ISS-0060-doctor-false-positives.md) | lyt doctor: fix two false-positive classes (repo-relative links, archived deps) | P2-normal | S | — |
 
 ### 2-sprint (engagé)
 
@@ -44,6 +45,7 @@ _Aucune issue._
 | # | Titre | Priorité | Effort |
 |---|-------|----------|--------|
 | [ISS-0054](4-review/ISS-0054-preserve-custom-ai-bridges.md) | Preserve custom AI bridge files on init/upgrade instead of overwriting them | P1-high | M |
+| [ISS-0061](4-review/ISS-0061-tick-as-you-go-rule.md) | Codify tick-as-you-go: tick DoD checkboxes immediately, never in batch | P1-high | XS |
 
 ### 5-done (terminé)
 
