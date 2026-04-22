@@ -46,13 +46,13 @@ The discrepancy was spotted during ISS-0039 (addition of Copilot / Gemini / Wind
 
 ## Definition of done
 
-- [ ] `lyt init --tool cursor` generates `.cursor/rules/lytos.mdc` (not `.cursorrules`)
-- [ ] Generated `.mdc` starts with valid YAML front-matter (`description`, `globs`, `alwaysApply`)
-- [ ] `lyt upgrade` refreshes the new path
-- [ ] `lyt upgrade --migrate-cursor` (or similar) removes a stale `.cursorrules` and writes the new file
-- [ ] Test: exact path + presence of front-matter
-- [ ] README bridge table updated
-- [ ] Manual verification: `--tool cursor` produces a file Cursor picks up immediately (open the repo in Cursor, start a chat, confirm the rule is applied)
+- [x] `lyt init --tool cursor` generates `.cursor/rules/lytos.mdc` (not `.cursorrules`)
+- [x] Generated `.mdc` starts with valid YAML front-matter (`description`, `globs`, `alwaysApply`)
+- [x] `lyt upgrade` refreshes the new path
+- [x] `lyt upgrade --migrate-cursor` (or similar) removes a stale `.cursorrules` and writes the new file *(wraps legacy content with modern front-matter rather than deleting — PR #14)*
+- [x] Test: exact path + presence of front-matter *(plus 5 migration tests in upgrade.test.ts)*
+- [x] README bridge table updated
+- [ ] Manual verification: `--tool cursor` produces a file Cursor picks up immediately (open the repo in Cursor, start a chat, confirm the rule is applied) *(human action, post-merge)*
 
 ## Relevant files
 
@@ -84,7 +84,7 @@ Ce qui ne va pas :
 
 Points à corriger :
 
-- ajouter une vraie stratégie de migration pour les repos qui ont encore `.cursorrules`
-- exposer l'option CLI prévue pour confirmer cette migration
-- couvrir le scénario legacy dans `tests/commands/upgrade.test.ts`
-- réaligner la doc publique qui décrit encore l'ancien fichier dans certaines pages `cli/init`
+- [x] ajouter une vraie stratégie de migration pour les repos qui ont encore `.cursorrules` *(new `src/lib/cursor-migration.ts` with `wrapLegacyRules` + `migrateCursorRules`, content-preserving)*
+- [x] exposer l'option CLI prévue pour confirmer cette migration *(`lyt upgrade --migrate-cursor`)*
+- [x] couvrir le scénario legacy dans `tests/commands/upgrade.test.ts` *(5 tests: migrated, dry-run, both-present, no-legacy, idempotent)*
+- [x] réaligner la doc publique qui décrit encore l'ancien fichier dans certaines pages `cli/init` *(4 website pages updated + new /cli/upgrade EN+FR + Team Rules note)*
