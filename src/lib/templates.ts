@@ -603,7 +603,7 @@ export function cursorRulesTemplate(_ctx: TemplateContext): string {
   // `alwaysApply: true` + `globs: ["**/*"]` mirror the legacy .cursorrules
   // behavior — the rule is active on every file in the project.
   return `---
-description: Lytos project instructions — read .lytos/ at session start
+description: "Lytos project instructions — read .lytos/ at session start"
 globs: ["**/*"]
 alwaysApply: true
 ---

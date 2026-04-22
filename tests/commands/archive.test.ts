@@ -155,4 +155,33 @@ describe("lyt archive", () => {
     const doneDir = join(fixture.cwd, ".lytos", "issue-board", "5-done");
     expect(readdirSync(doneDir)).toContain("ISS-9006-sample.md");
   });
+
+  it("regenerates BOARD.md after archiving so archive counts stay in sync (ISS-0051)", () => {
+    fixture = createEmptyBoardFixture();
+    writeDoneIssue(fixture.cwd, "ISS-9100", daysAgoISO(30));
+
+    const result = run("archive --all", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+
+    const boardPath = join(fixture.cwd, ".lytos", "issue-board", "BOARD.md");
+    expect(existsSync(boardPath)).toBe(true);
+    const board = readFileSync(boardPath, "utf-8");
+    // BOARD.md references the archive index once issues have been archived
+    expect(board).toContain("archive/INDEX.md");
+    expect(result.stderr).toContain("BOARD.md refreshed");
+  });
+
+  it("BOARD.md lists issues still in 5-done/ (ISS-0051 retention window)", () => {
+    fixture = createEmptyBoardFixture();
+    // A freshly closed issue (today) — must remain visible on the board.
+    writeDoneIssue(fixture.cwd, "ISS-9200", daysAgoISO(0));
+
+    const result = run("board", fixture.cwd);
+    expect(result.exitCode).toBe(0);
+
+    const boardPath = join(fixture.cwd, ".lytos", "issue-board", "BOARD.md");
+    const board = readFileSync(boardPath, "utf-8");
+    expect(board).toContain("5-done");
+    expect(board).toContain("ISS-9200");
+  });
 });
