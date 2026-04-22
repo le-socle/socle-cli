@@ -28,6 +28,26 @@ function initGitRepo(cwd: string): void {
   execSync("git add -A && git commit -m 'init' --no-gpg-sign", { cwd, stdio: "pipe" });
 }
 
+function writeIssue(cwd: string, statusDir: string, status: string): void {
+  const boardDir = join(cwd, ".lytos", "issue-board", statusDir);
+  mkdirSync(boardDir, { recursive: true });
+  writeFileSync(
+    join(boardDir, "ISS-0001-test-feature.md"),
+    `---
+id: ISS-0001
+title: "Test feature"
+type: feat
+priority: P1-high
+status: ${status}
+branch: "feat/ISS-0001-test-feature"
+---
+
+# ISS-0001 — Test feature
+`,
+    "utf-8"
+  );
+}
+
 function tryCommit(cwd: string): { exitCode: number; stderr: string } {
   writeFileSync(join(cwd, "test.txt"), `change-${Date.now()}`);
   execSync("git add -A", { cwd, stdio: "pipe" });
@@ -149,6 +169,34 @@ describe("pre-commit hook enforcement", () => {
     fixture = createEmptyFixture();
     initGitRepo(fixture.cwd);
     installPreCommitHook(fixture.cwd);
+
+    execSync("git checkout -b feat/ISS-0001-test-feature", { cwd: fixture.cwd, stdio: "pipe" });
+
+    const result = tryCommit(fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+  });
+
+  it("blocks commits when the issue branch points to a backlog issue", () => {
+    fixture = createEmptyFixture();
+    initGitRepo(fixture.cwd);
+    installPreCommitHook(fixture.cwd);
+    writeIssue(fixture.cwd, "1-backlog", "1-backlog");
+
+    execSync("git checkout -b feat/ISS-0001-test-feature", { cwd: fixture.cwd, stdio: "pipe" });
+
+    const result = tryCommit(fixture.cwd);
+
+    expect(result.exitCode).not.toBe(0);
+    expect(result.stderr).toContain("issue status is '1-backlog'");
+    expect(result.stderr).toContain("lyt start ISS-0001");
+  });
+
+  it("allows commits when the issue branch points to an in-progress issue", () => {
+    fixture = createEmptyFixture();
+    initGitRepo(fixture.cwd);
+    installPreCommitHook(fixture.cwd);
+    writeIssue(fixture.cwd, "3-in-progress", "3-in-progress");
 
     execSync("git checkout -b feat/ISS-0001-test-feature", { cwd: fixture.cwd, stdio: "pipe" });
 

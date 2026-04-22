@@ -7,6 +7,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { resolve, join } from "path";
 import { mkdirSync, writeFileSync, utimesSync } from "fs";
+import { execSync } from "child_process";
 import {
   createEmptyFixture,
   type Fixture,
@@ -72,6 +73,15 @@ This is a test project.
     lyt("skills/code-structure/SKILL.md"),
     "---\nname: code-structure\ndescription: test fixture\n---\n\n# Code Structure\nSkill."
   );
+}
+
+function initGitRepo(cwd: string): void {
+  execSync("git init -b main", { cwd, stdio: "pipe" });
+  execSync("git config user.email 'test@test.com'", { cwd, stdio: "pipe" });
+  execSync("git config user.name 'Test'", { cwd, stdio: "pipe" });
+  writeFileSync(join(cwd, "README.md"), "# Test");
+  execSync("git add -A", { cwd, stdio: "pipe" });
+  execSync("git commit -m 'init' --no-gpg-sign", { cwd, stdio: "pipe" });
 }
 
 let fixture: Fixture;
@@ -208,6 +218,63 @@ depends: [ISS-9999]
 
     expect(result.stderr).toContain("ISS-9999");
     expect(result.stderr).toContain("does not exist");
+  });
+
+  it("detects when the current issue branch points to a backlog issue", () => {
+    fixture = createEmptyFixture();
+    createValidLytos(fixture.cwd);
+    initGitRepo(fixture.cwd);
+
+    writeFileSync(
+      resolve(fixture.cwd, ".lytos", "issue-board", "1-backlog", "ISS-0001-test.md"),
+      `---
+id: ISS-0001
+title: "Test issue"
+status: 1-backlog
+priority: P1-high
+branch: "fix/ISS-0001-test"
+---
+
+# Test
+`
+    );
+
+    execSync("git checkout -b fix/ISS-0001-test", { cwd: fixture.cwd, stdio: "pipe" });
+
+    const result = run("doctor", fixture.cwd);
+
+    expect(result.exitCode).toBe(1);
+    expect(result.stderr).toContain("Git Workflow");
+    expect(result.stderr).toContain("Current branch fix/ISS-0001-test points to ISS-0001");
+    expect(result.stderr).toContain("1-backlog");
+    expect(result.stderr).toContain("lyt start ISS-0001");
+  });
+
+  it("does not flag an active issue branch when the issue is in progress", () => {
+    fixture = createEmptyFixture();
+    createValidLytos(fixture.cwd);
+    initGitRepo(fixture.cwd);
+
+    writeFileSync(
+      resolve(fixture.cwd, ".lytos", "issue-board", "3-in-progress", "ISS-0001-test.md"),
+      `---
+id: ISS-0001
+title: "Test issue"
+status: 3-in-progress
+priority: P1-high
+branch: "fix/ISS-0001-test"
+---
+
+# Test
+`
+    );
+
+    execSync("git checkout -b fix/ISS-0001-test", { cwd: fixture.cwd, stdio: "pipe" });
+
+    const result = run("doctor", fixture.cwd);
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toContain("All diagnostics passed");
   });
 
   it("outputs valid JSON with --json", () => {

@@ -62,6 +62,51 @@ if ! echo "$BRANCH" | grep -qE '^(feat|fix|refactor|chore|docs|test|style|perf)/
   echo ""
   exit 1
 fi
+
+# If this is a Lytos repo, the branch's issue must already be active.
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+BOARD_DIR="$ROOT/.lytos/issue-board"
+
+if [ -d "$BOARD_DIR" ]; then
+  ISSUE_ID=$(printf '%s\n' "$BRANCH" | sed -n 's#^[^/]*/\\(ISS-[0-9][0-9]*\\)-.*#\\1#p')
+
+  if [ -n "$ISSUE_ID" ]; then
+    ISSUE_FILE=$(find "$BOARD_DIR" -type f -name "$ISSUE_ID-*.md" ! -path "*/archive/*" ! -path "*/6-private-notes/*" 2>/dev/null | head -n 1)
+
+    if [ -z "$ISSUE_FILE" ]; then
+      echo ""
+      echo "  ✗ Branch '$BRANCH' points to $ISSUE_ID, but no live issue file was found."
+      echo ""
+      echo "  Create the issue, or run: lyt start $ISSUE_ID"
+      echo "  To bypass: git commit --no-verify"
+      echo ""
+      exit 1
+    fi
+
+    ISSUE_STATUS=$(sed -n 's/^status:[[:space:]]*//p' "$ISSUE_FILE" | head -n 1 | tr -d '"' | tr -d "'")
+
+    if [ -z "$ISSUE_STATUS" ]; then
+      ISSUE_STATUS="unknown"
+    fi
+
+    case "$ISSUE_STATUS" in
+      3-in-progress|4-review)
+        ;;
+      *)
+        echo ""
+        echo "  ✗ Branch '$BRANCH' points to $ISSUE_ID, but the issue status is '$ISSUE_STATUS'."
+        echo ""
+        echo "  Lytos only allows commits on issue branches when the issue is in"
+        echo "  3-in-progress or 4-review."
+        echo "  Run: lyt start $ISSUE_ID"
+        echo "  Or move the issue back to 3-in-progress before committing."
+        echo "  To bypass: git commit --no-verify"
+        echo ""
+        exit 1
+        ;;
+    esac
+  fi
+fi
 ${LYTOS_HOOK_END}`;
 
 /**

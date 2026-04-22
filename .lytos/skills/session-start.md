@@ -147,11 +147,13 @@ If the principles don't cover the situation, flag the trade-off to the human rat
 Before starting to code:
 
 - [ ] Is the issue up to date? (status, checkboxes)
+- [ ] Is the issue already in `3-in-progress/`? If not, run `lyt start ISS-XXXX` first — an existing branch or PR is not a substitute
 - [ ] Is there an existing git branch for this issue?
+- [ ] Am I still on `main` / `dev` / `master`? If yes, stop before editing anything
 - [ ] Are there recent commits on this branch?
 - [ ] Are there any blockers flagged in the sprint?
 
-If a branch already exists, switch to it. Otherwise, create it following the convention: `type/ISS-XXXX-title-kebab`.
+If a branch already exists, switch to it only after the issue itself is in `3-in-progress/`. Resuming an existing branch is not an exception to the mandatory start phase. Otherwise, create it following the convention: `type/ISS-XXXX-title-kebab`.
 
 ### 6. Context summary
 

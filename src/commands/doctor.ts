@@ -18,6 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   "missing-skill": "Missing Skills",
   "status-mismatch": "Status Mismatches",
   "orphan-dependency": "Orphan Dependencies",
+  "git-workflow": "Git Workflow",
 };
 
 function scoreColor(score: number): (t: string) => string {

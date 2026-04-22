@@ -11,6 +11,7 @@
  */
 
 import { existsSync, readFileSync, readdirSync, statSync } from "fs";
+import { execFileSync } from "child_process";
 import { join, relative } from "path";
 import { parseFrontmatter } from "./frontmatter.js";
 
@@ -34,6 +35,10 @@ export interface DiagnosticResult {
 }
 
 const STALE_DAYS = 90;
+const STATUS_DIRS = [
+  "0-icebox", "1-backlog", "2-sprint",
+  "3-in-progress", "4-review", "5-done",
+];
 
 /**
  * Run all doctor checks on a .lytos/ directory.
@@ -66,6 +71,11 @@ export function diagnose(lytosDir: string): DiagnosticResult {
   const depResults = checkOrphanDependencies(lytosDir);
   findings.push(...depResults.findings);
   filesChecked += depResults.filesChecked;
+
+  // 6. Active branch / issue status coherence
+  const gitWorkflowResults = checkGitWorkflowDrift(lytosDir);
+  findings.push(...gitWorkflowResults.findings);
+  filesChecked += gitWorkflowResults.filesChecked;
 
   const errors = findings.filter((f) => f.severity === "error").length;
   const warnings = findings.filter((f) => f.severity === "warning").length;
@@ -189,12 +199,7 @@ function checkMissingSkills(
     }
   }
 
-  const statusDirs = [
-    "0-icebox", "1-backlog", "2-sprint",
-    "3-in-progress", "4-review",
-  ];
-
-  for (const dir of statusDirs) {
+  for (const dir of STATUS_DIRS.slice(0, 5)) {
     const dirPath = join(boardDir, dir);
     if (!existsSync(dirPath)) continue;
 
@@ -256,12 +261,7 @@ function checkStatusMismatches(
   const boardDir = join(lytosDir, "issue-board");
   if (!existsSync(boardDir)) return { findings, filesChecked };
 
-  const statusDirs = [
-    "0-icebox", "1-backlog", "2-sprint",
-    "3-in-progress", "4-review", "5-done",
-  ];
-
-  for (const dir of statusDirs) {
+  for (const dir of STATUS_DIRS) {
     const dirPath = join(boardDir, dir);
     if (!existsSync(dirPath)) continue;
 
@@ -308,12 +308,7 @@ function checkOrphanDependencies(
 
   // Collect all issue IDs
   const allIssueIds = new Set<string>();
-  const statusDirs = [
-    "0-icebox", "1-backlog", "2-sprint",
-    "3-in-progress", "4-review", "5-done",
-  ];
-
-  for (const dir of statusDirs) {
+  for (const dir of STATUS_DIRS) {
     const dirPath = join(boardDir, dir);
     if (!existsSync(dirPath)) continue;
 
@@ -332,7 +327,7 @@ function checkOrphanDependencies(
   }
 
   // Check depends fields
-  for (const dir of statusDirs) {
+  for (const dir of STATUS_DIRS) {
     const dirPath = join(boardDir, dir);
     if (!existsSync(dirPath)) continue;
 
@@ -370,6 +365,65 @@ function checkOrphanDependencies(
 }
 
 /**
+ * Check that the checked-out issue branch matches an active issue status.
+ */
+function checkGitWorkflowDrift(
+  lytosDir: string
+): { findings: DiagnosticFinding[]; filesChecked: number } {
+  const findings: DiagnosticFinding[] = [];
+  const repoRoot = join(lytosDir, "..");
+
+  if (!existsSync(join(repoRoot, ".git"))) {
+    return { findings, filesChecked: 0 };
+  }
+
+  let branch = "";
+  try {
+    branch = execFileSync("git", ["rev-parse", "--abbrev-ref", "HEAD"], {
+      cwd: repoRoot,
+      encoding: "utf-8",
+    }).trim();
+  } catch {
+    return { findings, filesChecked: 0 };
+  }
+
+  if (!branch || branch === "HEAD") {
+    return { findings, filesChecked: 0 };
+  }
+
+  const match = branch.match(/(?:^|\/)(ISS-\d+)-/);
+  if (!match) {
+    return { findings, filesChecked: 0 };
+  }
+
+  const issueId = match[1];
+  const issue = findIssueOnBoard(lytosDir, issueId);
+
+  if (!issue) {
+    findings.push({
+      severity: "error",
+      category: "git-workflow",
+      file: `git:${branch}`,
+      message: `Current branch points to ${issueId}, but no live issue file exists on the board`,
+      fix: `Create ${issueId}, or switch away from ${branch} before continuing`,
+    });
+    return { findings, filesChecked: 1 };
+  }
+
+  if (issue.status !== "3-in-progress" && issue.status !== "4-review") {
+    findings.push({
+      severity: "error",
+      category: "git-workflow",
+      file: issue.relPath,
+      message: `Current branch ${branch} points to ${issueId}, but the issue status is ${issue.status}`,
+      fix: `Run \`lyt start ${issueId}\` or move the issue back to 3-in-progress before coding`,
+    });
+  }
+
+  return { findings, filesChecked: 1 };
+}
+
+/**
  * Recursively collect all .md files in a directory.
  */
 function collectMarkdownFiles(dir: string): string[] {
@@ -389,6 +443,36 @@ function collectMarkdownFiles(dir: string): string[] {
   }
 
   return results;
+}
+
+function findIssueOnBoard(
+  lytosDir: string,
+  issueId: string
+): { relPath: string; status: string } | null {
+  const boardDir = join(lytosDir, "issue-board");
+  if (!existsSync(boardDir)) return null;
+
+  for (const dir of STATUS_DIRS) {
+    const dirPath = join(boardDir, dir);
+    if (!existsSync(dirPath)) continue;
+
+    const files = readdirSync(dirPath).filter(
+      (f) => f.startsWith(`${issueId}-`) && f.endsWith(".md")
+    );
+
+    if (files.length === 0) continue;
+
+    const file = files[0];
+    const content = readFileSync(join(dirPath, file), "utf-8");
+    const fm = parseFrontmatter(content);
+    const status = typeof fm?.status === "string" && fm.status ? fm.status : dir;
+    return {
+      relPath: `issue-board/${dir}/${file}`,
+      status,
+    };
+  }
+
+  return null;
 }
 
 /**
