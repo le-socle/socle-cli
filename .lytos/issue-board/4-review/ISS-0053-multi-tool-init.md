@@ -8,8 +8,8 @@ complexity: standard
 domain: [cli, init]
 skill: ""
 skills_aux: []
-status: 3-in-progress
-branch: "feat/ISS-0053-multi-tool-init"
+status: 4-review
+branch: "fix/ISS-0053-docs-multi-tool"
 depends: []
 created: 2026-04-21
 updated: 2026-04-22
@@ -54,16 +54,16 @@ If `none` is in the list with other tools, treat it as a no-op for that slot (ge
 
 ## Definition of done
 
-- [ ] `lyt init --tool claude,cursor,copilot` generates all three bridges
-- [ ] `lyt init --tool claude --tool cursor` generates both (if we go repeated-flag)
-- [ ] `lyt init --all-tools` generates the six shipping adapters
-- [ ] Interactive mode offers a "multiple" choice that accepts CSV
-- [ ] Unknown tool names error out with a clear message (exit 2)
-- [ ] `--force` re-runs still regenerate all requested bridges
-- [ ] Tests cover: single-tool (backwards compat), CSV, repeated flag, `--all-tools`, invalid tool, `none` mixed with others
-- [ ] Coverage ≥ 80% on the updated paths
-- [ ] README (en + fr) shows the multi-tool example
-- [ ] Website `/cli/init` page mentions the multi-tool option
+- [x] `lyt init --tool claude,cursor,copilot` generates all three bridges
+- [x] `lyt init --tool claude --tool cursor` generates both (if we go repeated-flag)
+- [x] `lyt init --all-tools` generates the six shipping adapters
+- [x] Interactive mode offers a "multiple" choice that accepts CSV
+- [x] Unknown tool names error out with a clear message (exit 2)
+- [x] `--force` re-runs still regenerate all requested bridges
+- [x] Tests cover: single-tool (backwards compat), CSV, repeated flag, `--all-tools`, invalid tool, `none` mixed with others
+- [x] Coverage ≥ 80% on the updated paths
+- [x] README (en + fr) shows the multi-tool example
+- [x] Website `/cli/init` page mentions the multi-tool option
 
 ## Relevant files
 
@@ -114,3 +114,25 @@ Points à corriger :
 - mettre à jour la doc website `cli/init` en EN
 - mettre à jour la doc website `cli/init` en FR
 - vérifier que le comportement `none` y est documenté comme dans les README
+
+## Verification — 2026-04-22 (post-NO_GO)
+
+Re-checked the website pages and found the previous audit was incorrect — both `cli/init` pages already cover the multi-tool surface. No new website work needed.
+
+**`lytos-website/src/content/docs/en/cli/init.md`** (shipped in commit `550b8d3` "docs(cli/init): document multi-tool init and refresh --tool options (ISS-0053)"):
+
+- Usage block lines 13-14: `lyt init --tool claude,cursor,copilot` and `lyt init --all-tools` examples
+- Section `### Mixed-team repos` lines 22-31: motivates the multi-tool case, two CSV / `--all-tools` invocations, and explicitly documents that `none` can appear in the CSV as a no-op and that unknown values exit before any file is written
+- Options table lines 70-71: `--tool <tools>` documented as "Single value or CSV", and `--all-tools` documented as a separate row
+
+**`lytos-website/src/content/docs/fr/cli/init.md`** — same structure in French, sections `### Repos avec équipe mixte` and identical options table.
+
+**`lytos-cli` local code/tests verified by**:
+
+- `src/commands/init.ts:251-256` — `--tool <tools>` and `--all-tools` Commander options
+- `src/commands/init.ts:380-386` — interactive CSV path
+- `src/commands/init.ts:44` — Unknown tool emits `Unknown --tool "..."` and exits
+- `tests/commands/init.test.ts:247` "scaffolds multiple bridges when --tool is a CSV (ISS-0053)"
+- `tests/commands/init.test.ts:264` "scaffolds every bridge when --all-tools (ISS-0053)"
+
+All DoD items ticked. The issue moves to `4-review`; promotion to `5-done` is for `lyt close`.
