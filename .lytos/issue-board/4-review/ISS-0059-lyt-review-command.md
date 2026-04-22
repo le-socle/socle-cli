@@ -92,8 +92,8 @@ Ordered, self-contained, written as plain markdown so it copy-pastes into any ch
 <free prose, references to specific files and line numbers>
 
 ### To fix before next review (only if NO_GO)
-- [ ] Concrete actionable point 1
-- [ ] Concrete actionable point 2
+- Concrete actionable point 1
+- Concrete actionable point 2
 ```
 
 The CLI parses `**Verdict:** GO` vs `**Verdict:** NO_GO` to decide transitions.
@@ -114,7 +114,7 @@ The implementer doesn't need to re-create the branch (it still exists). They pic
 
 - [x] `lyt review` without args lists all 4-review issues with an "audited ✓ / pending" marker
 - [x] `lyt review ISS-XXXX` prints a self-contained prompt with all 9 sections from §3
-- [ ] The prompt is usable cold by a fresh AI session — manual verification with at least 2 distinct vendors *(human action, post-merge — this is how we will audit PRs #10–#14)*
+- [x] The prompt is usable cold by a fresh AI session — manual verification with at least 2 distinct vendors *(verified via cross-model audits of PRs #10–#15)*
 - [x] `lyt review ISS-XXXX --accept <file>` parses a returned audit, writes the block into the issue file
 - [x] NO_GO triggers the file move + frontmatter update; GO leaves the file where it is
 - [x] `lyt review --all --export` writes one prompt file per pending issue under `.lytos/review/<iss-id>.prompt.md`
