@@ -1,6 +1,6 @@
 {
   "name": "lytos-cli",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "Markdown-based context for AI coding agents — manifest, rules, skills, memory, issue board. Lives in your repo. Model-independent.",
   "type": "module",
   "bin": {
