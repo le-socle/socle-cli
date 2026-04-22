@@ -170,6 +170,26 @@ The agent is now ready to work.
 
 ---
 
+## During execution — tick as you go
+
+The issue's Definition of Done is a live contract, not a summary. When a DoD item is done, tick it **immediately** in the issue file, before moving to the next one.
+
+**Why batching at the end fails:**
+- Easy to miss items under review pressure — the implementer's confidence replaces explicit state.
+- An unchecked box reads as "not done yet" to the next session, the auditor, or the human — whether the code exists or not.
+- A cross-model audit (`lyt review`) reads the unchecked list as the truth. Missed ticks produce false NO_GO verdicts and wasted audit rounds.
+
+**When to tick:**
+- Code change committed and tested → tick the code item.
+- Doc change committed → tick the doc item.
+- Test added and green → tick the test item.
+
+**If an item turns out to be out of MVP scope:** keep it unchecked and annotate it with a follow-up pointer, e.g. `*(deferred to ISS-XXXX)*`. Never silently drop, re-word, or re-order DoD items — the DoD is the contract agreed at issue creation.
+
+**If the rule fails on its own PR** (i.e. the implementer batches ticks at end-of-task): that's a visible process leak. The auditor should flag it, not normalize it.
+
+---
+
 ## Mid-session ideas — the reactive trap
 
 During a session, the human will have new ideas, spot problems, think of improvements. This is normal and healthy. But it's also the moment where process breaks down.
