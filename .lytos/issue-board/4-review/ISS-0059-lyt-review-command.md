@@ -8,7 +8,7 @@ complexity: standard
 domain: [cli, review, workflow]
 skill: "code-review"
 skills_aux: [documentation, testing]
-status: 1-backlog
+status: 4-review
 branch: "feat/ISS-0059-lyt-review-command"
 depends: []
 created: 2026-04-21
