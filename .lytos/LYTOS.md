@@ -98,9 +98,21 @@ Issues have YAML frontmatter. The important fields:
 
 The normal task lifecycle is:
 
-`1-backlog → 2-sprint → 3-in-progress → 4-review → 5-done`
+`1-backlog → 2-sprint → 3-in-progress → 4-review → 5-done → archive/<quarter>/`
 
 The key point is that finishing code does not immediately mean "done". Work stops in `4-review` until the human, CI, or another validation gate explicitly approves promotion to `5-done`.
+
+## Implementer and auditor are two different roles
+
+A first-class Lytos principle: **the AI session that implements an issue does not audit it**. A fresh session — ideally a different vendor or model — runs the review, reads the diff cold, and returns a `GO` or `NO_GO` verdict in a fixed block format. This is what `lyt review ISS-XXXX` is for.
+
+Why it matters:
+
+- Cognitive biases are model-specific. A model auditing its own code shares the blind spots that produced any mistake.
+- Nobody validates their own PR — the distance that makes code review useful applies to AI reviewers too.
+- The practice is live proof of Lytos's model-independence: if Claude can implement and GPT can audit the same repo with zero re-configuration, the thesis holds.
+
+Concretely: if Claude Code implemented, audit with Codex / GPT / Gemini. If GPT wrote the code, audit with Claude. The pairing matters less than the principle: **never the same session that wrote the code**.
 
 ## Expected behavior
 

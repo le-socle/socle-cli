@@ -23,7 +23,6 @@ _No issues._
 | [ISS-0047](1-backlog/ISS-0047-skill-import.md) | lyt skill: import agentskills.io skills into a Lytos project | P2-normal | L | ISS-0046 |
 | [ISS-0056](1-backlog/ISS-0056-reduce-board-regeneration-friction.md) | Reduce friction from mandatory `lyt board` regeneration on every issue move | P2-normal | S | — |
 | [ISS-0057](1-backlog/ISS-0057-validate-lytos-on-real-feature.md) | Validate Lytos on a real feature workflow with human controls | P1-high | M | — |
-| [ISS-0059](1-backlog/ISS-0059-lyt-review-command.md) | Add lyt review command for cross-model code audit | P1-high | M | — |
 | [ISS-0060](1-backlog/ISS-0060-doctor-false-positives.md) | lyt doctor: fix two false-positive classes (repo-relative links, archived deps) | P2-normal | S | — |
 
 ### 2-sprint (committed)
@@ -38,6 +37,7 @@ _No issues._
 
 | # | Title | Priority | Effort |
 |---|-------|----------|--------|
+| [ISS-0059](4-review/ISS-0059-lyt-review-command.md) | Add lyt review command for cross-model code audit | P1-high | M |
 | [ISS-0064](4-review/ISS-0064-archive-cleanup.md) | Archive completed housekeeping issues and restore a clean main worktree | P1-high | XS |
 
 ### 5-done (recently completed)

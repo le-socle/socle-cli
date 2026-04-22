@@ -77,6 +77,7 @@ Chaque bridge pointe vers le même dossier `.lytos/`, donc changer d'outil ne de
 | `lyt start ISS-XXXX` | Démarre une issue — déplace en in-progress, crée la branche, met à jour le board |
 | `lyt close ISS-XXXX` | Ferme une issue — déplace en done, alerte sur les items non cochés |
 | `lyt close` | Ferme en lot toutes les issues de 4-review/ → 5-done/ (demande confirmation ; `--yes` saute le prompt ; `--dry-run` previewe) |
+| `lyt review [ISS-XXXX]` | Audit cross-model pour les issues en `4-review/` — imprime un prompt autonome ou ingère un bloc audit retourné (`--accept`). À lancer depuis une **session IA fraîche**, idéalement un vendor différent de l'implémenteur. |
 | `lyt upgrade` | Récupère les derniers fichiers méthode dans `.lytos/`. `--migrate-cursor` convertit un legacy `.cursorrules` vers `.cursor/rules/lytos.mdc`. |
 | `lyt update` | Met à jour lytos-cli vers la dernière version |
 

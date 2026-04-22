@@ -4,6 +4,7 @@ import { createRequire } from "module";
 import { initCommand } from "./commands/init.js";
 import { boardCommand } from "./commands/board.js";
 import { archiveCommand } from "./commands/archive.js";
+import { reviewCommand } from "./commands/review.js";
 import { lintCommand } from "./commands/lint.js";
 import { doctorCommand } from "./commands/doctor.js";
 import { showCommand } from "./commands/show.js";
@@ -37,6 +38,8 @@ program.on("--help", () => {
   console.log("  lyt close ISS-0053");
   console.log("  lyt close --dry-run");
   console.log("  lyt upgrade --dry-run");
+  console.log("  lyt review                 # list pending reviews");
+  console.log("  lyt review ISS-0053        # print the audit prompt (use a FRESH AI session, ideally a different vendor)");
   console.log("");
   console.log('Use "lyt <command> --help" for command-specific options and arguments.');
 });
@@ -44,6 +47,7 @@ program.on("--help", () => {
 program.addCommand(initCommand);
 program.addCommand(boardCommand);
 program.addCommand(archiveCommand);
+program.addCommand(reviewCommand);
 program.addCommand(lintCommand);
 program.addCommand(doctorCommand);
 program.addCommand(showCommand);
