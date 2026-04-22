@@ -89,7 +89,7 @@ Ce qui ne va pas :
 
 Points à corriger :
 
-- documenter clairement le mode XS/light dans `README.md`
-- répliquer l'information dans `docs/fr/README.md` si le README reste la doc d'entrée
-- mettre à jour une page website qui décrit le startup flow ou le workflow global
-- préciser quand le chemin léger est permis et ce qui reste obligatoire
+- [x] documenter clairement le mode XS/light dans `README.md` *(PR #12 — "Startup depth — lightweight vs standard" subsection)*
+- [x] répliquer l'information dans `docs/fr/README.md` si le README reste la doc d'entrée *(mirror EN)*
+- [x] mettre à jour une page website qui décrit le startup flow ou le workflow global *(`/method/skills` EN + FR updated with the same subsection)*
+- [x] préciser quand le chemin léger est permis et ce qui reste obligatoire *(condition explicite `effort: XS` AND `complexity: light`, baseline de sécurité énumérée, règle d'auto-upgrade mentionnée)*
